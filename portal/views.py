@@ -1,5 +1,6 @@
 import json
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Count, Sum, Avg, Max, Min
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -11,7 +12,7 @@ from tablib import Dataset
 
 from portal.models import Aluno, Tae, Docente
 
-
+@login_required
 def dashboard(request):
     # DADOS DOS INDICADORES GERAIS
     alunos = Aluno.objects.all()
@@ -277,7 +278,7 @@ def dashboard(request):
     }
     return render(request, 'portal/dashboard.html', context)
 
-
+@permission_required('is_superuser')
 def import_form(request):
     # try:
     if request.method == 'POST':
