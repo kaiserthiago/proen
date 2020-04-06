@@ -331,6 +331,27 @@ def dashboard(request):
     conhecimentos_avancados.insert(10, taes_competencias_ead_competencia_rnp[4][1])
     sei_ensinar.insert(10, taes_competencias_ead_competencia_rnp[3][1])
 
+    # GRÁFICOS RESPOSTAS POR DATA
+    alunos_data_resposta = Aluno.objects.all().order_by(
+        'data_resposta__day').values_list(
+        'data_resposta__day').annotate(
+        total=Count('id')).distinct()
+
+    docentes_data_resposta = Docente.objects.all().order_by(
+        'data_resposta__day').values_list(
+        'data_resposta__day').annotate(
+        total=Count('id')).distinct()
+
+    taes_data_resposta = Tae.objects.all().order_by(
+        'data_resposta__day').values_list(
+        'data_resposta__day').annotate(
+        total=Count('id')).distinct()
+
+    chart_data_resposta_label = [obj[0] for obj in alunos_data_resposta]
+    chart_aluno_data_resposta_data = [int(obj[1]) for obj in alunos_data_resposta]
+    chart_docente_data_resposta_data = [int(obj[1]) for obj in docentes_data_resposta]
+    chart_tae_data_resposta_data = [int(obj[1]) for obj in taes_data_resposta]
+
     # preparacao_sulfato = PreparacaoSulfato.objects.filter(empresa=request.user.userprofile.empresa,
     #                                                       data__year=date.today().year).order_by(
     #     'data').values_list(
@@ -425,6 +446,11 @@ def dashboard(request):
         'chart_taes_compentecia_ead_data_conheco_sei_usar': json.dumps(sei_usar),
         'chart_taes_compentecia_ead_data_conhecimentos_avancados': json.dumps(conhecimentos_avancados),
         'chart_taes_compentecia_ead_data_sei_ensinar': json.dumps(sei_ensinar),
+
+        'chart_data_resposta_label': json.dumps(chart_data_resposta_label),
+        'chart_aluno_data_resposta_data': json.dumps(chart_aluno_data_resposta_data),
+        'chart_docente_data_resposta_data': json.dumps(chart_docente_data_resposta_data),
+        'chart_tae_data_resposta_data': json.dumps(chart_tae_data_resposta_data),
 
         # 'chart_lavagem_data_consumo': json.dumps(chart_lavagem_data_consumo),
         # 'chart_lavagem_data_tempo': json.dumps(chart_lavagem_data_tempo),

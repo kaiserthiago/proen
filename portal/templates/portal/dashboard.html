@@ -420,8 +420,21 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="respostas_por_data"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
 {% endblock %}
 {% block script %}
     <!--GRÁFICO ALUNO CAMPUS-->
@@ -1136,7 +1149,7 @@
         });
     </script>
 
-    <!--GRÁFICO RESPOSTAS TIPO PESSOA POR CAMPUS-->
+    <!--GRÁFICO GERAIS RESPOSTAS TIPO PESSOA POR CAMPUS-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var labels = JSON.parse('{{ chart_campus_reitoria_label|safe }}');
@@ -1152,6 +1165,70 @@
                 },
                 xAxis: {
                     categories: labels
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total de respostas'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                legend: {
+                    enabled: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Alunos',
+                    data: data_aluno
+                },
+                    {
+                        name: 'Docentes',
+                        data: data_docente
+                    },
+                    {
+                        name: 'TAEs',
+                        data: data_tae
+                    }
+                ]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO GERAIS RESPOSTAS POR DATA-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var labels = JSON.parse('{{ chart_data_resposta_label|safe }}');
+            var data_aluno = JSON.parse('{{ chart_aluno_data_resposta_data|safe }}');
+            var data_docente = JSON.parse('{{ chart_docente_data_resposta_data|safe }}');
+            var data_tae = JSON.parse('{{ chart_tae_data_resposta_data|safe }}');
+            var myChart = Highcharts.chart('respostas_por_data', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Respostas por Data'
+                },
+                xAxis: {
+                    categories: [
+                        '03/04/2020',
+                        '04/04/2020',
+                        '05/04/2020',
+                        '06/04/2020',
+                    ]
                 },
                 yAxis: {
                     title: {
