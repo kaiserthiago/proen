@@ -22,71 +22,31 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
 </head>
 
-<body class="hidden-sn mdb-skin">
+<body class="mdb-skin">
 
 <!--Double navigation-->
 <header>
-    <!-- Sidebar navigation -->
-    <div id="slide-out" class="side-nav" style="background-color: #195128">
-        <ul class="custom-scrollbar">
-            <!-- Logo -->
-            <li>
-                <div class="logo-wrapper waves-light">
-                    <a href="#"><img src="{{ request.user.userprofile.empresa.logo.url }}" class="img-fluid flex-center"
-                                     style="width: 100%; height: 100%; padding: 5px"></a>
-                </div>
-            </li>
-            <!--/. Logo -->
-            <!-- Side navigation links -->
-            <li>
-                <ul class="collapsible collapsible-accordion">
-                    <li>
-                        <a href="{% url 'dashboard' %}"
-                           class="collapsible-header waves-effect arrow-r
-                                   {% block class_dashboard_menu %}{% endblock %}"><i
-                                class="fas fa-tachometer-alt"></i>
-                            Dashboard</a>
-                    </li>
-
-                    <li>
-                        <a href="{% url 'import_form' %}"
-                           class="collapsible-header waves-effect arrow-r{% block class_import_menu %}{% endblock %}"><i
-                                class="fas fa-download"></i>
-                            Importar</a>
-                    </li>
-
-                    <li>
-                        <a href="{% url 'logout' %}" class="collapsible-header waves-effect arrow-r red-text"><i
-                                class="fa fa-sign-out-alt"></i> Sair</a>
-                    </li>
-                </ul>
-            </li>
-            <!--/. Side navigation links -->
-        </ul>
-        <div class="sidenav-bg mask-strong"></div>
-    </div>
-    <!--/. Sidebar navigation -->
     <!-- Navbar -->
     <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-md double-nav" style="background-color: #195128">
-        <!-- SideNav slide-out button -->
-        <div class="float-left">
-            <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
-        </div>
         <!-- Breadcrumb-->
         <div class="breadcrumb-dn mr-auto">
-            <p>Proen - IFRO</p>
+            <p>Pró-Reitoria de Ensino - IFRO</p>
         </div>
         <ul class="nav navbar-nav nav-flex-icons ml-auto">
-            {% if not request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a href="{% url 'login' %}" class="nav-link"><i class="fa fa-sign-in
-                    -alt"></i> <span
-                            class="clearfix d-none d-sm-inline-block">Login</span></a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a href="{% url 'logout' %}" class="nav-link"><i class="fa fa-sign-out-alt"></i> <span
-                            class="clearfix d-none d-sm-inline-block">Login</span></a>
+            {% if request.user.is_authenticated %}
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span
+                            class="clearfix d-none d-sm-inline-block">{{ request.user.first_name }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-success">
+                        <a class="dropdown-item" href="{% url 'dashboard' %}"><i class="fa fa-tachometer-alt"></i>
+                            Dashboard</a>
+                        <a class="dropdown-item" href="{% url 'import_form' %}"><i class="fa fa-download"></i> Importar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt red-text"></i> Logout</a>
+                    </div>
                 </li>
             {% endif %}
         </ul>
@@ -96,9 +56,9 @@
 <!--/.Double navigation-->
 
 <!--Main Layout-->
-<div class="content">
+<div class="content mt-4">
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid mt-5">
             {% block breadcrumb_base %}
             {% endblock %}
 
@@ -146,10 +106,13 @@
 
                 <ul class="list-unstyled">
                     <li>
-                        <a href="mailto:proen@ifro.edu.br?Subject=Contato - Wiki">Pró-Reitoria de Ensino</a></li>
+                        <a href="mailto:proen@ifro.edu.br?Subject=Contato">Pró-Reitoria de Ensino</a></li>
                     <li>
                     <li>
-                        <a href="mailto:thiago.kaiser@ifro.edu.br?Subject=Contato - Wiki">Prof. Thiago José Sampaio
+                        <a href="mailto:edslei.rodrigues@ifro.edu.br?Subject=Contato">Prof. Edslei Rodrigues de Almeida</a>
+                    </li>
+                    <li>
+                        <a href="mailto:thiago.kaiser@ifro.edu.br?Subject=Contato">Prof. Thiago José Sampaio
                             Kaiser</a>
                     </li>
                 </ul>

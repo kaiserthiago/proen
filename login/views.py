@@ -21,7 +21,7 @@ def register(request):
                 is_active=True,
             )
 
-            return redirect('home')
+            return redirect('dashboard')
 
     user_form = RegistroForm()
 
@@ -41,7 +41,7 @@ def user_login(request):
             if request.POST['next']:
                 return redirect(request.POST['next'])
             else:
-                return redirect('home')
+                return redirect('dashboard')
         else:
             messages.error(request, 'Usuário e/ou senha inválidos')
             return redirect('login')
@@ -51,4 +51,4 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('home')
+    return redirect('dashboard')
