@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>PREPARAÇÃO DE SULFATO</title>
+
+    <style type="text/css">
+        @page {
+            size: {{ pagesize|default:"A4" }};
+            margin-left: 2cm;
+            margin-right: 2cm;
+            margin-top: 5cm;
+            margin-bottom: 3cm;
+
+            @frame header {
+            -pdf-frame-content: page-header;
+            margin-top: 0.7cm;
+            margin-right: 2cm;
+        {#margin-bottom: 0cm;#}
+            margin-left: 2cm;
+        }
+
+        @frame footer {
+        -pdf-frame-content:page-footer;
+        bottom: 0cm;
+        margin-left: 2cm;
+        margin-right: 2cm;
+        height: 2.5cm;
+        }
+        }
+    </style>
+
+</head>
+<body>
+<div id="page-header">
+
+    <table style="font-weight: bold; font-size: 16px; border-bottom: 1px solid #000000; width: 100%; padding: 2px;">
+        <thead>
+        <tr>
+            <th style="width: 200px; text-align: left">
+                <img src="{{ empresa.logo.url }}"><br>
+            </th>
+            <th style="width: 615px; text-align: center; vertical-align: bottom">
+                {{ empresa.razao_social|upper }}
+            </th>
+        </tr>
+        </thead>
+    </table>
+    <div style="padding-top:5px; font-size: 12px; text-align: center; vertical-align: middle;">
+        <h3>
+            PREPARAÇÃO DE SULFATO
+        </h3>
+          <table style="text-align: left">
+           <tbody>
+            <tr>
+                <td style="width: 25%"><span style="font-weight: bold">Data inicial: </span>{{ data_inicio }}</td>
+                <td style="width: 25%"><span style="font-weight: bold">Data final: </span>{{ data_fim }}</td>
+                <td style="width: 25%"><span style="font-weight: bold">Quantidade >= </span>{% if quantidade_inicio %} {{ quantidade_inicio }} Kg{% endif %}</td>
+                <td style="width: 25%"><span style="font-weight: bold">Quantidade <= </span>{% if quantidade_fim %} {{ quantidade_fim }} Kg{% endif %}</td>
+            </tr>
+           </tbody>
+        </table>
+    </div>
+
+</div>
+<hr>
+
+<table style="border: 1px solid #ddd; width: 100%; padding: 2px;" bgcolor="#a9a9a9">
+    <thead>
+    <tr>
+        <th style="width: 80px; text-align: left">DATA</th>
+        <th style="width: 70px; text-align: right">HORA</th>
+        <th style="width: 100px; text-align: right">QUANTIDADE</th>
+        <th style="width: 475px; text-align: right">OPERADOR</th>
+    </tr>
+    </thead>
+</table>
+
+{% for preparacao in preparacoes.qs %}
+    <table style="border: 1px solid #ddd; width: 100%; padding: 2px">
+        <tbody>
+        <tr>
+            <td style="width: 80px; text-align: left"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ preparacao.data }}
+            </td>
+            <td style="width: 70px; text-align: right"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ preparacao.hora }}
+            </td>
+            <td style="width: 100px; text-align: right"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ preparacao.quantidade }}
+            </td>
+            <td style="width: 475px; text-align: right"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ preparacao.user }}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endfor %}
+{% for total in totais %}
+<table style="border: 0px solid #ddd; width: 100%; padding: 2px">
+    <tr>
+        <td style="width: 33%; text-align: left">
+            <span style="font-weight: bold">PREPAROS: </span> {{ total.preparos }}
+        </td>
+        <td style="width: 33%; text-align: center">
+            <span style="font-weight: bold">MÉDIA: </span> {{ total.media|floatformat:2 }} Kg
+        </td>
+        <td style="width: 33%; text-align: right">
+            <span style="font-weight: bold">TOTAL: </span> {{ total.total|floatformat:2 }} Kg
+        </td>
+    </tr>
+</table>
+<br>
+{% endfor %}
+<div id="page-footer" style="text-align: right; font-size: 12px">
+    Página
+    <pdf:pagenumber/>
+    <div style="text-align:center; padding-top: 2px; border-top: 1px solid">
+        {{ empresa.end_logradouro }}, {{ empresa.end_bairro }}, {{ empresa.end_cidade }}/{{ empresa.end_uf }},
+        CEP {{ empresa.end_cep }} / Fone: {{ empresa.fone }}<br>
+        E-mail: {{ empresa.email }} / Site: {{ empresa.site }}
+    </div>
+</div>
+</body>
+</html>

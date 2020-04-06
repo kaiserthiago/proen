@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="full-height">
+{% load static %}
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Proen - IFRO</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+    <!-- Pessoal -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+</head>
+
+<body class="hidden-sn mdb-skin">
+
+<!--Double navigation-->
+<header>
+    <!-- Sidebar navigation -->
+    <div id="slide-out" class="side-nav" style="background-color: #195128">
+        <ul class="custom-scrollbar">
+            <!-- Logo -->
+            <li>
+                <div class="logo-wrapper waves-light">
+                    <a href="#"><img src="{{ request.user.userprofile.empresa.logo.url }}" class="img-fluid flex-center"
+                                     style="width: 100%; height: 100%; padding: 5px"></a>
+                </div>
+            </li>
+            <!--/. Logo -->
+            <!-- Side navigation links -->
+            <li>
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a href="{% url 'dashboard' %}"
+                           class="collapsible-header waves-effect arrow-r
+                                   {% block class_dashboard_menu %}{% endblock %}"><i
+                                class="fas fa-tachometer-alt"></i>
+                            Dashboard</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'import_form' %}"
+                           class="collapsible-header waves-effect arrow-r{% block class_import_menu %}{% endblock %}"><i
+                                class="fas fa-download"></i>
+                            Importar</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'logout' %}" class="collapsible-header waves-effect arrow-r red-text"><i
+                                class="fa fa-sign-out-alt"></i> Sair</a>
+                    </li>
+                </ul>
+            </li>
+            <!--/. Side navigation links -->
+        </ul>
+        <div class="sidenav-bg mask-strong"></div>
+    </div>
+    <!--/. Sidebar navigation -->
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-md double-nav" style="background-color: #195128">
+        <!-- SideNav slide-out button -->
+        <div class="float-left">
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
+        </div>
+        <!-- Breadcrumb-->
+        <div class="breadcrumb-dn mr-auto">
+            <p>Proen - IFRO</p>
+        </div>
+        <ul class="nav navbar-nav nav-flex-icons ml-auto">
+            {% if not request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link"><i class="fa fa-sign-in
+                    -alt"></i> <span
+                            class="clearfix d-none d-sm-inline-block">Login</span></a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link"><i class="fa fa-sign-out-alt"></i> <span
+                            class="clearfix d-none d-sm-inline-block">Login</span></a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <!-- /.Navbar -->
+</header>
+<!--/.Double navigation-->
+
+<!--Main Layout-->
+<div class="content">
+    <main>
+        <div class="container-fluid">
+            {% block breadcrumb_base %}
+            {% endblock %}
+
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </main>
+</div>
+<!--Main Layout-->
+
+
+<!-- Footer -->
+<footer class="page-footer font-small pt-2" id="footer" style="background-color: #195128">
+
+    <!-- Footer Links -->
+    <div class="container-fluid text-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-6 mt-md-0 mt-3">
+
+                <!-- Content -->
+                <h5 class="text-uppercase font-weight-bold">Instituto Federal de Rondônia - IFRO</h5>
+
+                <ul class="list-unstyled">
+                    <li>Instituto Federal de Educação, Ciência e Tecnologia de Rondônia</li>
+                    <li>Av. Tiradentes, 3009 - Setor Industrial, Porto Velho
+                        - RO, 76821-001
+                    </li>
+                    <li>Fone: (69) 2182-9600</li>
+                </ul>
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none pb-3">
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+
+                <!-- Links -->
+                <h5 class="text-uppercase font-weight-bold">Desenvolvimento</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="mailto:proen@ifro.edu.br?Subject=Contato - Wiki">Pró-Reitoria de Ensino</a></li>
+                    <li>
+                    <li>
+                        <a href="mailto:thiago.kaiser@ifro.edu.br?Subject=Contato - Wiki">Prof. Thiago José Sampaio
+                            Kaiser</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+
+                <!-- Links -->
+                <h5 class="text-uppercase font-weight-bold">Contato</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <i class="fa fa-phone-square"></i> (69) 2182-9607
+                    </li>
+                    <li>
+                        <i class="fa fa-phone-square"></i> (69) 2182-9628
+                    </li>
+                    <li>
+                        <i class="fa fa-envelope"></i> proen@ifro.edu.br
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">Todos os direitos reservados</div>
+    <!-- Copyright -->
+
+</footer>
+<!--/.Footer-->
+
+{% block modal %}
+
+{% endblock %}
+
+<!--  SCRIPTS  -->
+<!-- JQuery -->
+<script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+<script>
+    // SideNav Initialization
+    $(".button-collapse").sideNav();
+
+    new WOW().init();
+    // Material Select Initialization
+    $(document).ready(function () {
+        $('.mdb-select').material_select();
+    });
+    // Tooltip Initialization
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <script type='text/javascript'>
+                $("document").ready(function () {
+                    toastr["danger"]("{{ message }}")
+                });
+            </script>
+        {% elif message.tags == 'success' %}
+            <script type='text/javascript'>
+                $("document").ready(function () {
+                    toastr["success"]("{{ message }}")
+                });
+            </script>
+        {% elif message.tags == 'warning' %}
+            <script type='text/javascript'>
+                $("document").ready(function () {
+                    toastr["warning"]("{{ message }}")
+                });
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<script type='text/javascript'>
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "md-toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": 300,
+        "hideDuration": 1000,
+        "timeOut": 3500,
+        "extendedTimeOut": 1000,
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+<script>
+    function disableButton() {
+        var btn = document.getElementById('btn_enviar');
+        btn.disabled = true;
+        btn.innerText = 'Processando...'
+    }
+</script>
+{% block script %}
+
+{% endblock %}
+<!--Modal LOGOUT-->
+<div class="modal fade" id="ModalLogout" tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header text-center">
+                <h4 class="heading lead">Logout</h4>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <form action="#" method="POST" id="FormLogout">
+                    {% csrf_token %}
+                    <p class="text-center mb-0 mt-3">Tem certeza que deseja sair do sistema?</p>
+                </form>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-danger waves-effect" form="FormLogout">
+                        Confirmar
+                    </button>
+                    <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">
+                        Voltar</a>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Fim Modal LOGOUT-->
+</body>
+
+</html>
+

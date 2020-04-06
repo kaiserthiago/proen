@@ -1,0 +1,1034 @@
+{% extends 'base.html' %}
+{% block dashboard_menu %} active {% endblock %}
+{% load humanize %}
+{% load percentual %}
+
+{% block breadcrumb_base %}
+    <ol class="breadcrumb blue-grey lighten-4">
+        <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="row mb-3">
+        <div class="col-sm-4">
+            <!--Card-->
+            <div class="card">
+                <div class="card-header grey lighten-1 font-weight-bold">
+                    <p class="float-left m-0">
+                        Indicadores Respostas
+                    </p>
+                </div>
+                <div class="card-body">
+                    <p class="border-bottom">
+                        Alunos
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual total_respostas alunos.count %}%</span>
+                        <span class="badge badge-pill badge-primary float-sm-right mr-1">{{ alunos.count|intcomma }}</span>
+                    </p>
+                    <p class="border-bottom">
+                        Docentes
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual total_respostas docentes.count %}%</span>
+                        <span class="badge badge-pill badge-success float-sm-right mr-1">{{ docentes.count|intcomma }}</span>
+                    </p>
+                    <p class="border-bottom">
+                        TAEs
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual total_respostas taes.count %}%</span>
+                        <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ taes.count|intcomma }}</span>
+                    </p>
+                    <p class="border-bottom">
+                        <strong>TOTAL</strong>
+                        <span class="badge badge-pill badge-danger float-sm-right">{{ total_respostas|intcomma }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="w-100 clearfix d-md-none">
+
+        <div class="col-sm-4">
+            <!--Card-->
+            <div class="card">
+                <div class="card-header grey lighten-1 font-weight-bold">
+                    <p class="float-left m-0">
+                        Comparativo de Respostas com Totais
+                    </p>
+                </div>
+                <div class="card-body">
+                    <p class="border-bottom">
+                        Alunos
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 9850 alunos.count %}%</span>
+                        <span class="badge badge-pill badge-primary float-sm-right mr-1">{{ alunos.count|intcomma }} de 9.850</span>
+                    </p>
+                    <p class="border-bottom">
+                        Docentes
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 706 docentes.count %}%</span>
+                        <span class="badge badge-pill badge-success float-sm-right mr-1">{{ docentes.count|intcomma }} de 706</span>
+                    </p>
+                    <p class="border-bottom">
+                        TAEs
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 567 taes.count %}%</span>
+                        <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ taes.count|intcomma }} de 567</span>
+                    </p>
+                    <p class="border-bottom">
+                        <strong>TOTAL</strong>
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 11233 total_respostas %}%</span>
+                        <span class="badge badge-pill badge-danger float-sm-right mr-1">{{ total_respostas|intcomma }} de 11.123</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+
+
+        <div class="col-sm-4">
+            <!--Card-->
+            <div class="card">
+                <div class="card-header grey lighten-1 font-weight-bold">
+                    <p class="float-left m-0">
+                        Indicadores Alunos
+                    </p>
+                </div>
+                <div class="card-body">
+                    {% for indicador in indicador_alunos_campus %}
+                        <p class="border-bottom">
+                            {{ indicador.campus }}
+                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
+                            <span class="badge badge-pill badge-primary float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
+                        </p>
+                    {% endfor %}
+                    <p class="border-bottom">
+                        <strong>TOTAL</strong>
+                        <span class="badge badge-pill badge-danger float-sm-right">{{ alunos.count|intcomma }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="w-100 clearfix d-md-none">
+
+        <div class="col-sm-4">
+            <!--Card-->
+            <div class="card">
+                <div class="card-header grey lighten-1 font-weight-bold">
+                    <p class="float-left m-0">
+                        Indicadores Docentes
+                    </p>
+                </div>
+                <div class="card-body">
+                    {% for indicador in indicador_docentes_campus %}
+                        <p class="border-bottom">
+                            {{ indicador.campus }}
+                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual docentes.count indicador.total %}%</span>
+                            <span class="badge badge-pill badge-success float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
+                        </p>
+                    {% endfor %}
+                    <p class="border-bottom">
+                        <strong>TOTAL</strong>
+                        <span class="badge badge-pill badge-danger float-sm-right">{{ docentes.count|intcomma }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr class="w-100 clearfix d-md-none">
+
+        <div class="col-sm-4">
+            <!--Card-->
+            <div class="card">
+                <div class="card-header grey lighten-1 font-weight-bold">
+                    <p class="float-left m-0">
+                        Indicadores TAEs
+                    </p>
+                </div>
+                <div class="card-body">
+                    {% for indicador in indicador_taes_campus %}
+                        <p class="border-bottom">
+                            {{ indicador.campus }}
+                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual taes.count indicador.total %}%</span>
+                            <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
+                        </p>
+                    {% endfor %}
+                    <p class="border-bottom">
+                        <strong>TOTAL</strong>
+                        <span class="badge badge-pill badge-danger float-sm-right">{{ taes.count|intcomma }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-5">
+            <!--Card-->
+            <div class="card">
+                <div class="card-header grey lighten-1 font-weight-bold">
+                    <p class="float-left m-0">
+                        Alunos por Nível de Curso
+                    </p>
+                </div>
+                <div class="card-body">
+                    {% for indicador in indicador_alunos_nivel_curso %}
+                        <p class="border-bottom">
+                            {{ indicador.nivel_curso }}
+                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
+                            <span class="badge badge-pill badge-success float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <hr class="w-100 clearfix d-md-none">
+
+        <div class="col-sm-3">
+            <!--Card-->
+            <div class="card">
+                <div class="card-header grey lighten-1 font-weight-bold">
+                    <p class="float-left m-0">
+                        Indicadores Alunos com Deficiência
+                    </p>
+                </div>
+                <div class="card-body">
+                    {% for indicador in indicador_alunos_deficiencia %}
+                        <p class="border-bottom">
+                            {{ indicador.deficiencia|slice:28 }}
+                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
+                            <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <hr class="w-100 clearfix d-md-none">
+
+        <div class="col-sm-4">
+            <!--Card-->
+            <div class="card">
+                <div class="card-header grey lighten-1 font-weight-bold">
+                    <p class="float-left m-0">
+                        Indicadores Alunos com Transtorno
+                    </p>
+                </div>
+                <div class="card-body">
+                    {% for indicador in indicador_alunos_transtorno %}
+                        <p class="border-bottom">
+                            {{ indicador.transtorno }}
+                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
+                            <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header grey lighten-1 font-weight-bold">
+            <p class="float-left m-0">
+                GRÁFICOS DE ALUNOS
+            </p>
+        </div>
+        <div class="card-body" style="background: #ededed">
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="aluno_campus"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="aluno_nivel_curso"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="alunos_acesso_internet"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="avaliacao_moodle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="alunos_posicao"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="avaliacao_atividades_remotas_alunos"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header grey lighten-1 font-weight-bold">
+            <p class="float-left m-0">
+                GRÁFICOS DE DOCENTES
+            </p>
+        </div>
+        <div class="card-body" style="background: #ededed">
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="docentes_acesso_internet"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="docentes_posicao"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="avaliacao_atividades_remotas_docentes"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header grey lighten-1 font-weight-bold">
+            <p class="float-left m-0">
+                GRÁFICOS DE TAES
+            </p>
+        </div>
+        <div class="card-body" style="background: #ededed">
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="taes_acesso_internet"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="taes_posicao"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="avaliacao_atividades_remotas_taes"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <!--Card-->
+            <div class="card">
+                <div class="card-body">
+                    <div id="respostas_tipo_pessoa_campus"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <!--GRÁFICO ALUNO CAMPUS-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var labels = JSON.parse('{{ chart_aluno_campus_label|safe }}');
+            var data = JSON.parse('{{ chart_aluno_campus_data|safe }}');
+            var myChart = Highcharts.chart('aluno_campus', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Alunos por <i>Campus</i>'
+                },
+                xAxis: {
+                    categories: labels
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                legend: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Campus',
+                    data: data
+                }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO ALUNO NÍVEL CURSO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var labels = JSON.parse('{{ chart_aluno_nivel_curso_label|safe }}');
+            var data = JSON.parse('{{ alunos_nivel_curso|safe }}');
+            var myChart = Highcharts.chart('aluno_nivel_curso', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Alunos por Nível do Curso'
+                },
+                xAxis: {
+                    categories: labels
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true
+                        },
+                        showInLegend: true
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                series: [{
+                    name: 'Quantidade',
+                    data: data
+                }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO ALUNOS POSIÇÃO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ alunos_posicao|safe }}');
+            var myChart = Highcharts.chart('alunos_posicao', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'O que o IFRO deve fazer a respeito da suspensão das atividades presenciais?',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Alunos'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO ALUNOS ACESSO INTERNET-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ alunos_acesso_internet|safe }}');
+            var myChart = Highcharts.chart('alunos_acesso_internet', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Acesso à Internet',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Alunos'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO ALUNOS AVALIAÇÃO MOODLE-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var labels = JSON.parse('{{ chart_alunos_avaliacao_moodle_labels|safe }}');
+            var data = JSON.parse('{{ chart_alunos_avaliacao_moodle_data|safe }}');
+            var myChart = Highcharts.chart('avaliacao_moodle', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Avaliação do AVA Institucional'
+                },
+                subtitle: {
+                    text: 'Nota Média por <i>Campus</i>'
+                },
+                xAxis: {
+                    categories: labels
+                },
+                yAxis: {
+                    title: {
+                        text: 'Nota Média'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                tooltip: {
+                    pointFormat: 'Nota média do AVA: <b>{point.y:.1f}</b>'
+                },
+                legend: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Média de notas',
+                    data: data
+                }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO ALUNOS AVALIAÇÃO ATIVIDADES REMOTAS-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var labels = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_label|safe }}');
+            var data_conteudo = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_data_conteudo|safe }}');
+            var data_orientacoes = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_data_orientacoes|safe }}');
+            var myChart = Highcharts.chart('avaliacao_atividades_remotas_alunos', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Avaliação das Atividades Remotas'
+                },
+                subtitle: {
+                    text: 'Respostas dos Alunos'
+                },
+                xAxis: {
+                    categories: labels
+                },
+                yAxis: {
+                    title: {
+                        text: 'Nota Média'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y:.1f}</b>'
+                },
+                legend: {
+                    enabled: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Conteúdo',
+                    data: data_conteudo
+                },
+                    {
+                        name: 'Orientações',
+                        data: data_orientacoes
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO DOCENTES ACESSO INTERNET-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ docentes_acesso_internet|safe }}');
+            var myChart = Highcharts.chart('docentes_acesso_internet', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Acesso à Internet',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Docentes'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO DOCENTES AVALIAÇÃO ATIVIDADES REMOTAS-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var labels = JSON.parse('{{ chart_docentes_avaliacao_atividades_remotas_label|safe }}');
+            var data = JSON.parse('{{ chart_docentes_avaliacao_atividades_remotas_data_experiencia|safe }}');
+            var myChart = Highcharts.chart('avaliacao_atividades_remotas_docentes', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Avaliação das Atividades Remotas'
+                },
+                subtitle: {
+                    text: 'Respostas dos Docentes'
+                },
+                xAxis: {
+                    categories: labels
+                },
+                yAxis: {
+                    title: {
+                        text: 'Nota Média'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y:.1f}</b>'
+                },
+                legend: {
+                    enabled: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Experiência',
+                    data: data
+                }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO DOCENTES POSIÇÃO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ docentes_posicao|safe }}');
+            var myChart = Highcharts.chart('docentes_posicao', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'O que o IFRO deve fazer a respeito da suspensão das atividades presenciais?',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Docentes'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO TAES ACESSO INTERNET-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ taes_acesso_internet|safe }}');
+            var myChart = Highcharts.chart('taes_acesso_internet', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Acesso à Internet',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos TAEs'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO TAES AVALIAÇÃO ATIVIDADES REMOTAS-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var labels = JSON.parse('{{ chart_taes_avaliacao_atividades_remotas_label|safe }}');
+            var data_jornada = JSON.parse('{{ chart_taes_avaliacao_atividades_remotas_data_jornada|safe }}');
+            var data_producao = JSON.parse('{{ chart_taes_avaliacao_atividades_remotas_data_producao|safe }}');
+            var myChart = Highcharts.chart('avaliacao_atividades_remotas_taes', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Avaliação das Atividades Remotas'
+                },
+                subtitle: {
+                    text: 'Respostas dos TAEs'
+                },
+                xAxis: {
+                    categories: labels
+                },
+                yAxis: {
+                    title: {
+                        text: 'Nota Média'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y:.1f}</b>'
+                },
+                legend: {
+                    enabled: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Jornada',
+                    data: data_jornada
+                },
+                    {
+                        name: 'Produção',
+                        data: data_producao
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO TAES POSIÇÃO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ taes_posicao|safe }}');
+            var myChart = Highcharts.chart('taes_posicao', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'O que o IFRO deve fazer a respeito da suspensão das atividades presenciais?',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos TAEs'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO RESPOSTAS TIPO PESSOA POR CAMPUS-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var labels = JSON.parse('{{ chart_campus_reitoria_label|safe }}');
+            var data_aluno = JSON.parse('{{ chart_aluno_campus_data|safe }}');
+            var data_docente = JSON.parse('{{ chart_docente_campus_data|safe }}');
+            var data_tae = JSON.parse('{{ chart_tae_campus_data|safe }}');
+            var myChart = Highcharts.chart('respostas_tipo_pessoa_campus', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Respostas por <i>Campus</i>'
+                },
+                xAxis: {
+                    categories: labels
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total de respostas'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                legend: {
+                    enabled: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Alunos',
+                    data: data_aluno
+                },
+                    {
+                        name: 'Docentes',
+                        data: data_docente
+                    },
+                    {
+                        name: 'TAEs',
+                        data: data_tae
+                    }
+                ]
+            });
+        });
+    </script>
+{% endblock %}

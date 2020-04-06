@@ -1,0 +1,11 @@
+*.pyc
+*~
+__pycache__
+myvenv
+media
+db.sqlite3
+.DS_Store
+deploy/logs/*
+wiki/settings.py
+static/admin
+static/import_export

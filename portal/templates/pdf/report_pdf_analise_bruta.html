@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>ANÁLISE DE ÁGUA BRUTA</title>
+
+    <style type="text/css">
+        @page {
+            size: {{ pagesize|default:"A4" }};
+            margin-left: 2cm;
+            margin-right: 2cm;
+            margin-top: 6.5cm;
+            margin-bottom: 3cm;
+
+            @frame header {
+            -pdf-frame-content: page-header;
+            margin-top: 0.7cm;
+            margin-right: 2cm;
+        {#margin-bottom: 0cm;#}
+            margin-left: 2cm;
+        }
+
+        @frame footer {
+        -pdf-frame-content:page-footer;
+        bottom: 0cm;
+        margin-left: 2cm;
+        margin-right: 2cm;
+        height: 2.5cm;
+        }
+        }
+    </style>
+
+</head>
+<body>
+<div id="page-header">
+
+    <table style="font-weight: bold; font-size: 16px; border-bottom: 1px solid #000000; width: 100%; padding: 2px;">
+        <thead>
+        <tr>
+            <th style="width: 200px; text-align: left">
+                <img src="{{ empresa.logo.url }}"><br>
+            </th>
+            <th style="width: 615px; text-align: center; vertical-align: bottom">
+                {{ empresa.razao_social|upper }}
+            </th>
+        </tr>
+        </thead>
+    </table>
+    <div style="padding-top:5px; font-size: 12px; text-align: center; vertical-align: middle;">
+        <h3>
+           ANÁLISE DE ÁGUA BRUTA
+        </h3>
+          <table style="text-align: left">
+           <tbody>
+            <tr>
+                <td style="width: 25%"><span style="font-weight: bold">Data inicial: </span>{{ data_inicio }}</td>
+                <td style="width: 25%"><span style="font-weight: bold">Data final: </span>{{ data_fim }}</td>
+                <td style="width: 25%"><span style="font-weight: bold">Alcalinidade >= </span>{% if alcalinidade_inicio %} {{ alcalinidade_inicio }}{% endif %}</td>
+                <td style="width: 25%"><span style="font-weight: bold">Alcalinidade <= </span>{% if alcalinidade_fim %} {{ alcalinidade_fim }}{% endif %}</td>
+            </tr>
+           <tr>
+                <td style="width: 25%"><span style="font-weight: bold">Gás carbônico >= </span>{% if gas_carbonico_inicio %} {{ gas_carbonico_inicio }}{% endif %}</td>
+                <td style="width: 25%"><span style="font-weight: bold">Gás carbônico <= </span>{% if gas_carbonico_fim %} {{ gas_carbonico_fim }}{% endif %}</td>
+                <td style="width: 25%"><span style="font-weight: bold">pH >= </span>{% if ph_inicio %} {{ ph_inicio }}{% endif %}</td>
+                <td style="width: 25%"><span style="font-weight: bold">pH <= </span>{% if ph_fim %} {{ ph_fim }}{% endif %}</td>
+            </tr>
+            <tr>
+                <td style="width: 25%"><span style="font-weight: bold">Turbidez >= </span>{% if turbidez_inicio %} {{ turbidez_inicio }}{% endif %}</td>
+                <td style="width: 25%"><span style="font-weight: bold">Turbidez <= </span>{% if turbidez_fim %} {{ turbidez_fim }}{% endif %}</td>
+            </tr>
+           </tbody>
+        </table>
+    </div>
+
+</div>
+<hr>
+
+<table style="border: 1px solid #ddd; width: 100%; padding: 2px;" bgcolor="#a9a9a9">
+    <thead>
+    <tr>
+        <th style="width: 100px; text-align: left">DATA</th>
+        <th style="width: 70px; text-align: left">HORA</th>
+        <th style="width: 150px; text-align: right">ALCALINIDADE</th>
+        <th style="width: 150px; text-align: right">GÁS CARBÔNICO</th>
+        <th style="width: 100px; text-align: right">PH</th>
+        <th style="width: 100px; text-align: right">TURBIDEZ</th>
+        <th style="width: 300px; text-align: right">OPERADOR</th>
+    </tr>
+    </thead>
+</table>
+
+<table style="border: 1px solid #ddd; width: 100%; padding: 2px">
+    <tbody>
+    {% for analise in analises_bruta.qs %}
+        <tr>
+            <td style="width: 100px; text-align: left"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ analise.data }}
+            </td>
+            <td style="width: 70px; text-align: left"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ analise.hora }}
+            </td>
+            <td style="width: 150px; text-align: right"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ analise.alcalinidade }}
+            </td>
+            <td style="width: 150px; text-align: right"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ analise.gas_carbonico }}
+            </td>
+            <td style="width: 100px; text-align: right"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ analise.ph }}
+            </td>
+            <td style="width: 100px; text-align: right"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ analise.turbidez }}
+            </td>
+            <td style="width: 300px; text-align: right"{% if forloop.counter|divisibleby:2 %}
+                bgcolor="#ededed"{% endif %}>
+                {{ analise.user }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<table style="border: 0px solid #ddd; width: 100%; padding: 2px">
+    {% for total in totais %}
+        <tr>
+            <td style="width: 170px; text-align: center">
+                <span style="font-weight: bold">VALORES MÉDIOS: </span>
+            </td>
+            <td style="width: 150px; text-align: right">
+                {{ total.alcalinidade_media|floatformat:2 }}
+            </td>
+            <td style="width: 150px; text-align: right">
+                {{ total.gas_carbonico_media|floatformat:2 }}
+            </td>
+            <td style="width: 100px; text-align: right">
+                {{ total.ph_media|floatformat:2 }}
+            </td>
+            <td style="width: 100px; text-align: right">
+                {{ total.turbidez_media|floatformat:2 }}
+            </td>
+            <td style="width: 300px; text-align: right">
+                <span style="font-weight: bold">TOTAL DE ANÁLISES: </span>
+                {{ total.analises }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<div id="page-footer" style="text-align: right; font-size: 12px">
+    Página
+    <pdf:pagenumber/>
+    <div style="text-align:center; padding-top: 2px; border-top: 1px solid">
+        {{ empresa.end_logradouro }}, {{ empresa.end_bairro }}, {{ empresa.end_cidade }}/{{ empresa.end_uf }},
+        CEP {{ empresa.end_cep }} / Fone: {{ empresa.fone }}<br>
+        E-mail: {{ empresa.email }} / Site: {{ empresa.site }}
+    </div>
+</div>
+</body>
+</html>
