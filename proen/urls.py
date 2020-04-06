@@ -23,6 +23,7 @@ from proen import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('portal.urls')),
+    url(r'^', include('login.urls')),
 ]
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
