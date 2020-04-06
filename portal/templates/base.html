@@ -43,9 +43,13 @@
                     <div class="dropdown-menu dropdown-menu-right dropdown-success">
                         <a class="dropdown-item" href="{% url 'dashboard' %}"><i class="fa fa-tachometer-alt"></i>
                             Dashboard</a>
-                        <a class="dropdown-item" href="{% url 'import_form' %}"><i class="fa fa-download"></i> Importar</a>
+                        {% if request.user.is_superuser %}
+                            <a class="dropdown-item" href="{% url 'import_form' %}"><i class="fa fa-download"></i>
+                                Importar</a>
+                        {% endif %}
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt red-text"></i> Logout</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt red-text"></i>
+                            Logout</a>
                     </div>
                 </li>
             {% endif %}
@@ -109,7 +113,8 @@
                         <a href="mailto:proen@ifro.edu.br?Subject=Contato">Pró-Reitoria de Ensino</a></li>
                     <li>
                     <li>
-                        <a href="mailto:edslei.rodrigues@ifro.edu.br?Subject=Contato">Prof. Edslei Rodrigues de Almeida</a>
+                        <a href="mailto:edslei.rodrigues@ifro.edu.br?Subject=Contato">Prof. Edslei Rodrigues de
+                            Almeida</a>
                     </li>
                     <li>
                         <a href="mailto:thiago.kaiser@ifro.edu.br?Subject=Contato">Prof. Thiago José Sampaio
