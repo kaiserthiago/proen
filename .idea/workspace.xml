@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e5db46fe-3f34-4b9f-b7b5-9ef6779b9cc1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/portal/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/portal/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +96,7 @@
       <updated>1586099128592</updated>
       <workItem from="1586099131308" duration="20863000" />
       <workItem from="1586172806087" duration="22610000" />
-      <workItem from="1586197629980" duration="5586000" />
+      <workItem from="1586197629980" duration="7476000" />
     </task>
     <task id="LOCAL-00001" summary="requirements">
       <created>1586194528042</created>
@@ -161,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586202322305</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="adicionar dispotivo acesso internet">
+      <created>1586203583716</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1586203583716</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,41 +184,42 @@
     <MESSAGE value="git ignote" />
     <MESSAGE value="gráficos taes" />
     <MESSAGE value="gráfico respostas por data" />
-    <option name="LAST_COMMIT_MESSAGE" value="gráfico respostas por data" />
+    <MESSAGE value="adicionar dispotivo acesso internet" />
+    <option name="LAST_COMMIT_MESSAGE" value="adicionar dispotivo acesso internet" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="393" y="5" key="CommitChangelistDialog2" timestamp="1586203451071">
+    <state x="393" y="5" key="CommitChangelistDialog2" timestamp="1586205315268">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="393" y="5" key="CommitChangelistDialog2/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586203451071" />
+    <state x="393" y="5" key="CommitChangelistDialog2/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586205315268" />
     <state x="548" y="166" key="FileChooserDialogImpl" timestamp="1586099288545">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="166" key="FileChooserDialogImpl/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586099288545" />
-    <state width="1493" height="137" key="GridCell.Tab.0.bottom" timestamp="1586203497868">
+    <state width="1493" height="137" key="GridCell.Tab.0.bottom" timestamp="1586205202186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="137" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586203497868" />
-    <state width="1493" height="137" key="GridCell.Tab.0.center" timestamp="1586203497868">
+    <state width="1493" height="137" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586205202186" />
+    <state width="1493" height="137" key="GridCell.Tab.0.center" timestamp="1586205202186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="137" key="GridCell.Tab.0.center/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586203497868" />
-    <state width="1493" height="137" key="GridCell.Tab.0.left" timestamp="1586203497868">
+    <state width="1493" height="137" key="GridCell.Tab.0.center/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586205202186" />
+    <state width="1493" height="137" key="GridCell.Tab.0.left" timestamp="1586205202186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="137" key="GridCell.Tab.0.left/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586203497868" />
-    <state width="1493" height="137" key="GridCell.Tab.0.right" timestamp="1586203497868">
+    <state width="1493" height="137" key="GridCell.Tab.0.left/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586205202186" />
+    <state width="1493" height="137" key="GridCell.Tab.0.right" timestamp="1586205202186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="137" key="GridCell.Tab.0.right/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586203497868" />
+    <state width="1493" height="137" key="GridCell.Tab.0.right/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586205202186" />
     <state x="277" y="54" key="SettingsEditor" timestamp="1586203016671">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="54" key="SettingsEditor/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586203016671" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1586202323857">
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1586205330754">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586202323857" />
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586205330754" />
     <state x="578" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586195000202">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

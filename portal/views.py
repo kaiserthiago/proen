@@ -352,34 +352,125 @@ def dashboard(request):
     chart_docente_data_resposta_data = [int(obj[1]) for obj in docentes_data_resposta]
     chart_tae_data_resposta_data = [int(obj[1]) for obj in taes_data_resposta]
 
-    # preparacao_sulfato = PreparacaoSulfato.objects.filter(empresa=request.user.userprofile.empresa,
-    #                                                       data__year=date.today().year).order_by(
-    #     'data').values_list(
-    #     'data').annotate(
-    #     total=Sum('quantidade'))
-    #
-    # chart_sulfato_label = [str(obj[0].strftime('%d/%m/%y')) for obj in preparacao_sulfato]
-    # chart_sulfato_data = [float(obj[1]) for obj in preparacao_sulfato]
-    #
-    # utilizacal_cal = UtilizacaoCal.objects.filter(empresa=request.user.userprofile.empresa,
-    #                                               data__year=date.today().year).order_by(
-    #     'data').values_list(
-    #     'data').annotate(
-    #     total=Sum('quantidade'))
-    #
-    # chart_cal_label = [str(obj[0].strftime('%d/%m/%y')) for obj in utilizacal_cal]
-    # chart_cal_data = [float(obj[1]) for obj in utilizacal_cal]
-    #
-    # # ANÁLISE BRUTA
-    # dados_analise_bruta = AnaliseBruta.objects.filter(empresa=request.user.userprofile.empresa,
-    #                                                   data__year=date.today().year).order_by('data').values_list(
-    #     'data', 'turbidez', 'alcalinidade', 'gas_carbonico', 'ph').annotate(Count('id'))
-    #
-    # chart_analise_bruta_label = [str(obj[0].strftime('%d/%m/%y')) for obj in dados_analise_bruta]
-    # chart_analise_bruta_dados_turbidez = [float(obj[1]) for obj in dados_analise_bruta]
-    # chart_analise_bruta_dados_alcalinidade = [float(obj[2]) for obj in dados_analise_bruta]
-    # chart_analise_bruta_dados_gas_carbonico = [float(obj[3]) for obj in dados_analise_bruta]
-    # chart_analise_bruta_dados_ph = [float(obj[4]) for obj in dados_analise_bruta]
+    # GRÁFICO ALUNOS FORMA ACESSO INTERNET
+    acesso_aluno_sim = []
+    acesso_aluno_nao = []
+
+    aluno_acesso_possui_pc = Aluno.objects.all().order_by(
+        'possui_pc').values_list(
+        'possui_pc').annotate(
+        total=Count('possui_pc'),
+    ).distinct()
+
+    acesso_aluno_sim.insert(0, aluno_acesso_possui_pc[0][1])
+    acesso_aluno_nao.insert(0, aluno_acesso_possui_pc[1][1])
+
+    aluno_acesso_possui_celular = Aluno.objects.all().order_by(
+        'possui_celular').values_list(
+        'possui_celular').annotate(
+        total=Count('possui_celular'),
+    ).distinct()
+
+    acesso_aluno_sim.insert(1, aluno_acesso_possui_celular[0][1])
+    acesso_aluno_nao.insert(1, aluno_acesso_possui_celular[1][1])
+
+    aluno_acesso_possui_tablet = Aluno.objects.all().order_by(
+        'possui_tablet').values_list(
+        'possui_tablet').annotate(
+        total=Count('possui_tablet'),
+    ).distinct()
+
+    acesso_aluno_sim.insert(2, aluno_acesso_possui_tablet[0][1])
+    acesso_aluno_nao.insert(2, aluno_acesso_possui_tablet[1][1])
+
+    aluno_acesso_possui_tv = Aluno.objects.all().order_by(
+        'possui_tv').values_list(
+        'possui_tv').annotate(
+        total=Count('possui_tv'),
+    ).distinct()
+
+    acesso_aluno_sim.insert(3, aluno_acesso_possui_tv[0][1])
+    acesso_aluno_nao.insert(3, aluno_acesso_possui_tv[1][1])
+
+    # GRÁFICO DOCENTES FORMA ACESSO INTERNET
+    acesso_docente_sim = []
+    acesso_docente_nao = []
+
+    docente_acesso_possui_pc = Docente.objects.all().order_by(
+        'possui_pc').values_list(
+        'possui_pc').annotate(
+        total=Count('possui_pc'),
+    ).distinct()
+
+    acesso_docente_sim.insert(0, docente_acesso_possui_pc[0][1])
+    acesso_docente_nao.insert(0, docente_acesso_possui_pc[1][1])
+
+    docente_acesso_possui_celular = Docente.objects.all().order_by(
+        'possui_celular').values_list(
+        'possui_celular').annotate(
+        total=Count('possui_celular'),
+    ).distinct()
+
+    acesso_docente_sim.insert(1, docente_acesso_possui_celular[0][1])
+    acesso_docente_nao.insert(1, docente_acesso_possui_celular[1][1])
+
+    docente_acesso_possui_tablet = Docente.objects.all().order_by(
+        'possui_tablet').values_list(
+        'possui_tablet').annotate(
+        total=Count('possui_tablet'),
+    ).distinct()
+
+    acesso_docente_sim.insert(2, docente_acesso_possui_tablet[0][1])
+    acesso_docente_nao.insert(2, docente_acesso_possui_tablet[1][1])
+
+    docente_acesso_possui_tv = Docente.objects.all().order_by(
+        'possui_tv').values_list(
+        'possui_tv').annotate(
+        total=Count('possui_tv'),
+    ).distinct()
+
+    acesso_docente_sim.insert(3, docente_acesso_possui_tv[0][1])
+    acesso_docente_nao.insert(3, docente_acesso_possui_tv[1][1])
+
+    # GRÁFICO TAES FORMA ACESSO INTERNET
+    acesso_tae_sim = []
+    acesso_tae_nao = []
+
+    tae_acesso_possui_pc = Tae.objects.all().order_by(
+        'possui_pc').values_list(
+        'possui_pc').annotate(
+        total=Count('possui_pc'),
+    ).distinct()
+
+    acesso_tae_sim.insert(0, tae_acesso_possui_pc[0][1])
+    acesso_tae_nao.insert(0, tae_acesso_possui_pc[1][1])
+
+    tae_acesso_possui_celular = Tae.objects.all().order_by(
+        'possui_celular').values_list(
+        'possui_celular').annotate(
+        total=Count('possui_celular'),
+    ).distinct()
+
+    acesso_tae_sim.insert(1, tae_acesso_possui_celular[0][1])
+    acesso_tae_nao.insert(1, tae_acesso_possui_celular[1][1])
+
+    tae_acesso_possui_tablet = Tae.objects.all().order_by(
+        'possui_tablet').values_list(
+        'possui_tablet').annotate(
+        total=Count('possui_tablet'),
+    ).distinct()
+
+    acesso_tae_sim.insert(2, tae_acesso_possui_tablet[0][1])
+    acesso_tae_nao.insert(2, tae_acesso_possui_tablet[1][1])
+
+    tae_acesso_possui_tv = Tae.objects.all().order_by(
+        'possui_tv').values_list(
+        'possui_tv').annotate(
+        total=Count('possui_tv'),
+    ).distinct()
+
+    acesso_tae_sim.insert(3, tae_acesso_possui_tv[0][1])
+    acesso_tae_nao.insert(3, tae_acesso_possui_tv[1][1])
 
     context = {
         'alunos': alunos,
@@ -452,20 +543,15 @@ def dashboard(request):
         'chart_docente_data_resposta_data': json.dumps(chart_docente_data_resposta_data),
         'chart_tae_data_resposta_data': json.dumps(chart_tae_data_resposta_data),
 
-        # 'chart_lavagem_data_consumo': json.dumps(chart_lavagem_data_consumo),
-        # 'chart_lavagem_data_tempo': json.dumps(chart_lavagem_data_tempo),
-        #
-        # 'chart_sulfato_label': json.dumps(chart_sulfato_label),
-        # 'chart_sulfato_data': json.dumps(chart_sulfato_data),
-        #
-        # 'chart_cal_label': json.dumps(chart_cal_label),
-        # 'chart_cal_data': json.dumps(chart_cal_data),
-        #
-        # 'chart_analise_bruta_label': json.dumps(chart_analise_bruta_label),
-        # 'chart_analise_bruta_dados_turbidez': chart_analise_bruta_dados_turbidez,
-        # 'chart_analise_bruta_dados_alcalinidade': chart_analise_bruta_dados_alcalinidade,
-        # 'chart_analise_bruta_dados_gas_carbonico': chart_analise_bruta_dados_gas_carbonico,
-        # 'chart_analise_bruta_dados_ph': chart_analise_bruta_dados_ph
+        'chart_alunos_forma_acesso_internet_sim': json.dumps(acesso_aluno_sim),
+        'chart_alunos_forma_acesso_internet_nao': json.dumps(acesso_aluno_nao),
+
+        'chart_docentes_forma_acesso_internet_sim': json.dumps(acesso_docente_sim),
+        'chart_docentes_forma_acesso_internet_nao': json.dumps(acesso_docente_nao),
+
+        'chart_taes_forma_acesso_internet_sim': json.dumps(acesso_tae_sim),
+        'chart_taes_forma_acesso_internet_nao': json.dumps(acesso_tae_nao),
+
     }
     return render(request, 'portal/dashboard.html', context)
 
