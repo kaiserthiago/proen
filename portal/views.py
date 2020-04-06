@@ -501,6 +501,10 @@ def import_form(request):
                     aluno.deficiencia = str(n[47])
                     aluno.transtorno = str(n[48])
                     aluno.auxilio = str(n[57])
+                    aluno.possui_pc = str(n[42])
+                    aluno.possui_celular = str(n[43])
+                    aluno.possui_tablet = str(n[44])
+                    aluno.possui_tv = str(n[45])
 
                     aluno.save()
 
@@ -532,6 +536,10 @@ def import_form(request):
                     tae.competencia_rnp = str(n[20])
                     tae.avaliacao_jornada = int(n[22])
                     tae.avaliacao_producao = int(n[23])
+                    tae.possui_pc = str(n[5])
+                    tae.possui_celular = str(n[6])
+                    tae.possui_tablet = str(n[7])
+                    tae.possui_tv = str(n[8])
 
                     tae.save()
 
@@ -562,6 +570,10 @@ def import_form(request):
                     docente.competencia_simulador = str(n[69])
                     docente.competencia_rnp = str(n[70])
                     docente.avaliacao_experiencia = int(n[34])
+                    docente.possui_pc = str(n[28])
+                    docente.possui_celular = str(n[29])
+                    docente.possui_tablet = str(n[30])
+                    docente.possui_tv = str(n[31])
 
                     docente.save()
 
