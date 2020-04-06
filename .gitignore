@@ -1,7 +1,7 @@
 *.pyc
 *~
 __pycache__
-idea
+.idea
 myvenv
 media
 db.sqlite3
