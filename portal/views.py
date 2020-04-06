@@ -353,8 +353,8 @@ def dashboard(request):
     chart_tae_data_resposta_data = [int(obj[1]) for obj in taes_data_resposta]
 
     # GRÁFICO ALUNOS FORMA ACESSO INTERNET
-    acesso_aluno_sim = []
     acesso_aluno_nao = []
+    acesso_aluno_sim = []
 
     aluno_acesso_possui_pc = Aluno.objects.all().order_by(
         'possui_pc').values_list(
@@ -362,8 +362,8 @@ def dashboard(request):
         total=Count('possui_pc'),
     ).distinct()
 
-    acesso_aluno_sim.insert(0, aluno_acesso_possui_pc[0][1])
-    acesso_aluno_nao.insert(0, aluno_acesso_possui_pc[1][1])
+    acesso_aluno_nao.insert(0, aluno_acesso_possui_pc[0][1])
+    acesso_aluno_sim.insert(0, aluno_acesso_possui_pc[1][1])
 
     aluno_acesso_possui_celular = Aluno.objects.all().order_by(
         'possui_celular').values_list(
@@ -371,8 +371,8 @@ def dashboard(request):
         total=Count('possui_celular'),
     ).distinct()
 
-    acesso_aluno_sim.insert(1, aluno_acesso_possui_celular[0][1])
-    acesso_aluno_nao.insert(1, aluno_acesso_possui_celular[1][1])
+    acesso_aluno_nao.insert(1, aluno_acesso_possui_celular[0][1])
+    acesso_aluno_sim.insert(1, aluno_acesso_possui_celular[1][1])
 
     aluno_acesso_possui_tablet = Aluno.objects.all().order_by(
         'possui_tablet').values_list(
@@ -380,8 +380,8 @@ def dashboard(request):
         total=Count('possui_tablet'),
     ).distinct()
 
-    acesso_aluno_sim.insert(2, aluno_acesso_possui_tablet[0][1])
-    acesso_aluno_nao.insert(2, aluno_acesso_possui_tablet[1][1])
+    acesso_aluno_nao.insert(2, aluno_acesso_possui_tablet[0][1])
+    acesso_aluno_sim.insert(2, aluno_acesso_possui_tablet[1][1])
 
     aluno_acesso_possui_tv = Aluno.objects.all().order_by(
         'possui_tv').values_list(
@@ -389,12 +389,12 @@ def dashboard(request):
         total=Count('possui_tv'),
     ).distinct()
 
-    acesso_aluno_sim.insert(3, aluno_acesso_possui_tv[0][1])
-    acesso_aluno_nao.insert(3, aluno_acesso_possui_tv[1][1])
+    acesso_aluno_nao.insert(3, aluno_acesso_possui_tv[0][1])
+    acesso_aluno_sim.insert(3, aluno_acesso_possui_tv[1][1])
 
     # GRÁFICO DOCENTES FORMA ACESSO INTERNET
-    acesso_docente_sim = []
     acesso_docente_nao = []
+    acesso_docente_sim = []
 
     docente_acesso_possui_pc = Docente.objects.all().order_by(
         'possui_pc').values_list(
@@ -402,8 +402,8 @@ def dashboard(request):
         total=Count('possui_pc'),
     ).distinct()
 
-    acesso_docente_sim.insert(0, docente_acesso_possui_pc[0][1])
-    acesso_docente_nao.insert(0, docente_acesso_possui_pc[1][1])
+    acesso_docente_nao.insert(0, docente_acesso_possui_pc[0][1])
+    acesso_docente_sim.insert(0, docente_acesso_possui_pc[1][1])
 
     docente_acesso_possui_celular = Docente.objects.all().order_by(
         'possui_celular').values_list(
@@ -411,8 +411,8 @@ def dashboard(request):
         total=Count('possui_celular'),
     ).distinct()
 
-    acesso_docente_sim.insert(1, docente_acesso_possui_celular[0][1])
-    acesso_docente_nao.insert(1, docente_acesso_possui_celular[1][1])
+    acesso_docente_nao.insert(1, docente_acesso_possui_celular[0][1])
+    acesso_docente_sim.insert(1, docente_acesso_possui_celular[1][1])
 
     docente_acesso_possui_tablet = Docente.objects.all().order_by(
         'possui_tablet').values_list(
@@ -420,8 +420,8 @@ def dashboard(request):
         total=Count('possui_tablet'),
     ).distinct()
 
-    acesso_docente_sim.insert(2, docente_acesso_possui_tablet[0][1])
-    acesso_docente_nao.insert(2, docente_acesso_possui_tablet[1][1])
+    acesso_docente_nao.insert(2, docente_acesso_possui_tablet[0][1])
+    acesso_docente_sim.insert(2, docente_acesso_possui_tablet[1][1])
 
     docente_acesso_possui_tv = Docente.objects.all().order_by(
         'possui_tv').values_list(
@@ -429,12 +429,12 @@ def dashboard(request):
         total=Count('possui_tv'),
     ).distinct()
 
-    acesso_docente_sim.insert(3, docente_acesso_possui_tv[0][1])
-    acesso_docente_nao.insert(3, docente_acesso_possui_tv[1][1])
+    acesso_docente_nao.insert(3, docente_acesso_possui_tv[0][1])
+    acesso_docente_sim.insert(3, docente_acesso_possui_tv[1][1])
 
     # GRÁFICO TAES FORMA ACESSO INTERNET
-    acesso_tae_sim = []
     acesso_tae_nao = []
+    acesso_tae_sim = []
 
     tae_acesso_possui_pc = Tae.objects.all().order_by(
         'possui_pc').values_list(
@@ -442,8 +442,8 @@ def dashboard(request):
         total=Count('possui_pc'),
     ).distinct()
 
-    acesso_tae_sim.insert(0, tae_acesso_possui_pc[0][1])
-    acesso_tae_nao.insert(0, tae_acesso_possui_pc[1][1])
+    acesso_tae_nao.insert(0, tae_acesso_possui_pc[0][1])
+    acesso_tae_sim.insert(0, tae_acesso_possui_pc[1][1])
 
     tae_acesso_possui_celular = Tae.objects.all().order_by(
         'possui_celular').values_list(
@@ -451,8 +451,8 @@ def dashboard(request):
         total=Count('possui_celular'),
     ).distinct()
 
-    acesso_tae_sim.insert(1, tae_acesso_possui_celular[0][1])
-    acesso_tae_nao.insert(1, tae_acesso_possui_celular[1][1])
+    acesso_tae_nao.insert(1, tae_acesso_possui_celular[0][1])
+    acesso_tae_sim.insert(1, tae_acesso_possui_celular[1][1])
 
     tae_acesso_possui_tablet = Tae.objects.all().order_by(
         'possui_tablet').values_list(
@@ -460,8 +460,8 @@ def dashboard(request):
         total=Count('possui_tablet'),
     ).distinct()
 
-    acesso_tae_sim.insert(2, tae_acesso_possui_tablet[0][1])
-    acesso_tae_nao.insert(2, tae_acesso_possui_tablet[1][1])
+    acesso_tae_nao.insert(2, tae_acesso_possui_tablet[0][1])
+    acesso_tae_sim.insert(2, tae_acesso_possui_tablet[1][1])
 
     tae_acesso_possui_tv = Tae.objects.all().order_by(
         'possui_tv').values_list(
@@ -469,8 +469,8 @@ def dashboard(request):
         total=Count('possui_tv'),
     ).distinct()
 
-    acesso_tae_sim.insert(3, tae_acesso_possui_tv[0][1])
-    acesso_tae_nao.insert(3, tae_acesso_possui_tv[1][1])
+    acesso_tae_nao.insert(3, tae_acesso_possui_tv[0][1])
+    acesso_tae_sim.insert(3, tae_acesso_possui_tv[1][1])
 
     context = {
         'alunos': alunos,
