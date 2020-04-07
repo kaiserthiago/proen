@@ -182,6 +182,155 @@ def dashboard(request):
         'formacao_ead').annotate(
         total=Count('id')).distinct()
 
+    # GRÁFICO DOCENTES COMPETÊNCIAS EAD
+    docente_nao_conheco = []
+    docente_conheco = []
+    docente_sei_usar = []
+    docente_conhecimentos_avancados = []
+    docente_sei_ensinar = []
+
+    docentes_competencias_ead_competencia_avaliacao = Tae.objects.all().order_by(
+        'competencia_avaliacao').values_list(
+        'competencia_avaliacao').annotate(
+        total=Count('competencia_avaliacao'),
+    ).distinct()
+
+    docente_nao_conheco.insert(0, docentes_competencias_ead_competencia_avaliacao[2][1])
+    docente_conheco.insert(0, docentes_competencias_ead_competencia_avaliacao[0][1])
+    docente_sei_usar.insert(0, docentes_competencias_ead_competencia_avaliacao[1][1])
+    docente_conhecimentos_avancados.insert(0, docentes_competencias_ead_competencia_avaliacao[4][1])
+    docente_sei_ensinar.insert(0, docentes_competencias_ead_competencia_avaliacao[3][1])
+
+    docentes_competencias_ead_competencia_desenvolvimento = Tae.objects.all().order_by(
+        'competencia_desenvolvimento').values_list(
+        'competencia_desenvolvimento').annotate(
+        total=Count('competencia_desenvolvimento'),
+    ).distinct()
+
+    docente_nao_conheco.insert(1, docentes_competencias_ead_competencia_desenvolvimento[2][1])
+    docente_conheco.insert(1, docentes_competencias_ead_competencia_desenvolvimento[0][1])
+    docente_sei_usar.insert(1, docentes_competencias_ead_competencia_desenvolvimento[1][1])
+    docente_conhecimentos_avancados.insert(1, docentes_competencias_ead_competencia_desenvolvimento[4][1])
+    docente_sei_ensinar.insert(1, docentes_competencias_ead_competencia_desenvolvimento[3][1])
+
+    docentes_competencias_ead_competencia_design = Tae.objects.all().order_by(
+        'competencia_design').values_list(
+        'competencia_design').annotate(
+        total=Count('competencia_desenvolvimento'),
+    ).distinct()
+
+    docente_nao_conheco.insert(2, docentes_competencias_ead_competencia_design[2][1])
+    docente_conheco.insert(2, docentes_competencias_ead_competencia_design[0][1])
+    docente_sei_usar.insert(2, docentes_competencias_ead_competencia_design[1][1])
+    docente_conhecimentos_avancados.insert(2, docentes_competencias_ead_competencia_design[4][1])
+    docente_sei_ensinar.insert(2, docentes_competencias_ead_competencia_design[3][1])
+
+    docentes_competencias_ead_competencia_elaboracao = Tae.objects.all().order_by(
+        'competencia_elaboracao').values_list(
+        'competencia_elaboracao').annotate(
+        total=Count('competencia_elaboracao'),
+    ).distinct()
+
+    docente_nao_conheco.insert(3, docentes_competencias_ead_competencia_elaboracao[2][1])
+    docente_conheco.insert(3, docentes_competencias_ead_competencia_elaboracao[0][1])
+    docente_sei_usar.insert(3, docentes_competencias_ead_competencia_elaboracao[1][1])
+    docente_conhecimentos_avancados.insert(3, docentes_competencias_ead_competencia_elaboracao[4][1])
+    docente_sei_ensinar.insert(3, docentes_competencias_ead_competencia_elaboracao[3][1])
+
+    docentes_competencias_ead_competencia_ensino = Tae.objects.all().order_by(
+        'competencia_ensino').values_list(
+        'competencia_ensino').annotate(
+        total=Count('competencia_ensino'),
+    ).distinct()
+
+    docente_nao_conheco.insert(4, docentes_competencias_ead_competencia_ensino[2][1])
+    docente_conheco.insert(4, docentes_competencias_ead_competencia_ensino[0][1])
+    docente_sei_usar.insert(4, docentes_competencias_ead_competencia_ensino[1][1])
+    docente_conhecimentos_avancados.insert(4, docentes_competencias_ead_competencia_ensino[4][1])
+    docente_sei_ensinar.insert(4, docentes_competencias_ead_competencia_ensino[3][1])
+
+    docentes_competencias_ead_competencia_plataforma = Tae.objects.all().order_by(
+        'competencia_plataforma').values_list(
+        'competencia_plataforma').annotate(
+        total=Count('competencia_plataforma'),
+    ).distinct()
+
+    docente_nao_conheco.insert(5, docentes_competencias_ead_competencia_plataforma[2][1])
+    docente_conheco.insert(5, docentes_competencias_ead_competencia_plataforma[0][1])
+    docente_sei_usar.insert(5, docentes_competencias_ead_competencia_plataforma[1][1])
+    docente_conhecimentos_avancados.insert(5, docentes_competencias_ead_competencia_plataforma[4][1])
+    docente_sei_ensinar.insert(5, docentes_competencias_ead_competencia_plataforma[3][1])
+
+    docentes_competencias_ead_competencia_producao = Tae.objects.all().order_by(
+        'competencia_producao').values_list(
+        'competencia_producao').annotate(
+        total=Count('competencia_producao'),
+    ).distinct()
+
+    docente_nao_conheco.insert(6, docentes_competencias_ead_competencia_producao[2][1])
+    docente_conheco.insert(6, docentes_competencias_ead_competencia_producao[0][1])
+    docente_sei_usar.insert(6, docentes_competencias_ead_competencia_producao[1][1])
+
+    try:
+        docente_conhecimentos_avancados.insert(6, docentes_competencias_ead_competencia_producao[4][1])
+    except:
+        docente_conhecimentos_avancados.insert(6, 0)
+
+    docente_sei_ensinar.insert(6, docentes_competencias_ead_competencia_producao[3][1])
+
+    docentes_competencias_ead_competencia_roteiro = Tae.objects.all().order_by(
+        'competencia_roteiro').values_list(
+        'competencia_roteiro').annotate(
+        total=Count('competencia_roteiro'),
+    ).distinct()
+
+    docente_nao_conheco.insert(7, docentes_competencias_ead_competencia_roteiro[2][1])
+    docente_conheco.insert(7, docentes_competencias_ead_competencia_roteiro[0][1])
+    docente_sei_usar.insert(7, docentes_competencias_ead_competencia_roteiro[1][1])
+    docente_conhecimentos_avancados.insert(7, docentes_competencias_ead_competencia_roteiro[4][1])
+    docente_sei_ensinar.insert(7, docentes_competencias_ead_competencia_roteiro[3][1])
+
+    docentes_competencias_ead_competencia_sala = Tae.objects.all().order_by(
+        'competencia_sala').values_list(
+        'competencia_sala').annotate(
+        total=Count('competencia_sala'),
+    ).distinct()
+
+    docente_nao_conheco.insert(8, docentes_competencias_ead_competencia_sala[2][1])
+    docente_conheco.insert(8, docentes_competencias_ead_competencia_sala[0][1])
+    docente_sei_usar.insert(8, docentes_competencias_ead_competencia_sala[1][1])
+    docente_conhecimentos_avancados.insert(8, docentes_competencias_ead_competencia_sala[4][1])
+    docente_sei_ensinar.insert(8, docentes_competencias_ead_competencia_sala[3][1])
+
+    docentes_competencias_ead_competencia_simulador = Tae.objects.all().order_by(
+        'competencia_simulador').values_list(
+        'competencia_simulador').annotate(
+        total=Count('competencia_simulador'),
+    ).distinct()
+
+    docente_nao_conheco.insert(9, docentes_competencias_ead_competencia_simulador[2][1])
+    docente_conheco.insert(9, docentes_competencias_ead_competencia_simulador[0][1])
+    docente_sei_usar.insert(9, docentes_competencias_ead_competencia_simulador[1][1])
+
+    try:
+        docente_conhecimentos_avancados.insert(9, docentes_competencias_ead_competencia_simulador[4][1])
+    except:
+        docente_conhecimentos_avancados.insert(9, 0)
+
+    docente_sei_ensinar.insert(9, docentes_competencias_ead_competencia_simulador[3][1])
+
+    docentes_competencias_ead_competencia_rnp = Tae.objects.all().order_by(
+        'competencia_rnp').values_list(
+        'competencia_rnp').annotate(
+        total=Count('competencia_rnp'),
+    ).distinct()
+
+    docente_nao_conheco.insert(10, docentes_competencias_ead_competencia_rnp[2][1])
+    docente_conheco.insert(10, docentes_competencias_ead_competencia_rnp[0][1])
+    docente_sei_usar.insert(10, docentes_competencias_ead_competencia_rnp[1][1])
+    docente_conhecimentos_avancados.insert(10, docentes_competencias_ead_competencia_rnp[4][1])
+    docente_sei_ensinar.insert(10, docentes_competencias_ead_competencia_rnp[3][1])
+
     # GRÁFICO TAES COMPETÊNCIAS EAD
     nao_conheco = []
     conheco = []
@@ -531,6 +680,12 @@ def dashboard(request):
             chart_docentes_avaliacao_atividades_remotas_data_experiencia),
 
         'taes_formacao_ead': json.dumps(list(taes_formacao_ead)),
+
+        'chart_docentes_compentecia_ead_data_nao_conheco': json.dumps(docente_nao_conheco),
+        'chart_docentes_compentecia_ead_data_conheco': json.dumps(docente_conheco),
+        'chart_docentes_compentecia_ead_data_conheco_sei_usar': json.dumps(docente_sei_usar),
+        'chart_docentes_compentecia_ead_data_conhecimentos_avancados': json.dumps(docente_conhecimentos_avancados),
+        'chart_docentes_compentecia_ead_data_sei_ensinar': json.dumps(docente_sei_ensinar),
 
         'chart_taes_compentecia_ead_data_nao_conheco': json.dumps(nao_conheco),
         'chart_taes_compentecia_ead_data_conheco': json.dumps(conheco),

@@ -296,6 +296,7 @@
             </div>
         </div>
     </div>
+
     {#GRÁFICO DOCENTES#}
     <div class="card mb-3">
         <div class="card-header grey lighten-1 font-weight-bold">
@@ -343,6 +344,18 @@
                     <div class="card">
                         <div class="card-body">
                             <div id="avaliacao_atividades_remotas_docentes"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="docentes_competencias_ead"></div>
                         </div>
                     </div>
                 </div>
@@ -1009,6 +1022,89 @@
                         innerSize: '50%',
 
                     }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO DOCENTES COMPENTÊNCIAS EAD-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data_nao_conheco = JSON.parse('{{ chart_docentes_compentecia_ead_data_nao_conheco|safe }}');
+            var data_conheco = JSON.parse('{{ chart_docentes_compentecia_ead_data_conheco|safe }}');
+            var data_conheco_sei_usar = JSON.parse('{{ chart_docentes_compentecia_ead_data_conheco_sei_usar|safe }}');
+            var data_conhecimentos_avancados = JSON.parse('{{ chart_docentes_compentecia_ead_data_conhecimentos_avancados|safe }}');
+            var data_sei_ensinar = JSON.parse('{{ chart_docentes_compentecia_ead_data_sei_ensinar|safe }}');
+            var myChart = Highcharts.chart('docentes_competencias_ead', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Competências EaD'
+                },
+                subtitle: {
+                    text: 'Respostas dos Docentes'
+                },
+                xAxis: {
+                    categories: [
+                        'Avaliação online',
+                        'Desenvolvimento de Objetos de Aprendizagem',
+                        'Design Educacional (Instrucional)',
+                        'Elaboração de Projeto Pedagógico de Curso para EAD',
+                        'Ensino Híbrido',
+                        'Plataforma Moodle ',
+                        'Produção de livro-texto',
+                        'Roteiro para vídeo aulas ',
+                        'Sala de aula invertida',
+                        'Simuladores e Ambientes de Imersão',
+                        'WebConferência RNP',
+                    ]
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total de respostas'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                legend: {
+                    enabled: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Não conheço',
+                    data: data_nao_conheco
+                },
+                    {
+                        name: 'Conheço',
+                        data: data_conheco
+                    },
+                    {
+                        name: 'Conheço e sei como usar',
+                        data: data_conheco_sei_usar
+                    },
+                    {
+                        name: 'Tenho conhecimentos avançados',
+                        data: data_conhecimentos_avancados
+                    },
+                    {
+                        name: 'Sei ensinar outra pessoa',
+                        data: data_sei_ensinar
+                    },
+                ]
             });
         });
     </script>
