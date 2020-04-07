@@ -105,5 +105,3 @@ light-font .breadcrumb-item + .breadcrumb-item::before {
 .card-header.redonda a {
     color: #4265f4;
 }
-
-@font-face { font-family: "Billy Ohio Regular"; src: url('/static/font/Billy Ohio.ttf'); }
