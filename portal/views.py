@@ -90,6 +90,12 @@ def dashboard(request):
     chart_aluno_nivel_curso_label = [obj[0] for obj in alunos_nivel_curso]
     chart_aluno_nivel_curso_data = [int(obj[1]) for obj in alunos_nivel_curso]
 
+    # GRÁFICO DOCENTES FAZ AR
+    docentes_ar = Docente.objects.all().order_by(
+        '-promovendo_ar').values_list(
+        'promovendo_ar').annotate(
+        total=Count('id')).distinct()
+
     # GRÁFICO ALUNOS POR POSIÇÃO
     alunos_posicao = Aluno.objects.all().order_by(
         'posicao').values_list(
@@ -107,6 +113,19 @@ def dashboard(request):
         'posicao').values_list(
         'posicao').annotate(
         total=Count('id')).distinct()
+
+    # GRÁFICO DOCENTES POR OPINIÃO
+    docentes_opiniao = Docente.objects.all().order_by(
+        'opiniao').values_list(
+        'opiniao').annotate(
+        total=Count('id')).distinct()
+
+    # GRÁFICO TAES POR OPINIÃO
+    taes_opiniao = Tae.objects.all().order_by(
+        'opiniao').values_list(
+        'opiniao').annotate(
+        total=Count('id')).distinct()
+
 
     # GRÁFICO ALUNOS ACESSO INTERNET ALUNOS
     alunos_acesso_internet = Aluno.objects.all().order_by(
@@ -654,6 +673,11 @@ def dashboard(request):
         'alunos_posicao': json.dumps(list(alunos_posicao)),
         'docentes_posicao': json.dumps(list(docentes_posicao)),
         'taes_posicao': json.dumps(list(taes_posicao)),
+
+        'docentes_ar': json.dumps(list(docentes_ar)),
+
+        'docentes_opiniao': json.dumps(list(docentes_opiniao)),
+        'taes_opiniao': json.dumps(list(taes_opiniao)),
 
         'alunos_acesso_internet': json.dumps(list(alunos_acesso_internet)),
         'docentes_acesso_internet': json.dumps(list(docentes_acesso_internet)),

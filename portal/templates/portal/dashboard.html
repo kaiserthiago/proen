@@ -237,6 +237,7 @@
         </div>
     </div>
 
+    {#GRÁFICO ALUNOS#}
     <div class="card mb-3">
         <div class="card-header grey lighten-1 font-weight-bold">
             <p class="float-left m-0">
@@ -346,7 +347,30 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
+                            <div id="docentes_ar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
                             <div id="docentes_posicao"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="docentes_opiniao"></div>
                         </div>
                     </div>
                 </div>
@@ -362,7 +386,6 @@
                     </div>
                 </div>
             </div>
-
 
             <div class="row mb-3">
                 <div class="col-sm-12">
@@ -424,10 +447,12 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <div id="avaliacao_atividades_remotas_taes"></div>
+                            <div id="taes_opiniao"></div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
             <div class="row mb-3">
                 <div class="col-sm-6">
@@ -445,6 +470,17 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
+                            <div id="avaliacao_atividades_remotas_taes"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
                             <div id="taes_competencias_ead"></div>
                         </div>
                     </div>
@@ -453,7 +489,7 @@
         </div>
     </div>
 
-    {#    GRÁFICOS GERAIS#}
+    {#GRÁFICOS GERAIS#}
     <div class="card mb-3">
         <div class="card-header grey lighten-1 font-weight-bold">
             <p class="float-left m-0">
@@ -972,7 +1008,7 @@
                             format: '{point.y:.1f}',
                             distance: 0,
                         },
-                        showInLegend: true
+                        showInLegend: false
                     }
                 },
                 tooltip: {
@@ -992,6 +1028,54 @@
         });
     </script>
 
+    <!--GRÁFICO DOCENTES FAZ ATIVIDADE REMOTA-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ docentes_ar|safe }}');
+            var myChart = Highcharts.chart('docentes_ar', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Você está promovendo atividades remotas nas turmas em que leciona no semestre corrente?',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Docentes'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
+
     <!--GRÁFICO DOCENTES POSIÇÃO-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1002,6 +1086,54 @@
                 },
                 title: {
                     text: 'O que o IFRO deve fazer a respeito da suspensão das atividades presenciais?',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Docentes'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO DOCENTES OPINIÃO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ docentes_opiniao|safe }}');
+            var myChart = Highcharts.chart('docentes_opiniao', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Atividades Remotas são alternativas possíveis para implementarmos a aprendizagem no período da pandemia',
                     align: 'center',
                 },
                 subtitle: {
@@ -1297,6 +1429,54 @@
                 },
                 title: {
                     text: 'O que o IFRO deve fazer a respeito da suspensão das atividades presenciais?',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos TAEs'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO TAES OPINIÃO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ taes_opiniao|safe }}');
+            var myChart = Highcharts.chart('taes_opiniao', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Atividades Remotas são alternativas possíveis para implementarmos a aprendizagem no período da pandemia',
                     align: 'center',
                 },
                 subtitle: {
