@@ -713,18 +713,17 @@ def dashboard(request):
 
 @permission_required('is_superuser')
 def import_form(request):
-    # try:
     if request.method == 'POST':
         dataset = Dataset()
         new_persons = request.FILES['myfile']
 
         imported_data = dataset.load(new_persons.read())
 
-        # VERIFICA O ARQUIVO A PARTIR DA LINHA 2
+        # VERIFICA O ARQUIVO A PARTIR DA LINHA 1
         for n in imported_data[0:]:
-            if str(n[2]) == 'Aluno':
+            if str(n[1]) == 'Aluno':
                 try:
-                    aluno = get_object_or_404(Aluno, data_resposta=n[0])
+                    aluno = get_object_or_404(Aluno, data_resposta=n[0], campus=n[50])
                 except:
                     aluno = None
 
@@ -732,24 +731,26 @@ def import_form(request):
                     aluno = Aluno()
 
                     aluno.data_resposta = str(n[0])
-                    aluno.posicao = str(n[59])
-                    aluno.campus = str(n[40])
-                    aluno.nivel_curso = str(n[46])
-                    aluno.avaliacao_moodle = int(n[54])
-                    aluno.avaliacao_conteudo = int(n[52])
-                    aluno.avaliacao_orientacoes = int(n[50])
-                    aluno.acesso_internet = str(n[41])
-                    aluno.deficiencia = str(n[47])
-                    aluno.transtorno = str(n[48])
-                    aluno.auxilio = str(n[57])
-                    aluno.possui_pc = str(n[42])
-                    aluno.possui_celular = str(n[43])
-                    aluno.possui_tablet = str(n[44])
-                    aluno.possui_tv = str(n[45])
+                    aluno.posicao = str(n[68])
+                    aluno.campus = str(n[50])
+                    aluno.nivel_curso = str(n[56])
+                    aluno.avaliacao_moodle = int(n[64])
+                    aluno.avaliacao_conteudo = int(n[62])
+                    aluno.avaliacao_orientacoes = int(n[60])
+                    aluno.acesso_internet = str(n[51])
+                    aluno.deficiencia = str(n[57])
+                    aluno.transtorno = str(n[58])
+                    aluno.auxilio = str(n[67])
+                    aluno.possui_pc = str(n[52])
+                    aluno.possui_celular = str(n[53])
+                    aluno.possui_tablet = str(n[54])
+                    aluno.possui_tv = str(n[55])
+                    aluno.orientacao_enviada = str(n[59])
+                    aluno.conteudo_enviada = str(n[61])
 
                     aluno.save()
 
-            if str(n[2]) == 'TAE':
+            if str(n[1]) == 'TAE':
                 try:
                     tae = get_object_or_404(Tae, data_resposta=n[0])
                 except:
@@ -759,32 +760,32 @@ def import_form(request):
                     tae = Tae()
 
                     tae.data_resposta = str(n[0])
-                    tae.opiniao = str(n[24])
-                    tae.posicao = str(n[25])
-                    tae.campus = str(n[3])
-                    tae.acesso_internet = str(n[4])
-                    tae.formacao_ead = str(n[9])
-                    tae.competencia_avaliacao = str(n[10])
-                    tae.competencia_desenvolvimento = str(n[11])
-                    tae.competencia_design = str(n[12])
-                    tae.competencia_elaboracao = str(n[13])
-                    tae.competencia_ensino = str(n[14])
-                    tae.competencia_plataforma = str(n[15])
-                    tae.competencia_producao = str(n[16])
-                    tae.competencia_roteiro = str(n[17])
-                    tae.competencia_sala = str(n[18])
-                    tae.competencia_simulador = str(n[19])
-                    tae.competencia_rnp = str(n[20])
-                    tae.avaliacao_jornada = int(n[22])
-                    tae.avaliacao_producao = int(n[23])
-                    tae.possui_pc = str(n[5])
-                    tae.possui_celular = str(n[6])
-                    tae.possui_tablet = str(n[7])
-                    tae.possui_tv = str(n[8])
+                    tae.campus = str(n[2])
+                    tae.acesso_internet = str(n[3])
+                    tae.possui_pc = str(n[4])
+                    tae.possui_celular = str(n[5])
+                    tae.possui_tablet = str(n[6])
+                    tae.possui_tv = str(n[7])
+                    tae.formacao_ead = str(n[8])
+                    tae.competencia_avaliacao = str(n[9])
+                    tae.competencia_desenvolvimento = str(n[10])
+                    tae.competencia_design = str(n[11])
+                    tae.competencia_elaboracao = str(n[12])
+                    tae.competencia_ensino = str(n[13])
+                    tae.competencia_plataforma = str(n[14])
+                    tae.competencia_producao = str(n[15])
+                    tae.competencia_roteiro = str(n[16])
+                    tae.competencia_sala = str(n[17])
+                    tae.competencia_simulador = str(n[18])
+                    tae.competencia_rnp = str(n[19])
+                    tae.avaliacao_jornada = int(n[21])
+                    tae.avaliacao_producao = int(n[22])
+                    tae.opiniao = str(n[23])
+                    tae.posicao = str(n[24])
 
                     tae.save()
 
-            if str(n[2]) == 'Professor':
+            if str(n[1]) == 'Professor':
                 try:
                     docente = get_object_or_404(Docente, data_resposta=n[0])
                 except:
@@ -794,27 +795,27 @@ def import_form(request):
                     docente = Docente()
 
                     docente.data_resposta = str(n[0])
-                    docente.opiniao = str(n[38])
-                    docente.posicao = str(n[39])
-                    docente.campus = str(n[26])
-                    docente.acesso_internet = str(n[27])
-                    docente.promovendo_ar = str(n[32])
-                    docente.competencia_avaliacao = str(n[60])
-                    docente.competencia_desenvolvimento = str(n[61])
-                    docente.competencia_design = str(n[62])
-                    docente.competencia_elaboracao = str(n[63])
-                    docente.competencia_ensino = str(n[64])
-                    docente.competencia_plataforma = str(n[65])
-                    docente.competencia_producao = str(n[66])
-                    docente.competencia_roteiro = str(n[67])
-                    docente.competencia_sala = str(n[68])
-                    docente.competencia_simulador = str(n[69])
-                    docente.competencia_rnp = str(n[70])
-                    docente.avaliacao_experiencia = int(n[34])
-                    docente.possui_pc = str(n[28])
-                    docente.possui_celular = str(n[29])
-                    docente.possui_tablet = str(n[30])
-                    docente.possui_tv = str(n[31])
+                    docente.opiniao = str(n[48])
+                    docente.posicao = str(n[49])
+                    docente.campus = str(n[25])
+                    docente.acesso_internet = str(n[26])
+                    docente.promovendo_ar = str(n[31])
+                    docente.competencia_avaliacao = str(n[33])
+                    docente.competencia_desenvolvimento = str(n[34])
+                    docente.competencia_design = str(n[35])
+                    docente.competencia_elaboracao = str(n[36])
+                    docente.competencia_ensino = str(n[37])
+                    docente.competencia_plataforma = str(n[38])
+                    docente.competencia_producao = str(n[39])
+                    docente.competencia_roteiro = str(n[40])
+                    docente.competencia_sala = str(n[41])
+                    docente.competencia_simulador = str(n[42])
+                    docente.competencia_rnp = str(n[43])
+                    docente.avaliacao_experiencia = int(n[44])
+                    docente.possui_pc = str(n[27])
+                    docente.possui_celular = str(n[28])
+                    docente.possui_tablet = str(n[29])
+                    docente.possui_tv = str(n[30])
 
                     docente.save()
 
@@ -823,6 +824,3 @@ def import_form(request):
     }
 
     return render(request, 'portal/import_form.html', context)
-
-# except:
-#     return HttpResponse('Deu erro')

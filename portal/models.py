@@ -18,6 +18,8 @@ class Aluno(models.Model):
     possui_celular = models.CharField(verbose_name='Celular Smartphone', max_length=3, blank=True, null=True)
     possui_tablet = models.CharField(verbose_name='Tablet', max_length=3, blank=True, null=True)
     possui_tv = models.CharField(verbose_name='Smart TV', max_length=3, blank=True, null=True)
+    orientacao_enviada = models.CharField(verbose_name='Professores Enviaram Orientações?', max_length=150, blank=True, null=True)
+    conteudo_enviado = models.CharField(verbose_name='Professores Enviaram Conteúdo ?', max_length=150, blank=True, null=True)
 
     class Meta:
         ordering = ['-data_resposta', 'campus', 'nivel_curso']
