@@ -2,6 +2,7 @@
 {% block dashboard_menu %} active {% endblock %}
 {% load humanize %}
 {% load percentual %}
+{% load static %}
 
 {% block breadcrumb_base %}
     <ol class="breadcrumb blue-grey lighten-4">
@@ -76,6 +77,12 @@
                     </p>
                 </div>
             </div>
+        </div>
+        <hr class="w-100 clearfix d-md-none">
+
+        <div class="col-sm-4">
+            <img class="img-fluid mx-auto d-block align-middle" src="{% static 'img/logo-IFRO-(horizontal) (1).png' %}">
+            <p class="font-weight-bold d-flex justify-content-center text-uppercase mt-2">Educação que Transforma</p>
         </div>
     </div>
     <div class="row mb-3">
