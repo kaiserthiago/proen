@@ -104,8 +104,8 @@
                     {% for indicador in indicador_alunos_campus %}
                         <p class="border-bottom">
                             {{ indicador.campus }}
-                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'Aluno' indicador.total forloop.counter0 %}%</span>
-                            <span class="badge badge-pill badge-secondary float-sm-right mr-1">{% percentual alunos.count indicador.total %}%</span>
+{#                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'Aluno' indicador.total forloop.counter0 %}%</span>#}
+                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
                             <span class="badge badge-pill badge-primary float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
                         </p>
                     {% endfor %}
@@ -131,8 +131,8 @@
                     {% for indicador in indicador_docentes_campus %}
                         <p class="border-bottom">
                             {{ indicador.campus }}
-                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'Docente' indicador.total forloop.counter0 %}%</span>
-                            <span class="badge badge-pill badge-secondary float-sm-right mr-1">{% percentual docentes.count indicador.total %}%</span>
+{#                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'Docente' indicador.total forloop.counter0 %}%</span>#}
+                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual docentes.count indicador.total %}%</span>
                             <span class="badge badge-pill badge-success float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
                         </p>
                     {% endfor %}
@@ -157,8 +157,8 @@
                     {% for indicador in indicador_taes_campus %}
                         <p class="border-bottom">
                             {{ indicador.campus }}
-                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'TAE' indicador.total forloop.counter0 %}%</span>
-                            <span class="badge badge-pill badge-secondary float-sm-right mr-1">{% percentual taes.count indicador.total %}%</span>
+{#                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'TAE' indicador.total forloop.counter0 %}%</span>#}
+                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual taes.count indicador.total %}%</span>
                             <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
                         </p>
                     {% endfor %}
