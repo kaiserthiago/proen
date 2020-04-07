@@ -189,7 +189,7 @@ def dashboard(request):
     docente_conhecimentos_avancados = []
     docente_sei_ensinar = []
 
-    docentes_competencias_ead_competencia_avaliacao = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_avaliacao = Docente.objects.all().order_by(
         'competencia_avaliacao').values_list(
         'competencia_avaliacao').annotate(
         total=Count('competencia_avaliacao'),
@@ -201,7 +201,7 @@ def dashboard(request):
     docente_conhecimentos_avancados.insert(0, docentes_competencias_ead_competencia_avaliacao[4][1])
     docente_sei_ensinar.insert(0, docentes_competencias_ead_competencia_avaliacao[3][1])
 
-    docentes_competencias_ead_competencia_desenvolvimento = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_desenvolvimento = Docente.objects.all().order_by(
         'competencia_desenvolvimento').values_list(
         'competencia_desenvolvimento').annotate(
         total=Count('competencia_desenvolvimento'),
@@ -213,7 +213,7 @@ def dashboard(request):
     docente_conhecimentos_avancados.insert(1, docentes_competencias_ead_competencia_desenvolvimento[4][1])
     docente_sei_ensinar.insert(1, docentes_competencias_ead_competencia_desenvolvimento[3][1])
 
-    docentes_competencias_ead_competencia_design = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_design = Docente.objects.all().order_by(
         'competencia_design').values_list(
         'competencia_design').annotate(
         total=Count('competencia_desenvolvimento'),
@@ -225,7 +225,7 @@ def dashboard(request):
     docente_conhecimentos_avancados.insert(2, docentes_competencias_ead_competencia_design[4][1])
     docente_sei_ensinar.insert(2, docentes_competencias_ead_competencia_design[3][1])
 
-    docentes_competencias_ead_competencia_elaboracao = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_elaboracao = Docente.objects.all().order_by(
         'competencia_elaboracao').values_list(
         'competencia_elaboracao').annotate(
         total=Count('competencia_elaboracao'),
@@ -237,7 +237,7 @@ def dashboard(request):
     docente_conhecimentos_avancados.insert(3, docentes_competencias_ead_competencia_elaboracao[4][1])
     docente_sei_ensinar.insert(3, docentes_competencias_ead_competencia_elaboracao[3][1])
 
-    docentes_competencias_ead_competencia_ensino = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_ensino = Docente.objects.all().order_by(
         'competencia_ensino').values_list(
         'competencia_ensino').annotate(
         total=Count('competencia_ensino'),
@@ -249,7 +249,7 @@ def dashboard(request):
     docente_conhecimentos_avancados.insert(4, docentes_competencias_ead_competencia_ensino[4][1])
     docente_sei_ensinar.insert(4, docentes_competencias_ead_competencia_ensino[3][1])
 
-    docentes_competencias_ead_competencia_plataforma = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_plataforma = Docente.objects.all().order_by(
         'competencia_plataforma').values_list(
         'competencia_plataforma').annotate(
         total=Count('competencia_plataforma'),
@@ -261,7 +261,7 @@ def dashboard(request):
     docente_conhecimentos_avancados.insert(5, docentes_competencias_ead_competencia_plataforma[4][1])
     docente_sei_ensinar.insert(5, docentes_competencias_ead_competencia_plataforma[3][1])
 
-    docentes_competencias_ead_competencia_producao = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_producao = Docente.objects.all().order_by(
         'competencia_producao').values_list(
         'competencia_producao').annotate(
         total=Count('competencia_producao'),
@@ -278,7 +278,7 @@ def dashboard(request):
 
     docente_sei_ensinar.insert(6, docentes_competencias_ead_competencia_producao[3][1])
 
-    docentes_competencias_ead_competencia_roteiro = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_roteiro = Docente.objects.all().order_by(
         'competencia_roteiro').values_list(
         'competencia_roteiro').annotate(
         total=Count('competencia_roteiro'),
@@ -290,7 +290,7 @@ def dashboard(request):
     docente_conhecimentos_avancados.insert(7, docentes_competencias_ead_competencia_roteiro[4][1])
     docente_sei_ensinar.insert(7, docentes_competencias_ead_competencia_roteiro[3][1])
 
-    docentes_competencias_ead_competencia_sala = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_sala = Docente.objects.all().order_by(
         'competencia_sala').values_list(
         'competencia_sala').annotate(
         total=Count('competencia_sala'),
@@ -302,7 +302,7 @@ def dashboard(request):
     docente_conhecimentos_avancados.insert(8, docentes_competencias_ead_competencia_sala[4][1])
     docente_sei_ensinar.insert(8, docentes_competencias_ead_competencia_sala[3][1])
 
-    docentes_competencias_ead_competencia_simulador = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_simulador = Docente.objects.all().order_by(
         'competencia_simulador').values_list(
         'competencia_simulador').annotate(
         total=Count('competencia_simulador'),
@@ -319,7 +319,7 @@ def dashboard(request):
 
     docente_sei_ensinar.insert(9, docentes_competencias_ead_competencia_simulador[3][1])
 
-    docentes_competencias_ead_competencia_rnp = Tae.objects.all().order_by(
+    docentes_competencias_ead_competencia_rnp = Docente.objects.all().order_by(
         'competencia_rnp').values_list(
         'competencia_rnp').annotate(
         total=Count('competencia_rnp'),
