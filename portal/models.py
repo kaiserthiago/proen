@@ -20,7 +20,7 @@ class Aluno(models.Model):
     possui_tv = models.CharField(verbose_name='Smart TV', max_length=3, blank=True, null=True)
 
     class Meta:
-        ordering = ['campus', 'nivel_curso']
+        ordering = ['-data_resposta', 'campus', 'nivel_curso']
         verbose_name = 'Resposta do Aluno'
         verbose_name_plural = 'Respostas dos Alunos'
 
@@ -55,6 +55,10 @@ class Docente(models.Model):
     possui_tablet = models.CharField(verbose_name='Tablet', max_length=3, blank=True, null=True)
     possui_tv = models.CharField(verbose_name='Smart TV', max_length=3, blank=True, null=True)
 
+    class Meta:
+        ordering = ['-data_resposta', 'campus']
+        verbose_name = 'Resposta do Docente'
+        verbose_name_plural = 'Respostas dos Docentes'
 
 class Tae(models.Model):
     data_resposta = models.DateTimeField(verbose_name='Data/Hora da Resposta', blank=True, null=True)
@@ -86,3 +90,8 @@ class Tae(models.Model):
     possui_celular = models.CharField(verbose_name='Celular Smartphone', max_length=3, blank=True, null=True)
     possui_tablet = models.CharField(verbose_name='Tablet', max_length=3, blank=True, null=True)
     possui_tv = models.CharField(verbose_name='Smart TV', max_length=3, blank=True, null=True)
+
+    class Meta:
+        ordering = ['-data_resposta', 'campus']
+        verbose_name = 'Resposta do TAE'
+        verbose_name_plural = 'Respostas dos TAEs'
