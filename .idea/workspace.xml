@@ -4,7 +4,7 @@
     <list default="true" id="e5db46fe-3f34-4b9f-b7b5-9ef6779b9cc1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/templates/portal/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/portal/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/saae-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +97,7 @@
       <workItem from="1586099131308" duration="20863000" />
       <workItem from="1586172806087" duration="22610000" />
       <workItem from="1586197629980" duration="8459000" />
-      <workItem from="1586216802153" duration="2652000" />
+      <workItem from="1586216802153" duration="4720000" />
     </task>
     <task id="LOCAL-00001" summary="requirements">
       <created>1586194528042</created>
@@ -204,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586218872549</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="logo ifro">
+      <created>1586219506404</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1586219506404</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,33 +231,34 @@
     <MESSAGE value="gráficos forma de acesso à internet" />
     <MESSAGE value="gráficos formação ead docentes" />
     <MESSAGE value="adicionar classes ao admin" />
-    <option name="LAST_COMMIT_MESSAGE" value="adicionar classes ao admin" />
+    <MESSAGE value="logo ifro" />
+    <option name="LAST_COMMIT_MESSAGE" value="logo ifro" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="393" y="5" key="CommitChangelistDialog2" timestamp="1586218868731">
+    <state x="393" y="5" key="CommitChangelistDialog2" timestamp="1586221587258">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="393" y="5" key="CommitChangelistDialog2/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586218868731" />
+    <state x="393" y="5" key="CommitChangelistDialog2/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586221587258" />
     <state x="548" y="166" key="FileChooserDialogImpl" timestamp="1586099288545">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="166" key="FileChooserDialogImpl/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586099288545" />
-    <state width="1493" height="137" key="GridCell.Tab.0.bottom" timestamp="1586218847464">
+    <state width="1493" height="137" key="GridCell.Tab.0.bottom" timestamp="1586221218757">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="137" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586218847464" />
-    <state width="1493" height="137" key="GridCell.Tab.0.center" timestamp="1586218847464">
+    <state width="1493" height="137" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586221218757" />
+    <state width="1493" height="137" key="GridCell.Tab.0.center" timestamp="1586221218757">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="137" key="GridCell.Tab.0.center/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586218847464" />
-    <state width="1493" height="137" key="GridCell.Tab.0.left" timestamp="1586218847464">
+    <state width="1493" height="137" key="GridCell.Tab.0.center/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586221218757" />
+    <state width="1493" height="137" key="GridCell.Tab.0.left" timestamp="1586221218757">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="137" key="GridCell.Tab.0.left/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586218847464" />
-    <state width="1493" height="137" key="GridCell.Tab.0.right" timestamp="1586218847464">
+    <state width="1493" height="137" key="GridCell.Tab.0.left/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586221218757" />
+    <state width="1493" height="137" key="GridCell.Tab.0.right" timestamp="1586221218757">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="137" key="GridCell.Tab.0.right/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586218847464" />
+    <state width="1493" height="137" key="GridCell.Tab.0.right/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586221218757" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1586217487540">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -271,10 +279,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="54" key="SettingsEditor/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586203016671" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1586218875831">
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1586221675020">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586218875831" />
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586221675020" />
     <state x="578" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586195000202">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

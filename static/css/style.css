@@ -89,18 +89,21 @@ light-font .breadcrumb-item + .breadcrumb-item::before {
     color: #cfd8dc;
 }
 
-.ifro-color{
+.ifro-color {
     background-color: #2f9e41 !important;;
 }
-.card.redonda{
+
+.card.redonda {
     border-radius: 20px;
 }
 
-.card-header.redonda{
+.card-header.redonda {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
 
-.card-header.redonda a{
+.card-header.redonda a {
     color: #4265f4;
 }
+
+@font-face { font-family: "Billy Ohio Regular"; src: url('/static/font/Billy Ohio.ttf'); }
