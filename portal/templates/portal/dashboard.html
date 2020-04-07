@@ -104,7 +104,7 @@
                     {% for indicador in indicador_alunos_campus %}
                         <p class="border-bottom">
                             {{ indicador.campus }}
-{#                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'Aluno' indicador.total forloop.counter0 %}%</span>#}
+                            {#                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'Aluno' indicador.total forloop.counter0 %}%</span>#}
                             <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
                             <span class="badge badge-pill badge-primary float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
                         </p>
@@ -131,7 +131,7 @@
                     {% for indicador in indicador_docentes_campus %}
                         <p class="border-bottom">
                             {{ indicador.campus }}
-{#                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'Docente' indicador.total forloop.counter0 %}%</span>#}
+                            {#                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'Docente' indicador.total forloop.counter0 %}%</span>#}
                             <span class="badge badge-pill badge-secondary float-sm-right">{% percentual docentes.count indicador.total %}%</span>
                             <span class="badge badge-pill badge-success float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
                         </p>
@@ -157,7 +157,7 @@
                     {% for indicador in indicador_taes_campus %}
                         <p class="border-bottom">
                             {{ indicador.campus }}
-{#                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'TAE' indicador.total forloop.counter0 %}%</span>#}
+                            {#                            <span class="badge badge-pill badge-danger float-sm-right">{% campi 'TAE' indicador.total forloop.counter0 %}%</span>#}
                             <span class="badge badge-pill badge-secondary float-sm-right">{% percentual taes.count indicador.total %}%</span>
                             <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
                         </p>
@@ -300,11 +300,24 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <!--Card-->
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="height: 420px">
                             <div id="avaliacao_moodle"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body" style="height: 420px">
+                            <h4 class="text-center">Melhorias no AVA</h4>
+                            <br>
+                            <img class="img-fluid mx-auto d-block align-middle" src="{{ wc_alunos_melhorias_ava }}">
                         </div>
                     </div>
                 </div>
@@ -369,7 +382,7 @@
                 <div class="col-sm-6">
                     <!--Card-->
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="height: 420px">
                             <div id="docentes_opiniao"></div>
                         </div>
                     </div>
@@ -380,13 +393,50 @@
                 <div class="col-sm-6">
                     <!--Card-->
                     <div class="card">
+                        <div class="card-body" style="height: 420px">
+                            <h5 class="text-center">Pontos Positivos/Negativos</h5>
+                            <br>
+                            <img class="img-fluid mx-auto d-block align-middle" src="{{ wc_docentes_pontos_positivos_negativos }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-center">Estratégia de Enfrentamento/Superação</h5>
+                            <img class="img-fluid mx-auto d-block align-middle" src="{{ wc_docentes_estrategia_ponto_negativo }}">
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-center">Sugestões à Comissão Emergencial</h5>
+                            <img class="img-fluid mx-auto d-block align-middle" src="{{ wc_sugestao_comissao }}">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
                         <div class="card-body">
                             <div id="avaliacao_atividades_remotas_docentes"></div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="row mb-3">
                 <div class="col-sm-12">
                     <!--Card-->
@@ -458,7 +508,7 @@
                 <div class="col-sm-6">
                     <!--Card-->
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="height: 420px">
                             <div id="taes_formacao_ead"></div>
                         </div>
                     </div>
@@ -467,6 +517,19 @@
                 <hr class="w-100 clearfix d-md-none">
 
                 <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body" style="height: 420px">
+                            <h4 class="text-center">Oferta de Outras Capacitações EaD</h4>
+                            <br>
+                            <img class="img-fluid mx-auto d-block align-middle" src="{{ wc_taes_outras_capacitacoes }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-12">
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
@@ -1133,7 +1196,7 @@
                     type: 'pie'
                 },
                 title: {
-                    text: 'Atividades Remotas são alternativas possíveis para implementarmos a aprendizagem no período da pandemia',
+                    text: 'Uso das Atividades Remotas',
                     align: 'center',
                 },
                 subtitle: {
@@ -1765,6 +1828,51 @@
                         data: data_tae
                     }
                 ]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO GERAIS RWORDCLOUD MELHORIAS AVA-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var text = "{{ alunos_melhoria_ava }}";
+            var lines = text.split(/[,\. ]+/g),
+                data = Highcharts.reduce(lines, function (arr, word) {
+                    var obj = Highcharts.find(arr, function (obj) {
+                        return obj.name === word;
+                    });
+                    if (obj) {
+                        obj.weight += 1;
+                    } else {
+                        obj = {
+                            name: word,
+                            weight: 1
+                        };
+                        arr.push(obj);
+                    }
+                    return arr;
+                }, []);
+
+            Highcharts.chart('melhorias_ava', {
+                accessibility: {
+                    screenReaderSection: {
+                        beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                            '<div>{chartSubtitle}</div>' +
+                            '<div>{chartLongdesc}</div>' +
+                            '<div>{viewTableButton}</div>'
+                    }
+                },
+                series: [{
+                    type: 'wordcloud',
+                    data: data,
+                    name: 'Ocorrências'
+                }],
+                title: {
+                    text: 'Melhorias no AVA'
+                },
+                credits: {
+                    enabled: false
+                },
             });
         });
     </script>

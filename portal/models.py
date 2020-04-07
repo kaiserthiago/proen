@@ -3,16 +3,16 @@ from django.db import models
 
 # Create your models here.
 class Aluno(models.Model):
-    data_resposta = models.DateTimeField(verbose_name='Data/Hora da Resposta')
-    posicao = models.CharField(verbose_name='Posição', max_length=255)
-    campus = models.CharField(verbose_name='Campus', max_length=150)
-    nivel_curso = models.CharField(verbose_name='Nível Curso', max_length=150)
-    auxilio = models.CharField(verbose_name='Auxílio', max_length=3)
-    avaliacao_moodle = models.PositiveIntegerField(verbose_name='Avaliação Moodle')
-    avaliacao_conteudo = models.PositiveIntegerField(verbose_name='Avaliação Conteúdo do Professor')
-    avaliacao_orientacoes = models.PositiveIntegerField(verbose_name='Avaliação Orientações do Professor')
-    acesso_internet = models.CharField(verbose_name='Acesso à Internet', max_length=255)
-    deficiencia = models.CharField(verbose_name='Deficiência Física', max_length=150)
+    data_resposta = models.DateTimeField(verbose_name='Data/Hora da Resposta', blank=True, null=True)
+    posicao = models.CharField(verbose_name='Posição', max_length=255, blank=True, null=True)
+    campus = models.CharField(verbose_name='Campus', max_length=150, blank=True, null=True)
+    nivel_curso = models.CharField(verbose_name='Nível Curso', max_length=150, blank=True, null=True)
+    auxilio = models.CharField(verbose_name='Auxílio', max_length=3, blank=True, null=True)
+    avaliacao_moodle = models.PositiveIntegerField(verbose_name='Avaliação Moodle', blank=True, null=True)
+    avaliacao_conteudo = models.PositiveIntegerField(verbose_name='Avaliação Conteúdo do Professor', blank=True, null=True)
+    avaliacao_orientacoes = models.PositiveIntegerField(verbose_name='Avaliação Orientações do Professor', blank=True, null=True)
+    acesso_internet = models.CharField(verbose_name='Acesso à Internet', max_length=255, blank=True, null=True)
+    deficiencia = models.CharField(verbose_name='Deficiência Física', max_length=150, blank=True, null=True)
     transtorno = models.CharField(verbose_name='Transtorno de Aprendizagem ou Desenvolvimento', max_length=150)
     possui_pc = models.CharField(verbose_name='PC ou Notebook', max_length=3, blank=True, null=True)
     possui_celular = models.CharField(verbose_name='Celular Smartphone', max_length=3, blank=True, null=True)
@@ -20,6 +20,8 @@ class Aluno(models.Model):
     possui_tv = models.CharField(verbose_name='Smart TV', max_length=3, blank=True, null=True)
     orientacao_enviada = models.CharField(verbose_name='Professores Enviaram Orientações?', max_length=150, blank=True, null=True)
     conteudo_enviado = models.CharField(verbose_name='Professores Enviaram Conteúdo ?', max_length=150, blank=True, null=True)
+    melhoria_ava = models.TextField(verbose_name='Melhorias no AVA', blank=True, null=True)
+    docente_melhorar = models.TextField(verbose_name='Melhorias na Comunicação do Docente', blank=True, null=True)
 
     class Meta:
         ordering = ['-data_resposta', 'campus', 'nivel_curso']
@@ -56,6 +58,9 @@ class Docente(models.Model):
     possui_celular = models.CharField(verbose_name='Celular Smartphone', max_length=3, blank=True, null=True)
     possui_tablet = models.CharField(verbose_name='Tablet', max_length=3, blank=True, null=True)
     possui_tv = models.CharField(verbose_name='Smart TV', max_length=3, blank=True, null=True)
+    pontos_positivos_negativos = models.TextField(verbose_name='Pontos Positivos e Negativos', blank=True, null=True)
+    estrategia_ponto_negativo = models.TextField(verbose_name='Estratégias Superar Pontos Negativos', blank=True, null=True)
+    sugestao_comissao = models.TextField(verbose_name='Sugestão à Comissão', blank=True, null=True)
 
     class Meta:
         ordering = ['-data_resposta', 'campus']
@@ -92,6 +97,7 @@ class Tae(models.Model):
     possui_celular = models.CharField(verbose_name='Celular Smartphone', max_length=3, blank=True, null=True)
     possui_tablet = models.CharField(verbose_name='Tablet', max_length=3, blank=True, null=True)
     possui_tv = models.CharField(verbose_name='Smart TV', max_length=3, blank=True, null=True)
+    outras_capacitacoes = models.TextField(verbose_name='Outras Capacitações EaD', blank=True, null=True)
 
     class Meta:
         ordering = ['-data_resposta', 'campus']

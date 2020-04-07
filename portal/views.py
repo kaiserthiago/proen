@@ -4,10 +4,12 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Count, Sum, Avg, Max, Min
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from datetime import date
+from wordcloud import WordCloud, STOPWORDS
+import matplotlib.pyplot as plt
+import io
+import urllib, base64
 
 # Create your views here.
-from django.template.defaultfilters import lower
 from tablib import Dataset
 
 from portal.models import Aluno, Tae, Docente
@@ -15,6 +17,29 @@ from portal.models import Aluno, Tae, Docente
 
 @login_required
 def dashboard(request):
+    # FUNÇÃO PARA CRIAR A NUVEM DE PALAVRAS
+    def word_cloud(text):
+        plt.figure(figsize=(20, 5))
+
+        stopwords = set(STOPWORDS)
+        stopwords.update(
+            ['ava', 'não', 'de', 'ao', 'só', 'ou', 'da', 'na', 'no', 'que', 'um', 'uma', 'em', 'pra', 'para', 'mas',
+             'os', 'as', 'eu', 'EAD', 'tem', 'se', 'dos', 'a', 'o', 'como', 'são', 'essa', 'esse'])
+
+        wc = WordCloud(stopwords=stopwords, background_color="white", max_words=1000, max_font_size=400)
+        wc = wc.generate(text)
+        plt.figure(figsize=(10, 5))
+        plt.imshow(wc, interpolation='bilinear')
+        plt.axis("off")
+
+        image = io.BytesIO()
+        plt.savefig(image, format='png')
+        image.seek(0)  # rewind the data
+        string = base64.b64encode(image.read())
+
+        image_64 = 'data:image/png;base64,' + urllib.parse.quote(string)
+        return image_64
+
     # DADOS DOS INDICADORES GERAIS
     alunos = Aluno.objects.all()
     docentes = Docente.objects.all()
@@ -125,7 +150,6 @@ def dashboard(request):
         'opiniao').values_list(
         'opiniao').annotate(
         total=Count('id')).distinct()
-
 
     # GRÁFICO ALUNOS ACESSO INTERNET ALUNOS
     alunos_acesso_internet = Aluno.objects.all().order_by(
@@ -640,6 +664,53 @@ def dashboard(request):
     acesso_tae_nao.insert(3, tae_acesso_possui_tv[0][1])
     acesso_tae_sim.insert(3, tae_acesso_possui_tv[1][1])
 
+
+
+    # DISCURSIVA ALUNO: MELHORIAS NO AVA
+    alunos = Aluno.objects.all()
+    alunos_melhoria_ava = ''
+
+    for aluno in alunos:
+        if aluno.melhoria_ava != 'None':
+            alunos_melhoria_ava += (
+                        str(aluno.melhoria_ava).replace("'", '').replace('\n', '').replace('"', '') + ' ')
+
+    wc_alunos_melhorias_ava = word_cloud(alunos_melhoria_ava)
+
+    # DISCURSIVA TAE: MELHORIAS NO AVA
+    taes = Tae.objects.all()
+    taes_outras_capacitacoes = ''
+
+    for tae in taes:
+        if tae.outras_capacitacoes != 'None':
+            taes_outras_capacitacoes += (
+                    str(tae.outras_capacitacoes).replace("'", '').replace('\n', '').replace('"', '') + ' ')
+
+    wc_taes_outras_capacitacoes = word_cloud(taes_outras_capacitacoes)
+
+    # DISCURSIVA DOCENTES: PONTOS POSITIVOS/NEGATIVOS
+    docentes = Docente.objects.all()
+    docentes_pontos_positivos_negativos = ''
+    docentes_estrategia_ponto_negativo = ''
+    docentes_sugestao_comissao = ''
+
+    for docente in docentes:
+        if docente.pontos_positivos_negativos != 'None':
+            docentes_pontos_positivos_negativos += (
+                    str(docente.pontos_positivos_negativos).replace("'", '').replace('\n', '').replace('"', '') + ' ')
+
+        if docente.estrategia_ponto_negativo != 'None':
+            docentes_estrategia_ponto_negativo += (
+                    str(docente.estrategia_ponto_negativo).replace("'", '').replace('\n', '').replace('"', '') + ' ')
+
+        if docente.sugestao_comissao != 'None':
+            docentes_sugestao_comissao += (
+                    str(docente.sugestao_comissao).replace("'", '').replace('\n', '').replace('"', '') + ' ')
+
+    wc_docentes_pontos_positivos_negativos = word_cloud(docentes_pontos_positivos_negativos)
+    wc_docentes_estrategia_ponto_negativo = word_cloud(docentes_estrategia_ponto_negativo)
+    wc_sugestao_comissao = word_cloud(docentes_sugestao_comissao)
+
     context = {
         'alunos': alunos,
         'docentes': docentes,
@@ -731,6 +802,13 @@ def dashboard(request):
         'chart_taes_forma_acesso_internet_sim': json.dumps(acesso_tae_sim),
         'chart_taes_forma_acesso_internet_nao': json.dumps(acesso_tae_nao),
 
+        'alunos_melhoria_ava': (alunos_melhoria_ava),
+        'wc_alunos_melhorias_ava': wc_alunos_melhorias_ava,
+        'wc_taes_outras_capacitacoes': wc_taes_outras_capacitacoes,
+        'wc_docentes_pontos_positivos_negativos': wc_docentes_pontos_positivos_negativos,
+        'wc_docentes_estrategia_ponto_negativo': wc_docentes_estrategia_ponto_negativo,
+        'wc_sugestao_comissao': wc_sugestao_comissao
+
     }
     return render(request, 'portal/dashboard.html', context)
 
@@ -755,22 +833,24 @@ def import_form(request):
                     aluno = Aluno()
 
                     aluno.data_resposta = str(n[0])
-                    aluno.posicao = str(n[68])
                     aluno.campus = str(n[50])
-                    aluno.nivel_curso = str(n[56])
-                    aluno.avaliacao_moodle = int(n[64])
-                    aluno.avaliacao_conteudo = int(n[62])
-                    aluno.avaliacao_orientacoes = int(n[60])
                     aluno.acesso_internet = str(n[51])
-                    aluno.deficiencia = str(n[57])
-                    aluno.transtorno = str(n[58])
-                    aluno.auxilio = str(n[67])
                     aluno.possui_pc = str(n[52])
                     aluno.possui_celular = str(n[53])
                     aluno.possui_tablet = str(n[54])
                     aluno.possui_tv = str(n[55])
+                    aluno.nivel_curso = str(n[56])
+                    aluno.deficiencia = str(n[57])
+                    aluno.transtorno = str(n[58])
                     aluno.orientacao_enviada = str(n[59])
+                    aluno.avaliacao_orientacoes = int(n[60])
                     aluno.conteudo_enviada = str(n[61])
+                    aluno.avaliacao_conteudo = int(n[62])
+                    aluno.avaliacao_moodle = int(n[64])
+                    aluno.melhoria_ava = str(n[65])
+                    aluno.docente_melhorar = str(n[66])
+                    aluno.auxilio = str(n[67])
+                    aluno.posicao = str(n[68])
 
                     aluno.save()
 
@@ -802,6 +882,7 @@ def import_form(request):
                     tae.competencia_sala = str(n[17])
                     tae.competencia_simulador = str(n[18])
                     tae.competencia_rnp = str(n[19])
+                    tae.outras_capacitacoes = str(n[20])
                     tae.avaliacao_jornada = int(n[21])
                     tae.avaliacao_producao = int(n[22])
                     tae.opiniao = str(n[23])
@@ -819,10 +900,12 @@ def import_form(request):
                     docente = Docente()
 
                     docente.data_resposta = str(n[0])
-                    docente.opiniao = str(n[48])
-                    docente.posicao = str(n[49])
                     docente.campus = str(n[25])
                     docente.acesso_internet = str(n[26])
+                    docente.possui_pc = str(n[27])
+                    docente.possui_celular = str(n[28])
+                    docente.possui_tablet = str(n[29])
+                    docente.possui_tv = str(n[30])
                     docente.promovendo_ar = str(n[31])
                     docente.competencia_avaliacao = str(n[33])
                     docente.competencia_desenvolvimento = str(n[34])
@@ -836,10 +919,11 @@ def import_form(request):
                     docente.competencia_simulador = str(n[42])
                     docente.competencia_rnp = str(n[43])
                     docente.avaliacao_experiencia = int(n[44])
-                    docente.possui_pc = str(n[27])
-                    docente.possui_celular = str(n[28])
-                    docente.possui_tablet = str(n[29])
-                    docente.possui_tv = str(n[30])
+                    docente.pontos_positivos_negativos = str(n[45])
+                    docente.estrategia_ponto_negativo = str(n[46])
+                    docente.sugestao_comissao = str(n[47])
+                    docente.opiniao = str(n[48])
+                    docente.posicao = str(n[49])
 
                     docente.save()
 
