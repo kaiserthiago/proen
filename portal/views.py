@@ -17,6 +17,26 @@ from portal.models import Aluno, Tae, Docente
 
 @login_required
 def dashboard(request):
+    # PEGA NO GET O CAMPUS SELECIONADO
+    if request.GET.get('campus') and not 'btn_limpar' in request.GET:
+        qs_campus = request.GET.get('campus')
+    else:
+        qs_campus = ''
+
+    # LISTA DE CAMPUS SEM REITORIA
+    lista_campus_sem_reitoria = [
+        'Ariquemes',
+        'Cacoal',
+        'Colorado do Oeste',
+        'Guajará Mirim',
+        'Jaru',
+        'Ji-Paraná',
+        'Porto Velho Calama',
+        'Porto Velho Zona Norte',
+        'São Miguel do Guaporé',
+        'Vilhena',
+    ]
+
     # FUNÇÃO PARA CRIAR A NUVEM DE PALAVRAS
     def word_cloud(text):
         plt.figure(figsize=(20, 5))
@@ -134,22 +154,40 @@ def dashboard(request):
         total=Count('id')).distinct()
 
     # GRÁFICO ALUNOS POR POSIÇÃO
-    alunos_posicao = Aluno.objects.all().order_by(
-        'posicao').values_list(
-        'posicao').annotate(
-        total=Count('id')).distinct()
+    if qs_campus:
+        alunos_posicao = Aluno.objects.filter(campus=qs_campus).order_by(
+            'posicao').values_list(
+            'posicao').annotate(
+            total=Count('id')).distinct()
+    else:
+        alunos_posicao = Aluno.objects.all().order_by(
+            'posicao').values_list(
+            'posicao').annotate(
+            total=Count('id')).distinct()
 
     # GRÁFICO DOCENTES POR POSIÇÃO
-    docentes_posicao = Docente.objects.all().order_by(
-        'posicao').values_list(
-        'posicao').annotate(
-        total=Count('id')).distinct()
+    if qs_campus:
+        docentes_posicao = Docente.objects.filter(campus=qs_campus).order_by(
+            'posicao').values_list(
+            'posicao').annotate(
+            total=Count('id')).distinct()
+    else:
+        docentes_posicao = Docente.objects.all().order_by(
+            'posicao').values_list(
+            'posicao').annotate(
+            total=Count('id')).distinct()
 
     # GRÁFICO TAES POR POSIÇÃO
-    taes_posicao = Tae.objects.all().order_by(
-        'posicao').values_list(
-        'posicao').annotate(
-        total=Count('id')).distinct()
+    if qs_campus:
+        taes_posicao = Tae.objects.filter(campus=qs_campus).order_by(
+            'posicao').values_list(
+            'posicao').annotate(
+            total=Count('id')).distinct()
+    else:
+        taes_posicao = Tae.objects.all().order_by(
+            'posicao').values_list(
+            'posicao').annotate(
+            total=Count('id')).distinct()
 
     # GRÁFICO DOCENTES POR OPINIÃO
     docentes_opiniao = Docente.objects.all().order_by(
@@ -676,8 +714,6 @@ def dashboard(request):
     acesso_tae_nao.insert(3, tae_acesso_possui_tv[0][1])
     acesso_tae_sim.insert(3, tae_acesso_possui_tv[1][1])
 
-
-
     # DISCURSIVA ALUNO: MELHORIAS NO AVA
     alunos = Aluno.objects.all()
     alunos_melhoria_ava = ''
@@ -685,7 +721,7 @@ def dashboard(request):
     for aluno in alunos:
         if aluno.melhoria_ava != 'None':
             alunos_melhoria_ava += (
-                        str(aluno.melhoria_ava).replace("'", '').replace('\n', '').replace('"', '') + ' ')
+                    str(aluno.melhoria_ava).replace("'", '').replace('\n', '').replace('"', '') + ' ')
 
     wc_alunos_melhorias_ava = word_cloud(alunos_melhoria_ava)
 
@@ -724,6 +760,9 @@ def dashboard(request):
     wc_sugestao_comissao = word_cloud(docentes_sugestao_comissao)
 
     context = {
+        'qs_campus': qs_campus,
+        'lista_campus_sem_reitoria': lista_campus_sem_reitoria,
+
         'alunos': alunos,
         'docentes': docentes,
         'taes': taes,
@@ -822,7 +861,7 @@ def dashboard(request):
         'wc_taes_outras_capacitacoes': wc_taes_outras_capacitacoes,
         'wc_docentes_pontos_positivos_negativos': wc_docentes_pontos_positivos_negativos,
         'wc_docentes_estrategia_ponto_negativo': wc_docentes_estrategia_ponto_negativo,
-        'wc_sugestao_comissao': wc_sugestao_comissao
+        'wc_sugestao_comissao': wc_sugestao_comissao,
 
     }
     return render(request, 'portal/dashboard.html', context)

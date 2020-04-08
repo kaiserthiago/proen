@@ -14,10 +14,35 @@
 {% block content %}
     <div class="row mb-3">
         <div class="col-sm-4 align-middle">
-            <img class="img-fluid mx-auto d-block mt-4" src="{% static 'img/logo-IFRO-(horizontal) (1).png' %}">
+            <img class="img-fluid mx-auto d-block mt-2" src="{% static 'img/logo-IFRO-(horizontal) (1).png' %}">
             <h5 class="font-weight-bold d-flex justify-content-center mt-4 text-uppercase">
                 Educação que transforma
             </h5>
+            <form action="" method="get">
+                <div class="form-row">
+                    <div class="col-sm-7 select-outline">
+                        <select class="mdb-select md-form md-outline colorful-select dropdown-success" name="campus"
+                                id="id_campus">
+                            {% if not qs_campus %}
+                                <option value="" disabled selected>Selecione um Campus</option>
+                            {% endif %}
+                            {% for campus in lista_campus_sem_reitoria %}
+                                <option value="{{ campus }}" {% if qs_campus == campus %} selected{% endif %}>{{ campus }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="md-form">
+                            <button class="btn btn-success btn-sm btn-rounded" type="submit"><i
+                                    class="fas fa-search"></i>
+                            </button>
+                            <button name="btn_limpar" class="btn btn-danger btn-sm btn-rounded" type="submit"><i
+                                    class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
 
         <hr class="w-100 clearfix d-md-none">
@@ -804,7 +829,7 @@
                     align: 'center',
                 },
                 subtitle: {
-                    text: 'Respostas dos Alunos'
+                    text: 'Respostas dos Alunos{% if qs_campus %} - {{ qs_campus }}{% endif %}'
                 },
                 credits: {
                     enabled: false
@@ -1273,7 +1298,7 @@
                     align: 'center',
                 },
                 subtitle: {
-                    text: 'Respostas dos Docentes'
+                    text: 'Respostas dos Docentes{% if qs_campus %} - {{ qs_campus }}{% endif %}'
                 },
                 credits: {
                     enabled: false
@@ -1616,7 +1641,7 @@
                     align: 'center',
                 },
                 subtitle: {
-                    text: 'Respostas dos TAEs'
+                    text: 'Respostas dos TAEs{% if qs_campus %} - {{ qs_campus }}{% endif %}'
                 },
                 credits: {
                     enabled: false
