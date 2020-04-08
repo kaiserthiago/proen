@@ -105,3 +105,7 @@ light-font .breadcrumb-item + .breadcrumb-item::before {
 .card-header.redonda a {
     color: #4265f4;
 }
+.md-outline.select-wrapper+label {
+top: .5em !important;
+z-index: 2 !important;
+}
