@@ -115,6 +115,18 @@ def dashboard(request):
     chart_aluno_nivel_curso_label = [obj[0] for obj in alunos_nivel_curso]
     chart_aluno_nivel_curso_data = [int(obj[1]) for obj in alunos_nivel_curso]
 
+    # GRÁFICO ALUNOS DEFICIÊNCIA
+    alunos_deficiencia = Aluno.objects.all().order_by(
+        'deficiencia').values_list(
+        'deficiencia').annotate(
+        total=Count('id')).distinct()
+
+    # GRÁFICO ALUNOS TRANSTORNO
+    alunos_transtorno = Aluno.objects.all().order_by(
+        'transtorno').values_list(
+        'transtorno').annotate(
+        total=Count('id')).distinct()
+
     # GRÁFICO DOCENTES FAZ AR
     docentes_ar = Docente.objects.all().order_by(
         '-promovendo_ar').values_list(
@@ -740,6 +752,9 @@ def dashboard(request):
         'chart_aluno_nivel_curso_label': json.dumps(chart_aluno_nivel_curso_label),
         'chart_aluno_nivel_curso_data': json.dumps(chart_aluno_nivel_curso_data),
         'alunos_nivel_curso': json.dumps(list(alunos_nivel_curso)),
+
+        'alunos_deficiencia': json.dumps(list(alunos_deficiencia)),
+        'alunos_transtorno': json.dumps(list(alunos_transtorno)),
 
         'alunos_posicao': json.dumps(list(alunos_posicao)),
         'docentes_posicao': json.dumps(list(docentes_posicao)),
