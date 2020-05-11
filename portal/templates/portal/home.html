@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+        <div class="card redonda mb-4">
+        <div class="card-header redonda success-color-dark white-text">
+            <h4>Resultado - Pesquisa Pró-Reitoria de Ensino</h4>
+        </div>
+        <div class="card-body">
+            <p class="text-justify">
+                Resultado da pesquisa sobre a situação das Atividades Remotas no Âmbito do Ensino do IFRO em função da
+                Pandemia da COVID-19.
+            </p>
+            <p class="text-justify">
+                A Pró-Reitoria de Ensino <strong>agradece</strong> a todos os servidores e estudantes que participaram
+                da pesquisa. A participação de cada um foi fundamental para que possamos tomar as melhores decisões
+                nesse momento ímpar em nossas vidas.
+            </p>
+            <div id="btn_resultado" class="d-flex justify-content-center">
+                <a class="btn btn-sm success-color-dark white-text" href="{% url 'dashboard' %}"
+                   onClick="javascript:showMyModalSetTitle();">Resultado Objetivas - 1</a>
+                <a class="btn btn-sm success-color-dark white-text" href="{% url 'dashboard2' %}"
+                   onClick="javascript:showMyModalSetTitle();">Resultado Objetivas - 2</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

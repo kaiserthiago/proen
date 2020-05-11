@@ -94,12 +94,12 @@ light-font .breadcrumb-item + .breadcrumb-item::before {
 }
 
 .card.redonda {
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .card-header.redonda {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .card-header.redonda a {
