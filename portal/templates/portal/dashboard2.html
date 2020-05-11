@@ -70,8 +70,8 @@
                     </p>
                     <p class="border-bottom">
                         Docentes na Reitoria
-                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual total_respostas docentes.count %}%</span>
-                        <span class="badge badge-pill badge-success float-sm-right mr-1">{{ docentes.count|intcomma }}</span>
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual total_respostas docentes_reitoria.count %}%</span>
+                        <span class="badge badge-pill badge-default float-sm-right mr-1">{{ docentes_reitoria.count|intcomma }}</span>
                     </p>
                     <p class="border-bottom">
                         TAEs
@@ -79,7 +79,7 @@
                         <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ taes.count|intcomma }}</span>
                     </p>
                     <p class="border-bottom">
-                        <strong>TOTAL</strong>
+                        <span class="font-weight-bold">TOTAL</span>
                         <span class="badge badge-pill badge-danger float-sm-right">{{ total_respostas|intcomma }}</span>
                     </p>
                 </div>
@@ -104,13 +104,13 @@
                     </p>
                     <p class="border-bottom">
                         Docentes
-                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 706 docentes.count %}%</span>
-                        <span class="badge badge-pill badge-success float-sm-right mr-1">{{ docentes.count|intcomma }} de 706</span>
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 701 docentes.count %}%</span>
+                        <span class="badge badge-pill badge-success float-sm-right mr-1">{{ docentes.count|intcomma }} de 701</span>
                     </p>
                     <p class="border-bottom">
                         Docentes na Reitoria
-                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 706 docentes.count %}%</span>
-                        <span class="badge badge-pill badge-success float-sm-right mr-1">{{ docentes.count|intcomma }} de 706</span>
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 5 docentes_reitoria.count %}%</span>
+                        <span class="badge badge-pill badge-default float-sm-right mr-1">{{ docentes_reitoria.count|intcomma }} de 5</span>
                     </p>
                     <p class="border-bottom">
                         TAEs
@@ -118,8 +118,8 @@
                         <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ taes.count|intcomma }} de 567</span>
                     </p>
                     <p class="border-bottom">
-                        <strong>TOTAL</strong>
-                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 11233 total_respostas %}%</span>
+                        <spn class="font-weight-bold">TOTAL</spn>
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 11123 total_respostas %}%</span>
                         <span class="badge badge-pill badge-danger float-sm-right mr-1">{{ total_respostas|intcomma }} de 11.123</span>
                     </p>
                 </div>
@@ -147,7 +147,7 @@
                         </p>
                     {% endfor %}
                     <p class="border-bottom">
-                        <strong>TOTAL</strong>
+                        <span class="font-weight-bold">TOTAL</span>
                         <span class="badge badge-pill badge-danger float-sm-right">{{ alunos.count|intcomma }}</span>
                     </p>
                 </div>
@@ -174,7 +174,7 @@
                         </p>
                     {% endfor %}
                     <p class="border-bottom">
-                        <strong>TOTAL</strong>
+                        <span class="font-weight-bold">TOTAL</span>
                         <span class="badge badge-pill badge-danger float-sm-right">{{ docentes.count|intcomma }}</span>
                     </p>
                 </div>
@@ -200,7 +200,7 @@
                         </p>
                     {% endfor %}
                     <p class="border-bottom">
-                        <strong>TOTAL</strong>
+                        <span class="font-weight-bold">TOTAL</span>
                         <span class="badge badge-pill badge-danger float-sm-right">{{ taes.count|intcomma }}</span>
                     </p>
                 </div>
@@ -375,31 +375,19 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <div id="avaliacao_atividades_remotas_alunos"></div>
+                            <div id="alunos_posicao2"></div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <div class="row mb-3">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <!--Card-->
                     <div class="card">
-                        <div class="card-body" style="height: 420px">
-                            <div id="avaliacao_moodle"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="w-100 clearfix d-md-none">
-
-                <div class="col-sm-6">
-                    <!--Card-->
-                    <div class="card">
-                        <div class="card-body" style="height: 420px">
-                            <h4 class="text-center">Melhorias no AVA</h4>
-                            <br>
-                            <img class="img-fluid mx-auto d-block align-middle" src="{{ wc_alunos_melhorias_ava }}">
+                        <div class="card-body">
+                            <div id="avaliacao_atividades_remotas_alunos"></div>
                         </div>
                     </div>
                 </div>
@@ -513,7 +501,7 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <div id="taes_opiniao"></div>
+                            <div id="taes_producao"></div>
                         </div>
                     </div>
                 </div>
@@ -838,62 +826,13 @@
         });
     </script>
 
-    <!--GRÁFICO ALUNOS AVALIAÇÃO MOODLE-->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var labels = JSON.parse('{{ chart_alunos_avaliacao_moodle_labels|safe }}');
-            var data = JSON.parse('{{ chart_alunos_avaliacao_moodle_data|safe }}');
-            var myChart = Highcharts.chart('avaliacao_moodle', {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Avaliação do AVA Institucional'
-                },
-                subtitle: {
-                    text: 'Nota Média por <i>Campus</i>'
-                },
-                xAxis: {
-                    categories: labels
-                },
-                yAxis: {
-                    title: {
-                        text: 'Nota Média'
-                    }
-                },
-                plotOptions: {
-                    column: {
-                        dataLabels: {
-                            enabled: true,
-                            format: '{point.y:.1f}',
-                            distance: 0,
-                        },
-                        showInLegend: true
-                    }
-                },
-                tooltip: {
-                    pointFormat: 'Nota média do AVA: <b>{point.y:.1f}</b>'
-                },
-                legend: {
-                    enabled: false
-                },
-                credits: {
-                    enabled: false
-                },
-                series: [{
-                    name: 'Média de notas',
-                    data: data
-                }]
-            });
-        });
-    </script>
-
     <!--GRÁFICO ALUNOS AVALIAÇÃO ATIVIDADES REMOTAS-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var labels = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_label|safe }}');
             var data_conteudo = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_data_conteudo|safe }}');
             var data_orientacoes = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_data_orientacoes|safe }}');
+            var data_comunicacao = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_data_comunicacao|safe }}');
             var myChart = Highcharts.chart('avaliacao_atividades_remotas_alunos', {
                 chart: {
                     type: 'column'
@@ -936,8 +875,12 @@
                     data: data_conteudo
                 },
                     {
-                        name: 'Orientações',
+                        name: 'Orientações dos docentes',
                         data: data_orientacoes
+                    },
+                    {
+                        name: 'Comunicação com os docentes',
+                        data: data_comunicacao
                     }]
             });
         });
@@ -948,7 +891,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var labels = JSON.parse('{{ chart_docentes_avaliacao_atividades_remotas_label|safe }}');
-            var data = JSON.parse('{{ chart_docentes_avaliacao_atividades_remotas_data_experiencia|safe }}');
+            var data_ar = JSON.parse('{{ chart_docentes_avaliacao_atividades_remotas_data_ar|safe }}');
+            var data_comunicacao = JSON.parse('{{ chart_docentes_avaliacao_atividades_remotas_data_comunicacao|safe }}');
+            var data_participacao = JSON.parse('{{ chart_docentes_avaliacao_atividades_remotas_data_participacao|safe }}');
             var myChart = Highcharts.chart('avaliacao_atividades_remotas_docentes', {
                 chart: {
                     type: 'column'
@@ -974,7 +919,7 @@
                             format: '{point.y:.1f}',
                             distance: 0,
                         },
-                        showInLegend: false
+                        showInLegend: true
                     }
                 },
                 tooltip: {
@@ -987,9 +932,17 @@
                     enabled: false
                 },
                 series: [{
-                    name: 'Experiência',
-                    data: data
-                }]
+                    name: 'Atividades Remotas',
+                    data: data_ar
+                },
+                    {
+                        name: 'Comuicação com os alunos',
+                        data: data_comunicacao
+                    },
+                    {
+                        name: 'Participação dos alunos',
+                        data: data_participacao
+                    }]
             });
         });
     </script>
@@ -1155,6 +1108,54 @@
                 },
                 title: {
                     text: 'O que o IFRO deve fazer a respeito da suspensão das atividades presenciais?',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos TAEs{% if qs_campus %} - {{ qs_campus }}{% endif %}'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 0,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO TAES PRODUÇÃO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ taes_producao|safe }}');
+            var myChart = Highcharts.chart('taes_producao', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Como você avalia sua produção (cumprimento das atividades) em casa em comparação ao período anterior à suspensão das atividades presenciais?',
                     align: 'center',
                 },
                 subtitle: {

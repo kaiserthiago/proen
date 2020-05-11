@@ -919,8 +919,9 @@ def dashboard2(request):
     # DADOS DOS INDICADORES GERAIS
     alunos = Aluno2.objects.all()
     docentes = Docente2.objects.all()
+    docentes_reitoria = DocenteReitoria.objects.all()
     taes = Tae2.objects.all()
-    total_respostas = alunos.count() + docentes.count() + taes.count()
+    total_respostas = alunos.count() + docentes.count() + docentes_reitoria.count() + taes.count()
 
     # DADOS DOS INDICADORES DOS CAMPI
     indicador_alunos_campus = Aluno2.objects.all().order_by(
@@ -1005,7 +1006,6 @@ def dashboard2(request):
     chart_aluno_nivel_curso_label = [obj[0] for obj in alunos_nivel_curso]
     chart_aluno_nivel_curso_data = [int(obj[1]) for obj in alunos_nivel_curso]
 
-
     # GRÁFICO DOCENTES FAZ AR
     docentes_ar = Docente2.objects.all().order_by(
         '-promovendo_ar').values_list(
@@ -1059,36 +1059,35 @@ def dashboard2(request):
         'campus').values_list(
         'campus').annotate(
         orientacoes=Avg('avaliacao_orientacoes'),
-        conteudo=Avg('avaliacao_conteudo')).distinct()
+        conteudo=Avg('avaliacao_conteudo'),
+        comunicacao=Avg('avaliacao_comunicacao')).distinct()
 
     chart_alunos_avaliacao_atividades_remotas_label = [obj[0] for obj in alunos_avaliacao_atividades_remotas]
     chart_alunos_avaliacao_atividades_remotas_data_orientacoes = [float(obj[1]) for obj in
                                                                   alunos_avaliacao_atividades_remotas]
     chart_alunos_avaliacao_atividades_remotas_data_conteudo = [float(obj[2]) for obj in
                                                                alunos_avaliacao_atividades_remotas]
+    chart_alunos_avaliacao_atividades_remotas_data_comunicacao = [float(obj[3]) for obj in
+                                                                  alunos_avaliacao_atividades_remotas]
 
     # GRÁFICO MÉDIA NOTA ATIVIDADES REMOTAS DOCENTES
-    docentes_avaliacao_atividades_remotas = Docente.objects.all().order_by(
+    docentes_avaliacao_atividades_remotas = Docente2.objects.all().order_by(
         'campus').values_list(
         'campus').annotate(
-        experiencia=Avg('avaliacao_experiencia')).distinct()
+        ar=Avg('avaliacao_ar'),
+        comunicacao=Avg('avaliacao_comunicao'),
+        participacao=Avg('avaliacao_participacao'), ).distinct()
 
     chart_docentes_avaliacao_atividades_remotas_label = [obj[0] for obj in docentes_avaliacao_atividades_remotas]
-    chart_docentes_avaliacao_atividades_remotas_data_experiencia = [float(obj[1]) for obj in
-                                                                    docentes_avaliacao_atividades_remotas]
+    chart_docentes_avaliacao_atividades_remotas_data_ar = [float(obj[1]) for obj in docentes_avaliacao_atividades_remotas]
+    chart_docentes_avaliacao_atividades_remotas_data_comunicacao = [float(obj[2]) for obj in docentes_avaliacao_atividades_remotas]
+    chart_docentes_avaliacao_atividades_remotas_data_participacao = [float(obj[3]) for obj in docentes_avaliacao_atividades_remotas]
 
-    # GRÁFICO MÉDIA NOTA ATIVIDADES REMOTAS TAES
-    taes_avaliacao_atividades_remotas = Tae.objects.all().order_by(
-        'campus').values_list(
-        'campus').annotate(
-        jornada=Avg('avaliacao_jornada'),
-        producao=Avg('avaliacao_producao')).distinct()
-
-    chart_taes_avaliacao_atividades_remotas_label = [obj[0] for obj in taes_avaliacao_atividades_remotas]
-    chart_taes_avaliacao_atividades_remotas_data_jornada = [float(obj[1]) for obj in
-                                                            taes_avaliacao_atividades_remotas]
-    chart_taes_avaliacao_atividades_remotas_data_producao = [float(obj[2]) for obj in
-                                                             taes_avaliacao_atividades_remotas]
+    # GRÁFICO PRODUÇÃO TAES
+    taes_producao = Tae2.objects.all().order_by(
+        'avaliacao_producao').values_list(
+        'avaliacao_producao').annotate(
+        total=Count('id')).distinct()
 
     chart_campus_label = [obj[0] for obj in alunos_campus]
 
@@ -1196,6 +1195,7 @@ def dashboard2(request):
 
         'alunos': alunos,
         'docentes': docentes,
+        'docentes_reitoria': docentes_reitoria,
         'taes': taes,
         'total_respostas': total_respostas,
 
@@ -1232,23 +1232,21 @@ def dashboard2(request):
         'docentes_ar': json.dumps(list(docentes_ar)),
 
         'alunos_acesso_internet': json.dumps(list(alunos_acesso_internet)),
+        'taes_producao': json.dumps(list(taes_producao)),
 
         'chart_alunos_avaliacao_atividades_remotas_label': json.dumps(chart_alunos_avaliacao_atividades_remotas_label),
         'chart_alunos_avaliacao_atividades_remotas_data_orientacoes': json.dumps(
             chart_alunos_avaliacao_atividades_remotas_data_orientacoes),
         'chart_alunos_avaliacao_atividades_remotas_data_conteudo': json.dumps(
             chart_alunos_avaliacao_atividades_remotas_data_conteudo),
-
-        'chart_taes_avaliacao_atividades_remotas_label': json.dumps(chart_taes_avaliacao_atividades_remotas_label),
-        'chart_taes_avaliacao_atividades_remotas_data_jornada': json.dumps(
-            chart_taes_avaliacao_atividades_remotas_data_jornada),
-        'chart_taes_avaliacao_atividades_remotas_data_producao': json.dumps(
-            chart_taes_avaliacao_atividades_remotas_data_producao),
+        'chart_alunos_avaliacao_atividades_remotas_data_comunicacao': json.dumps(
+            chart_alunos_avaliacao_atividades_remotas_data_comunicacao),
 
         'chart_docentes_avaliacao_atividades_remotas_label': json.dumps(
             chart_docentes_avaliacao_atividades_remotas_label),
-        'chart_docentes_avaliacao_atividades_remotas_data_experiencia': json.dumps(
-            chart_docentes_avaliacao_atividades_remotas_data_experiencia),
+        'chart_docentes_avaliacao_atividades_remotas_data_ar': json.dumps(chart_docentes_avaliacao_atividades_remotas_data_ar),
+        'chart_docentes_avaliacao_atividades_remotas_data_comunicacao': json.dumps(chart_docentes_avaliacao_atividades_remotas_data_comunicacao),
+        'chart_docentes_avaliacao_atividades_remotas_data_participacao': json.dumps(chart_docentes_avaliacao_atividades_remotas_data_participacao),
 
         'chart_data_resposta_label': json.dumps(chart_data_resposta_label),
         'chart_aluno_data_resposta_data': json.dumps(chart_aluno_data_resposta_data),
@@ -1386,6 +1384,7 @@ def import_form(request):
     }
 
     return render(request, 'portal/import_form.html', context)
+
 
 @permission_required('is_superuser')
 def import_form2(request):

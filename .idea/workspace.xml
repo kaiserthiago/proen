@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5db46fe-3f34-4b9f-b7b5-9ef6779b9cc1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/portal/migrations/0004_aluno2_dificuldadecasa_docente2_gruporisco_tae2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/portal/migrations/0005_auto_20200511_1511.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/portal/migrations/0006_auto_20200511_1516.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/portal/templates/portal/dashboard2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/portal/templates/portal/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/templates/portal/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/portal/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portal/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portal/templates/portal/dashboard2.html" beforeDir="false" afterPath="$PROJECT_DIR$/portal/templates/portal/dashboard2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/portal/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/portal/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +101,7 @@
       <workItem from="1587050250231" duration="342000" />
       <workItem from="1587051156317" duration="1416000" />
       <workItem from="1587052885648" duration="1211000" />
-      <workItem from="1589213003408" duration="14876000" />
+      <workItem from="1589213003408" duration="16525000" />
     </task>
     <task id="LOCAL-00001" summary="requirements">
       <created>1586194528042</created>
@@ -309,7 +299,21 @@
       <option name="project" value="LOCAL" />
       <updated>1589214019772</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Dashboard pesquisa 2">
+      <created>1589233457421</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1589233457421</updated>
+    </task>
+    <task id="LOCAL-00030" summary="correção total">
+      <created>1589234307581</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1589234307581</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,8 +321,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="requirements" />
-    <MESSAGE value="include login urls" />
     <MESSAGE value="realizar login" />
     <MESSAGE value="login and super user required" />
     <MESSAGE value="gitignore" />
@@ -342,40 +344,42 @@
     <MESSAGE value="adicionar filtro de campus para gráfico" />
     <MESSAGE value="atualizar mdb" />
     <MESSAGE value="atualizar" />
-    <option name="LAST_COMMIT_MESSAGE" value="atualizar" />
+    <MESSAGE value="Dashboard pesquisa 2" />
+    <MESSAGE value="correção total" />
+    <option name="LAST_COMMIT_MESSAGE" value="correção total" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="393" y="0" key="CommitChangelistDialog2" timestamp="1589214015279">
+    <state x="393" y="0" key="CommitChangelistDialog2" timestamp="1589234304695">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="393" y="0" key="CommitChangelistDialog2/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589214015279" />
+    <state x="393" y="0" key="CommitChangelistDialog2/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589234304695" />
     <state x="393" y="5" key="CommitChangelistDialog2/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586359718287" />
     <state x="548" y="166" key="FileChooserDialogImpl" timestamp="1586099288545">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="166" key="FileChooserDialogImpl/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586099288545" />
-    <state width="1493" height="138" key="GridCell.Tab.0.bottom" timestamp="1589233329496">
+    <state width="1493" height="138" key="GridCell.Tab.0.bottom" timestamp="1589235035785">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="138" key="GridCell.Tab.0.bottom/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589233329496" />
+    <state width="1493" height="138" key="GridCell.Tab.0.bottom/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589235035785" />
     <state width="1493" height="139" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586360426885" />
     <state width="1237" height="105" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.260.1280.680@1920.260.1280.680" timestamp="1586387803774" />
-    <state width="1493" height="138" key="GridCell.Tab.0.center" timestamp="1589233329496">
+    <state width="1493" height="138" key="GridCell.Tab.0.center" timestamp="1589235035785">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="138" key="GridCell.Tab.0.center/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589233329496" />
+    <state width="1493" height="138" key="GridCell.Tab.0.center/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589235035785" />
     <state width="1493" height="139" key="GridCell.Tab.0.center/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586360426885" />
     <state width="1237" height="105" key="GridCell.Tab.0.center/0.0.1536.824/1920.260.1280.680@1920.260.1280.680" timestamp="1586387803774" />
-    <state width="1493" height="138" key="GridCell.Tab.0.left" timestamp="1589233329495">
+    <state width="1493" height="138" key="GridCell.Tab.0.left" timestamp="1589235035784">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="138" key="GridCell.Tab.0.left/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589233329495" />
+    <state width="1493" height="138" key="GridCell.Tab.0.left/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589235035784" />
     <state width="1493" height="139" key="GridCell.Tab.0.left/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586360426885" />
     <state width="1237" height="105" key="GridCell.Tab.0.left/0.0.1536.824/1920.260.1280.680@1920.260.1280.680" timestamp="1586387803774" />
-    <state width="1493" height="138" key="GridCell.Tab.0.right" timestamp="1589233329496">
+    <state width="1493" height="138" key="GridCell.Tab.0.right" timestamp="1589235035785">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="138" key="GridCell.Tab.0.right/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589233329496" />
+    <state width="1493" height="138" key="GridCell.Tab.0.right/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589235035785" />
     <state width="1493" height="139" key="GridCell.Tab.0.right/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586360426885" />
     <state width="1237" height="105" key="GridCell.Tab.0.right/0.0.1536.824/1920.260.1280.680@1920.260.1280.680" timestamp="1586387803774" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1586221838981">
@@ -399,10 +403,10 @@
     </state>
     <state x="277" y="54" key="SettingsEditor/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586266889646" />
     <state x="2151" y="260" key="SettingsEditor/0.0.1536.824/1920.260.1280.680@1920.260.1280.680" timestamp="1586382641818" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1589214026018">
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1589233462071">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589214026018" />
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1280.199.1280.680@0.0.1536.824" timestamp="1589233462071" />
     <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.260.1280.680@0.0.1536.824" timestamp="1586359752204" />
     <state x="578" y="328" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589215583233">
       <screen x="0" y="0" width="1536" height="824" />
