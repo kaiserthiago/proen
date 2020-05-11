@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 # Register your models here.
 from django.template.defaultfilters import date
@@ -7,7 +8,7 @@ from portal.models import Aluno, Docente, Tae
 
 
 @admin.register(Aluno)
-class AlunoAdmin(admin.ModelAdmin):
+class AlunoAdmin(ImportExportModelAdmin):
     list_display = (
         'id',
         'campus',
@@ -25,7 +26,7 @@ class AlunoAdmin(admin.ModelAdmin):
     list_per_page = 1000
 
 @admin.register(Docente)
-class DocenteAdmin(admin.ModelAdmin):
+class DocenteAdmin(ImportExportModelAdmin):
     list_display = (
         'id',
         'data_resposta',
@@ -36,7 +37,7 @@ class DocenteAdmin(admin.ModelAdmin):
     list_per_page = 1000
 
 @admin.register(Tae)
-class TaeAdmin(admin.ModelAdmin):
+class TaeAdmin(ImportExportModelAdmin):
     list_display = (
         'id',
         'data_resposta',
