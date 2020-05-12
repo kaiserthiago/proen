@@ -908,7 +908,10 @@ def dashboard2(request):
              'muitas', 'muitos', 'possam', 'bom', 'ruim', 'nesta', 'isso', 'minhas', 'pouco', 'pouca',
              'poucos', 'poucas', 'cada', 'pelo', 'pelos', 'pela', 'pelas', 'também', 'aula',
              'retorno', 'fazer', 'tempo', 'outras', 'seria', 'porém', 'problema', 'área', 'período',
-             'voltados', 'online', 'equipe', 'trabalhar'])
+             'voltados', 'online', 'equipe', 'trabalhar', 'ofertando', 'aulas', 'classe', 'finalidade',
+             'ano', 'campus', 'campi', 'câmpus', 'servidor', 'servidores', 'momento', 'assim',
+             'vejo', 'ajuda', 'distância', 'através', 'realidade', 'bom', 'mau', 'bem', 'mal', 'forma',
+             'qualidade', 'sugiro', 'sugestão', 'sugestões', 'troca'])
 
         wc = WordCloud(stopwords=stopwords, background_color="white", max_words=1000, max_font_size=400)
         wc = wc.generate(text)
