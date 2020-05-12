@@ -104,13 +104,13 @@
                     </p>
                     <p class="border-bottom">
                         Docentes
-                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 701 docentes.count %}%</span>
-                        <span class="badge badge-pill badge-success float-sm-right mr-1">{{ docentes.count|intcomma }} de 701</span>
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 692 docentes.count %}%</span>
+                        <span class="badge badge-pill badge-success float-sm-right mr-1">{{ docentes.count|intcomma }} de 692</span>
                     </p>
                     <p class="border-bottom">
                         Docentes na Reitoria
-                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 5 docentes_reitoria.count %}%</span>
-                        <span class="badge badge-pill badge-default float-sm-right mr-1">{{ docentes_reitoria.count|intcomma }} de 5</span>
+                        <span class="badge badge-pill badge-secondary float-sm-right">{% percentual 14 docentes_reitoria.count %}%</span>
+                        <span class="badge badge-pill badge-default float-sm-right mr-1">{{ docentes_reitoria.count|intcomma }} de 14</span>
                     </p>
                     <p class="border-bottom">
                         TAEs
@@ -214,7 +214,7 @@
             <div class="card">
                 <div class="card-header grey lighten-1 font-weight-bold">
                     <p class="float-left m-0">
-                        Alunos por Nível de Curso
+                        ALUNOS POR NÍVEL DE CURSO{% if qs_campus %} - <i>Campus</i> {{ qs_campus }}{% endif %}
                     </p>
                 </div>
                 <div class="card-body">
@@ -230,67 +230,98 @@
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-sm-4">
-            <!--Card-->
-            <div class="card">
-                <div class="card-header grey lighten-1 font-weight-bold">
-                    <p class="float-left m-0">
-                        Período/Semestre Letivo - Graduação
-                    </p>
-                </div>
-                <div class="card-body">
-                    {% for indicador in indicador_alunos_deficiencia %}
-                        <p class="border-bottom">
-                            {{ indicador.deficiencia|slice:28 }}
-                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
-                            <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
-                        </p>
-                    {% endfor %}
-                </div>
-            </div>
+    <div class="card mb-3">
+        <div class="card-header grey lighten-1 font-weight-bold">
+            <p class="float-left m-0">
+                DEMONSTRATIVO PERÍODO/SEMESTRE/ANO LETIVO{% if qs_campus %} - <i>Campus</i> {{ qs_campus }}{% endif %}
+            </p>
         </div>
-
-        <hr class="w-100 clearfix d-md-none">
-
-        <div class="col-sm-4">
-            <!--Card-->
-            <div class="card">
-                <div class="card-header grey lighten-1 font-weight-bold">
-                    <p class="float-left m-0">
-                        Período/Semestre Letivo - Técnico Concomitante ou Subsequente
-                    </p>
+        <div class="card-body" style="background: #ededed">
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-header grey lighten-1 font-weight-bold">
+                            <p class="float-left m-0">
+                                Graduação
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            {% for indicador in indicador_alunos_periodo_letivo_graduacao %}
+                                <p class="border-bottom">
+                                    {{ indicador.periodo_letivo|slice:20 }}
+                                    <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
+                                    <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    {% for indicador in indicador_alunos_transtorno %}
-                        <p class="border-bottom">
-                            {{ indicador.transtorno }}
-                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
-                            <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
-                        </p>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
 
-        <hr class="w-100 clearfix d-md-none">
+                <hr class="w-100 clearfix d-md-none">
 
-        <div class="col-sm-4">
-            <!--Card-->
-            <div class="card">
-                <div class="card-header grey lighten-1 font-weight-bold">
-                    <p class="float-left m-0">
-                        Ano Letivo - Técnico Integrado
-                    </p>
+                <div class="col-sm-3">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-header grey lighten-1 font-weight-bold">
+                            <p class="float-left m-0">
+                                Técnico Concomitante
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            {% for indicador in indicador_alunos_periodo_letivo_concomitante %}
+                                <p class="border-bottom">
+                                    {{ indicador.periodo_letivo|slice:20 }}
+                                    <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
+                                    <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    {% for indicador in indicador_alunos_transtorno %}
-                        <p class="border-bottom">
-                            {{ indicador.transtorno }}
-                            <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
-                            <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
-                        </p>
-                    {% endfor %}
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-3">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-header grey lighten-1 font-weight-bold">
+                            <p class="float-left m-0">
+                                Técnico Integrado
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            {% for indicador in indicador_alunos_periodo_letivo_integrado %}
+                                <p class="border-bottom">
+                                    {{ indicador.periodo_letivo|slice:20 }}
+                                    <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
+                                    <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-3">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-header grey lighten-1 font-weight-bold">
+                            <p class="float-left m-0">
+                                Técnico Subsequente
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            {% for indicador in indicador_alunos_periodo_letivo_subsequente %}
+                                <p class="border-bottom">
+                                    {{ indicador.periodo_letivo|slice:20 }}
+                                    <span class="badge badge-pill badge-secondary float-sm-right">{% percentual alunos.count indicador.total %}%</span>
+                                    <span class="badge badge-pill badge-warning float-sm-right mr-1">{{ indicador.total|intcomma }}</span>
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -300,7 +331,7 @@
     <div class="card mb-3">
         <div class="card-header grey lighten-1 font-weight-bold">
             <p class="float-left m-0">
-                GRÁFICOS DE ALUNOS
+                GRÁFICOS DE ALUNOS{% if qs_campus %} - <i>Campus</i> {{ qs_campus }}{% endif %}
             </p>
         </div>
         <div class="card-body" style="background: #ededed">
@@ -431,8 +462,12 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="text-center">Capacitação para servidores</h5>
-                            <br>
+                            <h5 class="text-center">
+                                Capacitação para servidores
+                                <small>
+                                  {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                              </small>
+                            </h5>
                             <img class="img-fluid mx-auto d-block align-middle"
                                  src="{{ wc_docentes_sugestao_capacitacao }}">
                         </div>
@@ -445,8 +480,12 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="text-center">Sugestão de atividades</h5>
-                            <br>
+                            <h5 class="text-center">
+                                Sugestão de atividades
+                               <small>
+                                  {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                              </small>
+                            </h5>
                             <img class="img-fluid mx-auto d-block align-middle"
                                  src="{{ wc_docentes_sugestao_suspensao }}">
                         </div>
@@ -513,8 +552,12 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="text-center">Capacitação para servidores</h5>
-                            <br>
+                            <h5 class="text-center">
+                                Capacitação para servidores
+                                <small>
+                                  {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                              </small>
+                            </h5>
                             <img class="img-fluid mx-auto d-block align-middle"
                                  src="{{ wc_taes_sugestao_capacitacao }}">
                         </div>
@@ -527,8 +570,13 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="text-center">Sugestão de atividades</h5>
-                            <br>
+                            <h5 class="text-center">
+                                Sugestão de atividades
+                                <small>
+                                  {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                              </small>
+                            </h5>
+
                             <img class="img-fluid mx-auto d-block align-middle"
                                  src="{{ wc_taes_sugestao_suspensao }}">
                         </div>
@@ -629,7 +677,10 @@
                     type: 'bar'
                 },
                 title: {
-                    text: 'Alunos por Nível do Curso'
+                    text: 'Nível do Curso'
+                },
+                subtitle: {
+                    text: 'Respostas dos Alunos{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
                 },
                 xAxis: {
                     categories: labels
@@ -682,7 +733,7 @@
                     align: 'center',
                 },
                 subtitle: {
-                    text: 'Respostas dos Alunos{% if qs_campus %} - {{ qs_campus }}{% endif %}'
+                    text: 'Respostas dos Alunos{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
                 },
                 credits: {
                     enabled: false
@@ -730,7 +781,7 @@
                     align: 'center',
                 },
                 subtitle: {
-                    text: 'Respostas dos Alunos'
+                    text: 'Respostas dos Alunos{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
                 },
                 credits: {
                     enabled: false
@@ -778,7 +829,7 @@
                     text: 'Formas de Acesso à Internet'
                 },
                 subtitle: {
-                    text: 'Respostas dos Alunos'
+                    text: 'Respostas dos Alunos{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
                 },
                 xAxis: {
                     categories: [
@@ -886,7 +937,6 @@
         });
     </script>
 
-
     <!--GRÁFICO DOCENTES AVALIAÇÃO ATIVIDADES REMOTAS-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -960,7 +1010,7 @@
                     align: 'center',
                 },
                 subtitle: {
-                    text: 'Respostas dos Docentes'
+                    text: 'Respostas dos Docentes{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
                 },
                 credits: {
                     enabled: false
@@ -1008,7 +1058,7 @@
                     align: 'center',
                 },
                 subtitle: {
-                    text: 'Respostas dos Docentes{% if qs_campus %} - {{ qs_campus }}{% endif %}'
+                    text: 'Respostas dos Docentes{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
                 },
                 credits: {
                     enabled: false
@@ -1111,7 +1161,7 @@
                     align: 'center',
                 },
                 subtitle: {
-                    text: 'Respostas dos TAEs{% if qs_campus %} - {{ qs_campus }}{% endif %}'
+                    text: 'Respostas dos TAEs{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
                 },
                 credits: {
                     enabled: false
@@ -1159,7 +1209,7 @@
                     align: 'center',
                 },
                 subtitle: {
-                    text: 'Respostas dos TAEs{% if qs_campus %} - {{ qs_campus }}{% endif %}'
+                    text: 'Respostas dos TAEs{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
                 },
                 credits: {
                     enabled: false
@@ -1266,6 +1316,9 @@
                 },
                 title: {
                     text: 'Respostas por Data'
+                },
+                subtitle: {
+                    text: '{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
                 },
                 xAxis: {
                     categories: [

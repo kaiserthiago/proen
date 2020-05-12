@@ -899,8 +899,18 @@ def dashboard2(request):
 
         stopwords = set(STOPWORDS)
         stopwords.update(
-            ['ava', 'não', 'de', 'ao', 'só', 'ou', 'da', 'na', 'no', 'que', 'um', 'uma', 'em', 'pra', 'para', 'mas',
-             'os', 'as', 'eu', 'EAD', 'tem', 'se', 'dos', 'a', 'o', 'como', 'são', 'essa', 'esse'])
+            ['ava', 'não', 'de', 'ao', 'só', 'ou', 'da', 'na', 'no', 'que', 'um', 'uma', 'em', 'pra', 'para',
+             'mas', 'os', 'as', 'eu', 'EAD', 'tem', 'se', 'dos', 'a', 'o', 'como', 'são', 'essa', 'esse',
+             'das', 'dos', 'des', 'line', 'aos', 'então', 'tipo', 'por', 'neste', 'este', 'esta', 'está'
+             'estão', 'até', 'nos', 'nas', 'nós', 'já', 'meu', 'minha', 'seu', 'sua', 'acredito', 'penso',
+             'prefiro', 'opinar', 'preciso', 'precisamos', 'quanto', 'quando', 'por', 'ser', 'exemplo',
+             'estávamos', 'estamos', 'muito', 'voltar', 'ao', 'sei', 'outros', 'outro', 'ifro', 'seja',
+             'todo', 'todos', 'tudo', 'sobre', 'pode', 'podem', 'tenho', 'ter', 'nova', 'novo', 'menos', 'mais',
+             'apenas', 'pois', 'sempre', 'algum', 'alguns', 'alguma', 'outra', 'parte', 'muita', 'muito',
+             'muitas', 'muitos', 'possam', 'bom', 'ruim', 'nesta', 'isso', 'minhas', 'pouco', 'pouca',
+             'poucos', 'poucas', 'cada', 'pelo', 'pelos', 'pela', 'pelas', 'também', 'aula',
+             'retorno', 'fazer', 'tempo', 'outras', 'seria', 'porém', 'problema', 'área', 'período',
+             'voltados', 'online', 'equipe', 'trabalhar'])
 
         wc = WordCloud(stopwords=stopwords, background_color="white", max_words=1000, max_font_size=400)
         wc = wc.generate(text)
@@ -915,13 +925,6 @@ def dashboard2(request):
 
         image_64 = 'data:image/png;base64,' + urllib.parse.quote(string)
         return image_64
-
-    # DADOS DOS INDICADORES GERAIS
-    alunos = Aluno2.objects.all()
-    docentes = Docente2.objects.all()
-    docentes_reitoria = DocenteReitoria.objects.all()
-    taes = Tae2.objects.all()
-    total_respostas = alunos.count() + docentes.count() + docentes_reitoria.count() + taes.count()
 
     # DADOS DOS INDICADORES DOS CAMPI
     indicador_alunos_campus = Aluno2.objects.all().order_by(
@@ -940,30 +943,64 @@ def dashboard2(request):
         total=Count('id')).distinct()
 
     # DADOS DOS INDICADORES DOS ALUNOS
-    indicador_alunos_nivel_curso = Aluno2.objects.all().order_by(
+    if qs_campus:
+        indicador_alunos_nivel_curso = Aluno2.objects.filter(campus=qs_campus).order_by(
+            'nivel_curso').values(
+            'nivel_curso').annotate(
+            total=Count('id')).distinct()
+    else:
+        indicador_alunos_nivel_curso = Aluno2.objects.all().order_by(
         'nivel_curso').values(
         'nivel_curso').annotate(
         total=Count('id')).distinct()
 
-    indicador_alunos_periodo_letivo_graduacao = Aluno2.objects.filter(
+    if qs_campus:
+        indicador_alunos_periodo_letivo_graduacao = Aluno2.objects.filter(
+            nivel_curso='Graduação (Bacharel, CST e Licenciatura)', campus=qs_campus).order_by(
+            'periodo_letivo').values(
+            'periodo_letivo').annotate(
+            total=Count('id')).distinct()
+    else:
+        indicador_alunos_periodo_letivo_graduacao = Aluno2.objects.filter(
         nivel_curso='Graduação (Bacharel, CST e Licenciatura)').order_by(
         'periodo_letivo').values(
         'periodo_letivo').annotate(
         total=Count('id')).distinct()
 
-    indicador_alunos_periodo_letivo_concomitante = Aluno2.objects.filter(
+    if qs_campus:
+        indicador_alunos_periodo_letivo_concomitante = Aluno2.objects.filter(
+            nivel_curso='Técnico Concomitante', campus=qs_campus).order_by(
+            'periodo_letivo').values(
+            'periodo_letivo').annotate(
+            total=Count('id')).distinct()
+    else:
+        indicador_alunos_periodo_letivo_concomitante = Aluno2.objects.filter(
         nivel_curso='Técnico Concomitante').order_by(
         'periodo_letivo').values(
         'periodo_letivo').annotate(
         total=Count('id')).distinct()
 
-    indicador_alunos_periodo_letivo_integrado = Aluno2.objects.filter(
+    if qs_campus:
+        indicador_alunos_periodo_letivo_integrado = Aluno2.objects.filter(
+            nivel_curso='Técnico Integrado', campus=qs_campus).order_by(
+            'periodo_letivo').values(
+            'periodo_letivo').annotate(
+            total=Count('id')).distinct()
+    else:
+        indicador_alunos_periodo_letivo_integrado = Aluno2.objects.filter(
         nivel_curso='Técnico Integrado').order_by(
         'periodo_letivo').values(
         'periodo_letivo').annotate(
         total=Count('id')).distinct()
 
-    indicador_alunos_periodo_letivo_subsequente = Aluno2.objects.filter(
+    if qs_campus:
+        indicador_alunos_periodo_letivo_subsequente = Aluno2.objects.filter(
+            nivel_curso='Técnico Subsequente', campus=qs_campus).order_by(
+            'periodo_letivo').values(
+            'periodo_letivo').annotate(
+            total=Count('id')).distinct()
+    else:
+        indicador_alunos_periodo_letivo_subsequente = Aluno2.objects.filter(
         nivel_curso='Técnico Subsequente').order_by(
         'periodo_letivo').values(
         'periodo_letivo').annotate(
@@ -998,7 +1035,13 @@ def dashboard2(request):
     chart_tae_campus_data = [int(obj[1]) for obj in taes_campus]
 
     # GRÁFICOS ALUNOS POR NÍVEL DE CURSO
-    alunos_nivel_curso = Aluno2.objects.all().order_by(
+    if qs_campus:
+        alunos_nivel_curso = Aluno2.objects.filter(campus=qs_campus).order_by(
+            'nivel_curso').values_list(
+            'nivel_curso').annotate(
+            total=Count('id')).distinct()
+    else:
+        alunos_nivel_curso = Aluno2.objects.all().order_by(
         'nivel_curso').values_list(
         'nivel_curso').annotate(
         total=Count('id')).distinct()
@@ -1007,7 +1050,13 @@ def dashboard2(request):
     chart_aluno_nivel_curso_data = [int(obj[1]) for obj in alunos_nivel_curso]
 
     # GRÁFICO DOCENTES FAZ AR
-    docentes_ar = Docente2.objects.all().order_by(
+    if qs_campus:
+        docentes_ar = Docente2.objects.filter(campus=qs_campus).order_by(
+            '-promovendo_ar').values_list(
+            'promovendo_ar').annotate(
+            total=Count('id')).distinct()
+    else:
+        docentes_ar = Docente2.objects.all().order_by(
         '-promovendo_ar').values_list(
         'promovendo_ar').annotate(
         total=Count('id')).distinct()
@@ -1049,7 +1098,13 @@ def dashboard2(request):
             total=Count('id')).distinct()
 
     # GRÁFICO ALUNOS ACESSO INTERNET ALUNOS
-    alunos_acesso_internet = Aluno2.objects.all().order_by(
+    if qs_campus:
+        alunos_acesso_internet = Aluno2.objects.filter(campus=qs_campus).order_by(
+            'acesso_internet').values_list(
+            'acesso_internet').annotate(
+            total=Count('id')).distinct()
+    else:
+        alunos_acesso_internet = Aluno2.objects.all().order_by(
         'acesso_internet').values_list(
         'acesso_internet').annotate(
         total=Count('id')).distinct()
@@ -1084,7 +1139,13 @@ def dashboard2(request):
     chart_docentes_avaliacao_atividades_remotas_data_participacao = [float(obj[3]) for obj in docentes_avaliacao_atividades_remotas]
 
     # GRÁFICO PRODUÇÃO TAES
-    taes_producao = Tae2.objects.all().order_by(
+    if qs_campus:
+        taes_producao = Tae2.objects.filter(campus=qs_campus).order_by(
+            'avaliacao_producao').values_list(
+            'avaliacao_producao').annotate(
+            total=Count('id')).distinct()
+    else:
+        taes_producao = Tae2.objects.all().order_by(
         'avaliacao_producao').values_list(
         'avaliacao_producao').annotate(
         total=Count('id')).distinct()
@@ -1095,17 +1156,35 @@ def dashboard2(request):
     chart_campus_reitoria_label.insert(8, 'Reitoria')
 
     # GRÁFICOS RESPOSTAS POR DATA
-    alunos_data_resposta = Aluno2.objects.all().order_by(
+    if qs_campus:
+        alunos_data_resposta = Aluno2.objects.filter(campus=qs_campus).order_by(
+            'data_resposta__day').values_list(
+            'data_resposta__day').annotate(
+            total=Count('id')).distinct()
+    else:
+        alunos_data_resposta = Aluno2.objects.all().order_by(
         'data_resposta__day').values_list(
         'data_resposta__day').annotate(
         total=Count('id')).distinct()
 
-    docentes_data_resposta = Docente2.objects.all().order_by(
+    if qs_campus:
+        docentes_data_resposta = Docente2.objects.filter(campus=qs_campus).order_by(
+            'data_resposta__day').values_list(
+            'data_resposta__day').annotate(
+            total=Count('id')).distinct()
+    else:
+        docentes_data_resposta = Docente2.objects.all().order_by(
         'data_resposta__day').values_list(
         'data_resposta__day').annotate(
         total=Count('id')).distinct()
 
-    taes_data_resposta = Tae2.objects.all().order_by(
+    if qs_campus:
+        taes_data_resposta = Tae2.objects.filter(campus=qs_campus).order_by(
+            'data_resposta__day').values_list(
+            'data_resposta__day').annotate(
+            total=Count('id')).distinct()
+    else:
+        taes_data_resposta = Tae2.objects.all().order_by(
         'data_resposta__day').values_list(
         'data_resposta__day').annotate(
         total=Count('id')).distinct()
@@ -1119,7 +1198,14 @@ def dashboard2(request):
     acesso_aluno_nao = []
     acesso_aluno_sim = []
 
-    aluno_acesso_possui_pc = Aluno2.objects.all().order_by(
+    if qs_campus:
+        aluno_acesso_possui_pc = Aluno2.objects.filter(campus=qs_campus).order_by(
+            'possui_pc').values_list(
+            'possui_pc').annotate(
+            total=Count('possui_pc'),
+        ).distinct()
+    else:
+        aluno_acesso_possui_pc = Aluno2.objects.all().order_by(
         'possui_pc').values_list(
         'possui_pc').annotate(
         total=Count('possui_pc'),
@@ -1128,7 +1214,14 @@ def dashboard2(request):
     acesso_aluno_nao.insert(0, aluno_acesso_possui_pc[0][1])
     acesso_aluno_sim.insert(0, aluno_acesso_possui_pc[1][1])
 
-    aluno_acesso_possui_celular = Aluno2.objects.all().order_by(
+    if qs_campus:
+        aluno_acesso_possui_celular = Aluno2.objects.filter(campus=qs_campus).order_by(
+            'possui_celular').values_list(
+            'possui_celular').annotate(
+            total=Count('possui_celular'),
+        ).distinct()
+    else:
+        aluno_acesso_possui_celular = Aluno2.objects.all().order_by(
         'possui_celular').values_list(
         'possui_celular').annotate(
         total=Count('possui_celular'),
@@ -1137,7 +1230,14 @@ def dashboard2(request):
     acesso_aluno_nao.insert(1, aluno_acesso_possui_celular[0][1])
     acesso_aluno_sim.insert(1, aluno_acesso_possui_celular[1][1])
 
-    aluno_acesso_possui_tablet = Aluno2.objects.all().order_by(
+    if qs_campus:
+        aluno_acesso_possui_tablet = Aluno2.objects.filter(campus=qs_campus).order_by(
+            'possui_tablet').values_list(
+            'possui_tablet').annotate(
+            total=Count('possui_tablet'),
+        ).distinct()
+    else:
+        aluno_acesso_possui_tablet = Aluno2.objects.all().order_by(
         'possui_tablet').values_list(
         'possui_tablet').annotate(
         total=Count('possui_tablet'),
@@ -1146,7 +1246,14 @@ def dashboard2(request):
     acesso_aluno_nao.insert(2, aluno_acesso_possui_tablet[0][1])
     acesso_aluno_sim.insert(2, aluno_acesso_possui_tablet[1][1])
 
-    aluno_acesso_possui_tv = Aluno2.objects.all().order_by(
+    if qs_campus:
+        aluno_acesso_possui_tv = Aluno2.objects.filter(campus=qs_campus).order_by(
+            'possui_tv').values_list(
+            'possui_tv').annotate(
+            total=Count('possui_tv'),
+        ).distinct()
+    else:
+        aluno_acesso_possui_tv = Aluno2.objects.all().order_by(
         'possui_tv').values_list(
         'possui_tv').annotate(
         total=Count('possui_tv'),
@@ -1156,7 +1263,10 @@ def dashboard2(request):
     acesso_aluno_sim.insert(3, aluno_acesso_possui_tv[1][1])
 
     # DISCURSIVA TAES
-    taes = Tae2.objects.all()
+    if qs_campus:
+        taes = Tae2.objects.filter(campus=qs_campus)
+    else:
+        taes = Tae2.objects.all()
     taes_sugestao_suspensao = ''
     taes_sugestao_capacitacao = ''
 
@@ -1173,7 +1283,10 @@ def dashboard2(request):
     wc_taes_sugestao_capacitacao = word_cloud(taes_sugestao_capacitacao)
 
     # DISCURSIVA DOCENTES
-    docentes = Docente2.objects.all()
+    if qs_campus:
+        docentes = Docente2.objects.filter(campus=qs_campus)
+    else:
+        docentes = Docente2.objects.all()
     docentes_sugestao_suspensao = ''
     docentes_sugestao_capacitacao = ''
 
@@ -1188,6 +1301,13 @@ def dashboard2(request):
 
     wc_docentes_sugestao_suspensao = word_cloud(docentes_sugestao_suspensao)
     wc_docentes_sugestao_capacitacao = word_cloud(docentes_sugestao_capacitacao)
+
+    # DADOS DOS INDICADORES GERAIS
+    alunos = Aluno2.objects.all()
+    docentes = Docente2.objects.all()
+    docentes_reitoria = DocenteReitoria.objects.all()
+    taes = Tae2.objects.all()
+    total_respostas = alunos.count() + docentes.count() + docentes_reitoria.count() + taes.count()
 
     context = {
         'qs_campus': qs_campus,
