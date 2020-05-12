@@ -1073,10 +1073,7 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         alunos_grupo_risco = GrupoRisco.objects.filter(
-            aluno__isnull=False,
-            docente__isnull=True,
-            docente_reitoria__isnull=True,
-            tae__isnull=True
+            aluno__isnull=False
         ).order_by(
             'grupo').values_list(
             'grupo').annotate(
@@ -1492,8 +1489,7 @@ def dashboard2(request):
         'docentes_ar': json.dumps(list(docentes_ar)),
 
         'alunos_dificuldade': json.dumps(list(alunos_dificuldade)),
-        # 'alunos_grupo_risco': json.dumps(list(alunos_grupo_risco)),
-        'alunos_grupo_risco': alunos_grupo_risco,
+        'alunos_grupo_risco': json.dumps(list(alunos_grupo_risco)),
 
         'docentes_dificuldade': json.dumps(list(docentes_dificuldade)),
         'docentes_grupo_risco': json.dumps(list(docentes_grupo_risco)),
