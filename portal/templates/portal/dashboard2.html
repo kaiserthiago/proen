@@ -351,28 +351,6 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <div id="aluno_deficiencia"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="w-100 clearfix d-md-none">
-
-                <div class="col-sm-6">
-                    <!--Card-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div id="aluno_transtorno"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-sm-6">
-                    <!--Card-->
-                    <div class="card">
-                        <div class="card-body">
                             <div id="alunos_acesso_internet"></div>
                         </div>
                     </div>
@@ -395,7 +373,7 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <div id="alunos_posicao"></div>
+                            <div id="alunos_horas_estudo"></div>
                         </div>
                     </div>
                 </div>
@@ -406,7 +384,7 @@
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <div id="alunos_posicao2"></div>
+                            <div id="alunos_posicao"></div>
                         </div>
                     </div>
                 </div>
@@ -775,6 +753,53 @@
         });
     </script>
 
+    <!--GRÁFICO ALUNOS HORAS ESTUDO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ alunos_horas_estudo|safe }}');
+            var myChart = Highcharts.chart('alunos_horas_estudo', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Didicação ao estudos em casa',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Alunos{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.1f}%',
+                            distance: 5,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%',
+
+                    }]
+            });
+        });
+    </script>
 
     <!--GRÁFICO ALUNOS POSIÇÃO-->
     <script>
@@ -808,7 +833,7 @@
                         dataLabels: {
                             enabled: true,
                             format: '{point.percentage:.1f}%',
-                            distance: 0,
+                            distance: 5,
                         },
                         showInLegend: true
                     }
@@ -856,7 +881,7 @@
                         dataLabels: {
                             enabled: true,
                             format: '{point.percentage:.1f}%',
-                            distance: 0,
+                            distance: 5,
                         },
                         showInLegend: true
                     }
@@ -963,7 +988,7 @@
                         dataLabels: {
                             enabled: true,
                             format: '{point.y:.1f}',
-                            distance: 0,
+                            distance: 5,
                         },
                         showInLegend: true
                     }
@@ -1131,7 +1156,7 @@
                         dataLabels: {
                             enabled: true,
                             format: '{point.y:.1f}',
-                            distance: 0,
+                            distance: 5,
                         },
                         showInLegend: true
                     }
@@ -1193,7 +1218,7 @@
                         dataLabels: {
                             enabled: true,
                             format: '{point.percentage:.1f}%',
-                            distance: 0,
+                            distance: 5,
                         },
                         showInLegend: true
                     }
@@ -1241,7 +1266,7 @@
                         dataLabels: {
                             enabled: true,
                             format: '{point.percentage:.1f}%',
-                            distance: 0,
+                            distance: 5,
                         },
                         showInLegend: true
                     }
@@ -1394,7 +1419,7 @@
                         dataLabels: {
                             enabled: true,
                             format: '{point.y:.1f}',
-                            distance: 0,
+                            distance: 5,
                         },
                         showInLegend: true
                     }
@@ -1452,7 +1477,7 @@
                         dataLabels: {
                             enabled: true,
                             format: '{point.percentage:.1f}%',
-                            distance: 0,
+                            distance: 5,
                         },
                         showInLegend: true
                     }
@@ -1500,7 +1525,7 @@
                         dataLabels: {
                             enabled: true,
                             format: '{point.percentage:.1f}%',
-                            distance: 0,
+                            distance: 5,
                         },
                         showInLegend: true
                     }

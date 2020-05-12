@@ -1141,6 +1141,18 @@ def dashboard2(request):
             'promovendo_ar').annotate(
             total=Count('id')).distinct()
 
+    # GRÁFICO ALUNOS POR HORAS DE ESTUDOS
+    if qs_campus:
+        alunos_horas_estudo = Aluno2.objects.filter(campus=qs_campus).order_by(
+            'horas_estudo').values_list(
+            'horas_estudo').annotate(
+            total=Count('id')).distinct()
+    else:
+        alunos_horas_estudo = Aluno2.objects.all().order_by(
+            'horas_estudo').values_list(
+            'horas_estudo').annotate(
+            total=Count('id')).distinct()
+
     # GRÁFICO ALUNOS POR POSIÇÃO
     if qs_campus:
         alunos_posicao = Aluno2.objects.filter(campus=qs_campus).order_by(
@@ -1444,6 +1456,8 @@ def dashboard2(request):
         'taes_grupo_risco': json.dumps(list(taes_grupo_risco)),
 
         'alunos_acesso_internet': json.dumps(list(alunos_acesso_internet)),
+        'alunos_horas_estudo': json.dumps(list(alunos_horas_estudo)),
+
         'taes_producao': json.dumps(list(taes_producao)),
 
         'chart_alunos_avaliacao_atividades_remotas_label': json.dumps(chart_alunos_avaliacao_atividades_remotas_label),
