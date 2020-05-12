@@ -336,11 +336,22 @@
         </div>
         <div class="card-body" style="background: #ededed">
             <div class="row mb-3">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
                             <div id="aluno_nivel_curso"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="alunos_auxilio"></div>
                         </div>
                     </div>
                 </div>
@@ -560,6 +571,29 @@
 
 
             </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="avaliacao_atividades_remotas_taes"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="taes_setor"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row mb-3">
                 <div class="col-sm-6">
                     <!--Card-->
@@ -592,17 +626,6 @@
 
                             <img class="img-fluid mx-auto d-block align-middle"
                                  src="{{ wc_taes_sugestao_suspensao }}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-sm-12">
-                    <!--Card-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div id="avaliacao_atividades_remotas_taes"></div>
                         </div>
                     </div>
                 </div>
@@ -704,20 +727,16 @@
     <!--GRÁFICO ALUNO NÍVEL CURSO-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var labels = JSON.parse('{{ chart_aluno_nivel_curso_label|safe }}');
             var data = JSON.parse('{{ alunos_nivel_curso|safe }}');
             var myChart = Highcharts.chart('aluno_nivel_curso', {
                 chart: {
-                    type: 'bar'
+                    type: 'pie'
                 },
                 title: {
                     text: 'Nível do Curso'
                 },
                 subtitle: {
                     text: 'Respostas dos Alunos{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
-                },
-                xAxis: {
-                    categories: labels
                 },
                 yAxis: {
                     title: {
@@ -729,16 +748,13 @@
                 },
                 plotOptions: {
                     pie: {
-                        allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
-                            enabled: true
+                            enabled: true,
+                            format: '{point.name}: {point.percentage:.1f}%',
                         },
-                        showInLegend: true
+                        showInLegend: false
                     }
-                },
-                legend: {
-                    enabled: false
                 },
                 accessibility: {
                     point: {
@@ -747,7 +763,54 @@
                 },
                 series: [{
                     name: 'Quantidade',
-                    data: data
+                    data: data,
+                    innerSize: '50%'
+                }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO ALUNO AUXÍLIO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ alunos_auxilio|safe }}');
+            var myChart = Highcharts.chart('alunos_auxilio', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Recebimento de Auxílio'
+                },
+                subtitle: {
+                    text: 'Respostas dos Alunos{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    pie: {
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.percentage:.1f}%',
+                        },
+                        showInLegend: false
+                    }
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                series: [{
+                    name: 'Quantidade',
+                    data: data,
+                    innerSize: '50%'
                 }]
             });
         });
@@ -1399,9 +1462,8 @@
     <!--GRÁFICO TAES AVALIAÇÃO ATIVIDADES REMOTAS-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var labels = JSON.parse('{{ chart_taes_avaliacao_atividades_remotas_label|safe }}');
-            var data_jornada = JSON.parse('{{ chart_taes_avaliacao_atividades_remotas_data_jornada|safe }}');
-            var data_producao = JSON.parse('{{ chart_taes_avaliacao_atividades_remotas_data_producao|safe }}');
+            var labels = JSON.parse('{{ chart_taes_avaliacao_rendimento_label|safe }}');
+            var data_rendimento = JSON.parse('{{ chart_taes_avaliacao_rendimento_data_rendimento|safe }}');
             var myChart = Highcharts.chart('avaliacao_atividades_remotas_taes', {
                 chart: {
                     type: 'column'
@@ -1439,13 +1501,10 @@
                 credits: {
                     enabled: false
                 },
-                series: [{
-                    name: 'Jornada',
-                    data: data_jornada
-                },
+                series: [
                     {
-                        name: 'Produção',
-                        data: data_producao
+                        name: 'Rendimento',
+                        data: data_rendimento
                     }]
             });
         });
@@ -1543,6 +1602,52 @@
                         innerSize: '50%',
 
                     }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO TAES SETOR-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ taes_setor|safe }}');
+            var myChart = Highcharts.chart('taes_setor', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Setor de lotação'
+                },
+                subtitle: {
+                    text: 'Respostas dos TAEs{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    pie: {
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.percentage:.1f}%',
+                        },
+                        showInLegend: false
+                    }
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                series: [{
+                    name: 'Quantidade',
+                    data: data,
+                    innerSize: '50%'
+                }]
             });
         });
     </script>
