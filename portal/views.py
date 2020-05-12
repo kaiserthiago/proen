@@ -19,7 +19,6 @@ def home(request):
     return render(request, 'portal/home.html', {})
 
 
-@login_required
 def dashboard(request):
     # PEGA NO GET O CAMPUS SELECIONADO
     if request.GET.get('campus') and not 'btn_limpar' in request.GET:
@@ -871,7 +870,6 @@ def dashboard(request):
     return render(request, 'portal/dashboard.html', context)
 
 
-@login_required
 def dashboard2(request):
     # PEGA NO GET O CAMPUS SELECIONADO
     if request.GET.get('campus') and not 'btn_limpar' in request.GET:
