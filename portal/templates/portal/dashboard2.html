@@ -965,6 +965,7 @@
             var data_conteudo = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_data_conteudo|safe }}');
             var data_orientacoes = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_data_orientacoes|safe }}');
             var data_comunicacao = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_data_comunicacao|safe }}');
+            var data_ar = JSON.parse('{{ chart_alunos_avaliacao_atividades_remotas_data_ar|safe }}');
             var myChart = Highcharts.chart('avaliacao_atividades_remotas_alunos', {
                 chart: {
                     type: 'column'
@@ -1002,10 +1003,15 @@
                 credits: {
                     enabled: false
                 },
-                series: [{
-                    name: 'Conteúdo',
-                    data: data_conteudo
-                },
+                series: [
+                    {
+                        name: 'Atividades Remotas',
+                        data: data_ar
+                    },
+                    {
+                        name: 'Conteúdo',
+                        data: data_conteudo
+                    },
                     {
                         name: 'Orientações dos docentes',
                         data: data_orientacoes

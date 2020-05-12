@@ -1207,7 +1207,8 @@ def dashboard2(request):
         'campus').annotate(
         orientacoes=Avg('avaliacao_orientacoes'),
         conteudo=Avg('avaliacao_conteudo'),
-        comunicacao=Avg('avaliacao_comunicacao')).distinct()
+        comunicacao=Avg('avaliacao_comunicacao'),
+        ar=Avg('avaliacao_ar')).distinct()
 
     chart_alunos_avaliacao_atividades_remotas_label = [obj[0] for obj in alunos_avaliacao_atividades_remotas]
     chart_alunos_avaliacao_atividades_remotas_data_orientacoes = [float(obj[1]) for obj in
@@ -1215,6 +1216,8 @@ def dashboard2(request):
     chart_alunos_avaliacao_atividades_remotas_data_conteudo = [float(obj[2]) for obj in
                                                                alunos_avaliacao_atividades_remotas]
     chart_alunos_avaliacao_atividades_remotas_data_comunicacao = [float(obj[3]) for obj in
+                                                                  alunos_avaliacao_atividades_remotas]
+    chart_alunos_avaliacao_atividades_remotas_data_ar = [float(obj[3]) for obj in
                                                                   alunos_avaliacao_atividades_remotas]
 
     # GRÁFICO MÉDIA NOTA ATIVIDADES REMOTAS DOCENTES
@@ -1467,6 +1470,8 @@ def dashboard2(request):
             chart_alunos_avaliacao_atividades_remotas_data_conteudo),
         'chart_alunos_avaliacao_atividades_remotas_data_comunicacao': json.dumps(
             chart_alunos_avaliacao_atividades_remotas_data_comunicacao),
+        'chart_alunos_avaliacao_atividades_remotas_data_ar': json.dumps(
+            chart_alunos_avaliacao_atividades_remotas_data_ar),
 
         'chart_docentes_avaliacao_atividades_remotas_label': json.dumps(
             chart_docentes_avaliacao_atividades_remotas_label),
