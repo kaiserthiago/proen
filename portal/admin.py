@@ -100,6 +100,7 @@ class DocenteReitoriaAdmin(ImportExportModelAdmin):
     list_filter = ('campus',)
     list_per_page = 1000
 
+
 @admin.register(DificuldadeCasa)
 class DificuldadeCasaAdmin(ImportExportModelAdmin):
     list_display = (
@@ -112,6 +113,7 @@ class DificuldadeCasaAdmin(ImportExportModelAdmin):
     )
     list_filter = ('dificuldade',)
     list_per_page = 1000
+
 
 @admin.register(GrupoRisco)
 class GrupoRiscoAdmin(ImportExportModelAdmin):

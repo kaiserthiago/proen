@@ -1054,7 +1054,7 @@ def dashboard2(request):
     # GRÁFICO ALUNOS DIFICULDADES EM CASA
     if qs_campus:
         alunos_dificuldade = DificuldadeCasa.objects.filter(aluno__isnull=False,
-                                                          aluno__campus=qs_campus).order_by(
+                                                            aluno__campus=qs_campus).order_by(
             'dificuldade').values_list(
             'dificuldade').annotate(
             total=Count('id')).distinct()
@@ -1067,12 +1067,17 @@ def dashboard2(request):
     # GRÁFICO ALUNOS GRUPO DE RISCO
     if qs_campus:
         alunos_grupo_risco = GrupoRisco.objects.filter(aluno__isnull=False,
-                                                     aluno__campus=qs_campus).order_by(
+                                                       aluno__campus=qs_campus).order_by(
             'grupo').values_list(
             'grupo').annotate(
             total=Count('id')).distinct()
     else:
-        alunos_grupo_risco = GrupoRisco.objects.filter(aluno__isnull=False).order_by(
+        alunos_grupo_risco = GrupoRisco.objects.filter(
+            aluno__isnull=False,
+            docente__isnull=True,
+            docente_reitoria__isnull=True,
+            tae__isnull=True
+        ).order_by(
             'grupo').values_list(
             'grupo').annotate(
             total=Count('id')).distinct()
@@ -1093,7 +1098,7 @@ def dashboard2(request):
     # GRÁFICO DOCENTES GRUPO DE RISCO
     if qs_campus:
         docentes_grupo_risco = GrupoRisco.objects.filter(docente__isnull=False,
-                                                              docente__campus=qs_campus).order_by(
+                                                         docente__campus=qs_campus).order_by(
             'grupo').values_list(
             'grupo').annotate(
             total=Count('id')).distinct()
@@ -1106,7 +1111,7 @@ def dashboard2(request):
     # GRÁFICO TAES DIFICULDADES EM CASA
     if qs_campus:
         taes_dificuldade = DificuldadeCasa.objects.filter(tae__isnull=False,
-                                                              tae__campus=qs_campus).order_by(
+                                                          tae__campus=qs_campus).order_by(
             'dificuldade').values_list(
             'dificuldade').annotate(
             total=Count('id')).distinct()
@@ -1119,7 +1124,7 @@ def dashboard2(request):
     # GRÁFICO TAES GRUPO DE RISCO
     if qs_campus:
         taes_grupo_risco = GrupoRisco.objects.filter(tae__isnull=False,
-                                                         tae__campus=qs_campus).order_by(
+                                                     tae__campus=qs_campus).order_by(
             'grupo').values_list(
             'grupo').annotate(
             total=Count('id')).distinct()
@@ -1242,7 +1247,7 @@ def dashboard2(request):
     chart_alunos_avaliacao_atividades_remotas_data_comunicacao = [float(obj[3]) for obj in
                                                                   alunos_avaliacao_atividades_remotas]
     chart_alunos_avaliacao_atividades_remotas_data_ar = [float(obj[3]) for obj in
-                                                                  alunos_avaliacao_atividades_remotas]
+                                                         alunos_avaliacao_atividades_remotas]
 
     # GRÁFICO DOCENTES MÉDIA NOTA ATIVIDADES REMOTAS
     docentes_avaliacao_atividades_remotas = Docente2.objects.all().order_by(
@@ -1487,7 +1492,8 @@ def dashboard2(request):
         'docentes_ar': json.dumps(list(docentes_ar)),
 
         'alunos_dificuldade': json.dumps(list(alunos_dificuldade)),
-        'alunos_grupo_risco': json.dumps(list(alunos_grupo_risco)),
+        # 'alunos_grupo_risco': json.dumps(list(alunos_grupo_risco)),
+        'alunos_grupo_risco': alunos_grupo_risco,
 
         'docentes_dificuldade': json.dumps(list(docentes_dificuldade)),
         'docentes_grupo_risco': json.dumps(list(docentes_grupo_risco)),
@@ -1711,7 +1717,7 @@ def import_form2(request):
 
                     # CADASTRAR TODAS AS DIFICULDADES
                     dificuldade = str(n[16])
-                    lista_dificuldade = dificuldade.split(',')
+                    lista_dificuldade = dificuldade.split(', ')
 
                     for item in lista_dificuldade:
                         aluno_dificuldade = DificuldadeCasa()
@@ -1723,7 +1729,7 @@ def import_form2(request):
 
                     # CADASRAR TODOS OS GRUPOS DE RISCO
                     grupo = str(n[19])
-                    lista_grupo = grupo.split(',')
+                    lista_grupo = grupo.split(', ')
 
                     for item in lista_grupo:
                         aluno_grupo = GrupoRisco()
@@ -1755,7 +1761,7 @@ def import_form2(request):
 
                     # CADASTRAR TODAS AS DIFICULDADES
                     dificuldade = str(n[35])
-                    lista_dificuldade = dificuldade.split(',')
+                    lista_dificuldade = dificuldade.split(', ')
 
                     for item in lista_dificuldade:
                         tae_dificuldade = DificuldadeCasa()
@@ -1767,7 +1773,7 @@ def import_form2(request):
 
                         # CADASRAR TODOS OS GRUPOS DE RISCO
                         grupo = str(n[36])
-                        lista_grupo = grupo.split(',')
+                        lista_grupo = grupo.split(', ')
 
                         for item in lista_grupo:
                             tae_grupo = GrupoRisco()
@@ -1800,7 +1806,7 @@ def import_form2(request):
 
                     # CADASTRAR TODAS AS DIFICULDADES
                     dificuldade = str(n[26])
-                    lista_dificuldade = dificuldade.split(',')
+                    lista_dificuldade = dificuldade.split(', ')
 
                     for item in lista_dificuldade:
                         docente_dificuldade = DificuldadeCasa()
@@ -1812,7 +1818,7 @@ def import_form2(request):
 
                         # CADASRAR TODOS OS GRUPOS DE RISCO
                         grupo = str(n[27])
-                        lista_grupo = grupo.split(',')
+                        lista_grupo = grupo.split(', ')
 
                         for item in lista_grupo:
                             docente_grupo = GrupoRisco()
