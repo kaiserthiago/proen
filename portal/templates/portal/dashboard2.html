@@ -423,6 +423,28 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="alunos_dificuldade"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="alunos_grupo_risco"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -465,8 +487,8 @@
                             <h5 class="text-center">
                                 Capacitação para servidores
                                 <small>
-                                  {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
-                              </small>
+                                    {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                                </small>
                             </h5>
                             <img class="img-fluid mx-auto d-block align-middle"
                                  src="{{ wc_docentes_sugestao_capacitacao }}">
@@ -482,9 +504,9 @@
                         <div class="card-body">
                             <h5 class="text-center">
                                 Sugestão de atividades
-                               <small>
-                                  {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
-                              </small>
+                                <small>
+                                    {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                                </small>
                             </h5>
                             <img class="img-fluid mx-auto d-block align-middle"
                                  src="{{ wc_docentes_sugestao_suspensao }}">
@@ -503,16 +525,29 @@
                     </div>
                 </div>
             </div>
+
             <div class="row mb-3">
                 <div class="col-sm-12">
                     <!--Card-->
                     <div class="card">
                         <div class="card-body">
-                            <div id="docentes_competencias_ead"></div>
+                            <div id="docentes_dificuldade"></div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="docentes_grupo_risco"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -555,8 +590,8 @@
                             <h5 class="text-center">
                                 Capacitação para servidores
                                 <small>
-                                  {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
-                              </small>
+                                    {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                                </small>
                             </h5>
                             <img class="img-fluid mx-auto d-block align-middle"
                                  src="{{ wc_taes_sugestao_capacitacao }}">
@@ -573,8 +608,8 @@
                             <h5 class="text-center">
                                 Sugestão de atividades
                                 <small>
-                                  {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
-                              </small>
+                                    {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                                </small>
                             </h5>
 
                             <img class="img-fluid mx-auto d-block align-middle"
@@ -593,7 +628,28 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="taes_dificuldade"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="taes_grupo_risco"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -937,6 +993,114 @@
         });
     </script>
 
+    <!--GRÁFICO ALUNOS DIFICULDADES EM CASA-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ alunos_dificuldade|safe }}');
+            var myChart = Highcharts.chart('alunos_dificuldade', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Dificuldades em casa',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Alunos{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.percentage:.1f}%',
+                        },
+                        showInLegend: false
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'top',
+                    layout: 'vertical',
+                    x: 0,
+                    y: 100
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%'
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO ALUNOS GRUPOS DE RISCO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ alunos_grupo_risco|safe }}');
+            var myChart = Highcharts.chart('alunos_grupo_risco', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Grupo de risco para Covid-19',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Alunos{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.percentage:.1f}%',
+                        },
+                        showInLegend: false
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'top',
+                    layout: 'vertical',
+                    x: 0,
+                    y: 100
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%'
+                    }]
+            });
+        });
+    </script>
+
     <!--GRÁFICO DOCENTES AVALIAÇÃO ATIVIDADES REMOTAS-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1093,6 +1257,114 @@
         });
     </script>
 
+    <!--GRÁFICO DOCENTES DIFICULDADES EM CASA-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ docentes_dificuldade|safe }}');
+            var myChart = Highcharts.chart('docentes_dificuldade', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Dificuldades em casa',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Docentes{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.percentage:.1f}%',
+                        },
+                        showInLegend: false
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'top',
+                    layout: 'vertical',
+                    x: 0,
+                    y: 100
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%'
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO DOCENTES GRUPOS DE RISCO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ docentes_grupo_risco|safe }}');
+            var myChart = Highcharts.chart('docentes_grupo_risco', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Grupo de risco para Covid-19',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos Docentes{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.percentage:.1f}%',
+                        },
+                        showInLegend: false
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'top',
+                    layout: 'vertical',
+                    x: 0,
+                    y: 100
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%'
+                    }]
+            });
+        });
+    </script>
+
     <!--GRÁFICO TAES AVALIAÇÃO ATIVIDADES REMOTAS-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1244,6 +1516,114 @@
         });
     </script>
 
+    <!--GRÁFICO TAES DIFICULDADES EM CASA-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ taes_dificuldade|safe }}');
+            var myChart = Highcharts.chart('taes_dificuldade', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Dificuldades em casa',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos TAEs{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.percentage:.1f}%',
+                        },
+                        showInLegend: false
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'top',
+                    layout: 'vertical',
+                    x: 0,
+                    y: 100
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%'
+                    }]
+            });
+        });
+    </script>
+
+    <!--GRÁFICO TAES GRUPOS DE RISCO-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ taes_grupo_risco|safe }}');
+            var myChart = Highcharts.chart('taes_grupo_risco', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Grupo de risco para Covid-19',
+                    align: 'center',
+                },
+                subtitle: {
+                    text: 'Respostas dos TAEs{% if qs_campus %} <i>Campus</i> - {{ qs_campus }}{% endif %}'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    headerFormat: '',
+                    pointFormat: '<span>{point.name}</span>:<br><b>{point.percentage:.1f}%</b> do total'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.percentage:.1f}%',
+                        },
+                        showInLegend: false
+                    }
+                },
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'top',
+                    layout: 'vertical',
+                    x: 0,
+                    y: 100
+                },
+                series: [
+                    {
+                        name: 'Votos',
+                        data: data,
+                        innerSize: '50%'
+                    }]
+            });
+        });
+    </script>
+
     <!--GRÁFICO GERAIS RESPOSTAS TIPO PESSOA POR CAMPUS-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1326,6 +1706,7 @@
                         '09/05/2020',
                         '10/05/2020',
                         '11/05/2020',
+                        '12/05/2020'
                     ]
                 },
                 yAxis: {

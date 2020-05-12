@@ -900,7 +900,8 @@ def dashboard2(request):
             ['ava', 'não', 'de', 'ao', 'só', 'ou', 'da', 'na', 'no', 'que', 'um', 'uma', 'em', 'pra', 'para',
              'mas', 'os', 'as', 'eu', 'EAD', 'tem', 'se', 'dos', 'a', 'o', 'como', 'são', 'essa', 'esse',
              'das', 'dos', 'des', 'line', 'aos', 'então', 'tipo', 'por', 'neste', 'este', 'esta', 'está'
-             'estão', 'até', 'nos', 'nas', 'nós', 'já', 'meu', 'minha', 'seu', 'sua', 'acredito', 'penso',
+                                                                                                  'estão', 'até', 'nos',
+             'nas', 'nós', 'já', 'meu', 'minha', 'seu', 'sua', 'acredito', 'penso',
              'prefiro', 'opinar', 'preciso', 'precisamos', 'quanto', 'quando', 'por', 'ser', 'exemplo',
              'estávamos', 'estamos', 'muito', 'voltar', 'ao', 'sei', 'outros', 'outro', 'ifro', 'seja',
              'todo', 'todos', 'tudo', 'sobre', 'pode', 'podem', 'tenho', 'ter', 'nova', 'novo', 'menos', 'mais',
@@ -951,9 +952,9 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         indicador_alunos_nivel_curso = Aluno2.objects.all().order_by(
-        'nivel_curso').values(
-        'nivel_curso').annotate(
-        total=Count('id')).distinct()
+            'nivel_curso').values(
+            'nivel_curso').annotate(
+            total=Count('id')).distinct()
 
     if qs_campus:
         indicador_alunos_periodo_letivo_graduacao = Aluno2.objects.filter(
@@ -963,10 +964,10 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         indicador_alunos_periodo_letivo_graduacao = Aluno2.objects.filter(
-        nivel_curso='Graduação (Bacharel, CST e Licenciatura)').order_by(
-        'periodo_letivo').values(
-        'periodo_letivo').annotate(
-        total=Count('id')).distinct()
+            nivel_curso='Graduação (Bacharel, CST e Licenciatura)').order_by(
+            'periodo_letivo').values(
+            'periodo_letivo').annotate(
+            total=Count('id')).distinct()
 
     if qs_campus:
         indicador_alunos_periodo_letivo_concomitante = Aluno2.objects.filter(
@@ -976,10 +977,10 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         indicador_alunos_periodo_letivo_concomitante = Aluno2.objects.filter(
-        nivel_curso='Técnico Concomitante').order_by(
-        'periodo_letivo').values(
-        'periodo_letivo').annotate(
-        total=Count('id')).distinct()
+            nivel_curso='Técnico Concomitante').order_by(
+            'periodo_letivo').values(
+            'periodo_letivo').annotate(
+            total=Count('id')).distinct()
 
     if qs_campus:
         indicador_alunos_periodo_letivo_integrado = Aluno2.objects.filter(
@@ -989,10 +990,10 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         indicador_alunos_periodo_letivo_integrado = Aluno2.objects.filter(
-        nivel_curso='Técnico Integrado').order_by(
-        'periodo_letivo').values(
-        'periodo_letivo').annotate(
-        total=Count('id')).distinct()
+            nivel_curso='Técnico Integrado').order_by(
+            'periodo_letivo').values(
+            'periodo_letivo').annotate(
+            total=Count('id')).distinct()
 
     if qs_campus:
         indicador_alunos_periodo_letivo_subsequente = Aluno2.objects.filter(
@@ -1002,10 +1003,10 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         indicador_alunos_periodo_letivo_subsequente = Aluno2.objects.filter(
-        nivel_curso='Técnico Subsequente').order_by(
-        'periodo_letivo').values(
-        'periodo_letivo').annotate(
-        total=Count('id')).distinct()
+            nivel_curso='Técnico Subsequente').order_by(
+            'periodo_letivo').values(
+            'periodo_letivo').annotate(
+            total=Count('id')).distinct()
 
     # GRÁFICOS ALUNOS POR CAMPUS
     alunos_campus = Aluno2.objects.all().order_by(
@@ -1043,12 +1044,90 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         alunos_nivel_curso = Aluno2.objects.all().order_by(
-        'nivel_curso').values_list(
-        'nivel_curso').annotate(
-        total=Count('id')).distinct()
+            'nivel_curso').values_list(
+            'nivel_curso').annotate(
+            total=Count('id')).distinct()
 
     chart_aluno_nivel_curso_label = [obj[0] for obj in alunos_nivel_curso]
     chart_aluno_nivel_curso_data = [int(obj[1]) for obj in alunos_nivel_curso]
+
+    # GRÁFICO ALUNOS DIFICULDADES EM CASA
+    if qs_campus:
+        alunos_dificuldade = DificuldadeCasa.objects.filter(aluno__isnull=False,
+                                                          aluno__campus=qs_campus).order_by(
+            'dificuldade').values_list(
+            'dificuldade').annotate(
+            total=Count('id')).distinct()
+    else:
+        alunos_dificuldade = DificuldadeCasa.objects.filter(aluno__isnull=False).order_by(
+            'dificuldade').values_list(
+            'dificuldade').annotate(
+            total=Count('id')).distinct()
+
+    # GRÁFICO ALUNOS GRUPO DE RISCO
+    if qs_campus:
+        alunos_grupo_risco = GrupoRisco.objects.filter(aluno__isnull=False,
+                                                     aluno__campus=qs_campus).order_by(
+            'grupo').values_list(
+            'grupo').annotate(
+            total=Count('id')).distinct()
+    else:
+        alunos_grupo_risco = GrupoRisco.objects.filter(aluno__isnull=False).order_by(
+            'grupo').values_list(
+            'grupo').annotate(
+            total=Count('id')).distinct()
+
+    # GRÁFICO DOCENTES DIFICULDADES EM CASA
+    if qs_campus:
+        docentes_dificuldade = DificuldadeCasa.objects.filter(docente__isnull=False,
+                                                              docente__campus=qs_campus).order_by(
+            'dificuldade').values_list(
+            'dificuldade').annotate(
+            total=Count('id')).distinct()
+    else:
+        docentes_dificuldade = DificuldadeCasa.objects.filter(docente__isnull=False).order_by(
+            'dificuldade').values_list(
+            'dificuldade').annotate(
+            total=Count('id')).distinct()
+
+    # GRÁFICO DOCENTES GRUPO DE RISCO
+    if qs_campus:
+        docentes_grupo_risco = GrupoRisco.objects.filter(docente__isnull=False,
+                                                              docente__campus=qs_campus).order_by(
+            'grupo').values_list(
+            'grupo').annotate(
+            total=Count('id')).distinct()
+    else:
+        docentes_grupo_risco = GrupoRisco.objects.filter(docente__isnull=False).order_by(
+            'grupo').values_list(
+            'grupo').annotate(
+            total=Count('id')).distinct()
+
+    # GRÁFICO TAES DIFICULDADES EM CASA
+    if qs_campus:
+        taes_dificuldade = DificuldadeCasa.objects.filter(tae__isnull=False,
+                                                              tae__campus=qs_campus).order_by(
+            'dificuldade').values_list(
+            'dificuldade').annotate(
+            total=Count('id')).distinct()
+    else:
+        taes_dificuldade = DificuldadeCasa.objects.filter(tae__isnull=False).order_by(
+            'dificuldade').values_list(
+            'dificuldade').annotate(
+            total=Count('id')).distinct()
+
+    # GRÁFICO TAES GRUPO DE RISCO
+    if qs_campus:
+        taes_grupo_risco = GrupoRisco.objects.filter(tae__isnull=False,
+                                                         tae__campus=qs_campus).order_by(
+            'grupo').values_list(
+            'grupo').annotate(
+            total=Count('id')).distinct()
+    else:
+        taes_grupo_risco = GrupoRisco.objects.filter(tae__isnull=False).order_by(
+            'grupo').values_list(
+            'grupo').annotate(
+            total=Count('id')).distinct()
 
     # GRÁFICO DOCENTES FAZ AR
     if qs_campus:
@@ -1058,9 +1137,9 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         docentes_ar = Docente2.objects.all().order_by(
-        '-promovendo_ar').values_list(
-        'promovendo_ar').annotate(
-        total=Count('id')).distinct()
+            '-promovendo_ar').values_list(
+            'promovendo_ar').annotate(
+            total=Count('id')).distinct()
 
     # GRÁFICO ALUNOS POR POSIÇÃO
     if qs_campus:
@@ -1106,9 +1185,9 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         alunos_acesso_internet = Aluno2.objects.all().order_by(
-        'acesso_internet').values_list(
-        'acesso_internet').annotate(
-        total=Count('id')).distinct()
+            'acesso_internet').values_list(
+            'acesso_internet').annotate(
+            total=Count('id')).distinct()
 
     # GRÁFICO MÉDIA NOTA ATIVIDADES REMOTAS ALUNOS
     alunos_avaliacao_atividades_remotas = Aluno2.objects.all().order_by(
@@ -1135,9 +1214,12 @@ def dashboard2(request):
         participacao=Avg('avaliacao_participacao'), ).distinct()
 
     chart_docentes_avaliacao_atividades_remotas_label = [obj[0] for obj in docentes_avaliacao_atividades_remotas]
-    chart_docentes_avaliacao_atividades_remotas_data_ar = [float(obj[1]) for obj in docentes_avaliacao_atividades_remotas]
-    chart_docentes_avaliacao_atividades_remotas_data_comunicacao = [float(obj[2]) for obj in docentes_avaliacao_atividades_remotas]
-    chart_docentes_avaliacao_atividades_remotas_data_participacao = [float(obj[3]) for obj in docentes_avaliacao_atividades_remotas]
+    chart_docentes_avaliacao_atividades_remotas_data_ar = [float(obj[1]) for obj in
+                                                           docentes_avaliacao_atividades_remotas]
+    chart_docentes_avaliacao_atividades_remotas_data_comunicacao = [float(obj[2]) for obj in
+                                                                    docentes_avaliacao_atividades_remotas]
+    chart_docentes_avaliacao_atividades_remotas_data_participacao = [float(obj[3]) for obj in
+                                                                     docentes_avaliacao_atividades_remotas]
 
     # GRÁFICO PRODUÇÃO TAES
     if qs_campus:
@@ -1147,9 +1229,9 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         taes_producao = Tae2.objects.all().order_by(
-        'avaliacao_producao').values_list(
-        'avaliacao_producao').annotate(
-        total=Count('id')).distinct()
+            'avaliacao_producao').values_list(
+            'avaliacao_producao').annotate(
+            total=Count('id')).distinct()
 
     chart_campus_label = [obj[0] for obj in alunos_campus]
 
@@ -1164,9 +1246,9 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         alunos_data_resposta = Aluno2.objects.all().order_by(
-        'data_resposta__day').values_list(
-        'data_resposta__day').annotate(
-        total=Count('id')).distinct()
+            'data_resposta__day').values_list(
+            'data_resposta__day').annotate(
+            total=Count('id')).distinct()
 
     if qs_campus:
         docentes_data_resposta = Docente2.objects.filter(campus=qs_campus).order_by(
@@ -1175,9 +1257,9 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         docentes_data_resposta = Docente2.objects.all().order_by(
-        'data_resposta__day').values_list(
-        'data_resposta__day').annotate(
-        total=Count('id')).distinct()
+            'data_resposta__day').values_list(
+            'data_resposta__day').annotate(
+            total=Count('id')).distinct()
 
     if qs_campus:
         taes_data_resposta = Tae2.objects.filter(campus=qs_campus).order_by(
@@ -1186,9 +1268,9 @@ def dashboard2(request):
             total=Count('id')).distinct()
     else:
         taes_data_resposta = Tae2.objects.all().order_by(
-        'data_resposta__day').values_list(
-        'data_resposta__day').annotate(
-        total=Count('id')).distinct()
+            'data_resposta__day').values_list(
+            'data_resposta__day').annotate(
+            total=Count('id')).distinct()
 
     chart_data_resposta_label = [obj[0] for obj in alunos_data_resposta]
     chart_aluno_data_resposta_data = [int(obj[1]) for obj in alunos_data_resposta]
@@ -1207,10 +1289,10 @@ def dashboard2(request):
         ).distinct()
     else:
         aluno_acesso_possui_pc = Aluno2.objects.all().order_by(
-        'possui_pc').values_list(
-        'possui_pc').annotate(
-        total=Count('possui_pc'),
-    ).distinct()
+            'possui_pc').values_list(
+            'possui_pc').annotate(
+            total=Count('possui_pc'),
+        ).distinct()
 
     acesso_aluno_nao.insert(0, aluno_acesso_possui_pc[0][1])
     acesso_aluno_sim.insert(0, aluno_acesso_possui_pc[1][1])
@@ -1223,10 +1305,10 @@ def dashboard2(request):
         ).distinct()
     else:
         aluno_acesso_possui_celular = Aluno2.objects.all().order_by(
-        'possui_celular').values_list(
-        'possui_celular').annotate(
-        total=Count('possui_celular'),
-    ).distinct()
+            'possui_celular').values_list(
+            'possui_celular').annotate(
+            total=Count('possui_celular'),
+        ).distinct()
 
     acesso_aluno_nao.insert(1, aluno_acesso_possui_celular[0][1])
     acesso_aluno_sim.insert(1, aluno_acesso_possui_celular[1][1])
@@ -1239,10 +1321,10 @@ def dashboard2(request):
         ).distinct()
     else:
         aluno_acesso_possui_tablet = Aluno2.objects.all().order_by(
-        'possui_tablet').values_list(
-        'possui_tablet').annotate(
-        total=Count('possui_tablet'),
-    ).distinct()
+            'possui_tablet').values_list(
+            'possui_tablet').annotate(
+            total=Count('possui_tablet'),
+        ).distinct()
 
     acesso_aluno_nao.insert(2, aluno_acesso_possui_tablet[0][1])
     acesso_aluno_sim.insert(2, aluno_acesso_possui_tablet[1][1])
@@ -1255,10 +1337,10 @@ def dashboard2(request):
         ).distinct()
     else:
         aluno_acesso_possui_tv = Aluno2.objects.all().order_by(
-        'possui_tv').values_list(
-        'possui_tv').annotate(
-        total=Count('possui_tv'),
-    ).distinct()
+            'possui_tv').values_list(
+            'possui_tv').annotate(
+            total=Count('possui_tv'),
+        ).distinct()
 
     acesso_aluno_nao.insert(3, aluno_acesso_possui_tv[0][1])
     acesso_aluno_sim.insert(3, aluno_acesso_possui_tv[1][1])
@@ -1352,6 +1434,15 @@ def dashboard2(request):
 
         'docentes_ar': json.dumps(list(docentes_ar)),
 
+        'alunos_dificuldade': json.dumps(list(alunos_dificuldade)),
+        'alunos_grupo_risco': json.dumps(list(alunos_grupo_risco)),
+
+        'docentes_dificuldade': json.dumps(list(docentes_dificuldade)),
+        'docentes_grupo_risco': json.dumps(list(docentes_grupo_risco)),
+
+        'taes_dificuldade': json.dumps(list(taes_dificuldade)),
+        'taes_grupo_risco': json.dumps(list(taes_grupo_risco)),
+
         'alunos_acesso_internet': json.dumps(list(alunos_acesso_internet)),
         'taes_producao': json.dumps(list(taes_producao)),
 
@@ -1365,9 +1456,12 @@ def dashboard2(request):
 
         'chart_docentes_avaliacao_atividades_remotas_label': json.dumps(
             chart_docentes_avaliacao_atividades_remotas_label),
-        'chart_docentes_avaliacao_atividades_remotas_data_ar': json.dumps(chart_docentes_avaliacao_atividades_remotas_data_ar),
-        'chart_docentes_avaliacao_atividades_remotas_data_comunicacao': json.dumps(chart_docentes_avaliacao_atividades_remotas_data_comunicacao),
-        'chart_docentes_avaliacao_atividades_remotas_data_participacao': json.dumps(chart_docentes_avaliacao_atividades_remotas_data_participacao),
+        'chart_docentes_avaliacao_atividades_remotas_data_ar': json.dumps(
+            chart_docentes_avaliacao_atividades_remotas_data_ar),
+        'chart_docentes_avaliacao_atividades_remotas_data_comunicacao': json.dumps(
+            chart_docentes_avaliacao_atividades_remotas_data_comunicacao),
+        'chart_docentes_avaliacao_atividades_remotas_data_participacao': json.dumps(
+            chart_docentes_avaliacao_atividades_remotas_data_participacao),
 
         'chart_data_resposta_label': json.dumps(chart_data_resposta_label),
         'chart_aluno_data_resposta_data': json.dumps(chart_aluno_data_resposta_data),
