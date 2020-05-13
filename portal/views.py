@@ -1435,6 +1435,17 @@ def dashboard2(request):
     wc_docentes_sugestao_suspensao = word_cloud(docentes_sugestao_suspensao)
     wc_docentes_sugestao_capacitacao = word_cloud(docentes_sugestao_capacitacao)
 
+    # DADOS RESPOSTAS DISCURSIVAS
+    if qs_campus:
+        docentes_discursivas = Docente2.objects.filter(campus=qs_campus)
+    else:
+        docentes_discursivas = Docente2.objects.all()
+
+    if qs_campus:
+        taes_discursivas = Tae2.objects.filter(campus=qs_campus)
+    else:
+        taes_discursivas = Tae2.objects.all()
+
     # DADOS DOS INDICADORES GERAIS
     alunos = Aluno2.objects.all()
     docentes = Docente2.objects.all()
@@ -1451,6 +1462,9 @@ def dashboard2(request):
         'docentes_reitoria': docentes_reitoria,
         'taes': taes,
         'total_respostas': total_respostas,
+
+        'docentes_discursivas': docentes_discursivas,
+        'taes_discursivas': taes_discursivas,
 
         'indicador_alunos_campus': indicador_alunos_campus,
         'indicador_docentes_campus': indicador_docentes_campus,

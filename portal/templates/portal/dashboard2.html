@@ -35,10 +35,12 @@
                     </div>
                     <div class="col-sm-5">
                         <div class="md-form">
-                            <button onClick="javascript:showMyModalSetTitle();" class="btn btn-success btn-sm btn-rounded" type="submit"><i
+                            <button onClick="javascript:showMyModalSetTitle();"
+                                    class="btn btn-success btn-sm btn-rounded" type="submit"><i
                                     class="fas fa-search"></i>
                             </button>
-                            <button onClick="javascript:showMyModalSetTitle();" name="btn_limpar" class="btn btn-danger btn-sm btn-rounded" type="submit"><i
+                            <button onClick="javascript:showMyModalSetTitle();" name="btn_limpar"
+                                    class="btn btn-danger btn-sm btn-rounded" type="submit"><i
                                     class="fas fa-times"></i>
                             </button>
                         </div>
@@ -688,6 +690,177 @@
         </div>
     </div>
 
+    {#PERGUNTAS DISCURSIVAS DOCENTES#}
+    <div class="card mb-3">
+        <div class="card-header grey lighten-1 font-weight-bold">
+            <p class="float-left m-0">
+                QUESTÕES DISCURSIVAS DOCENTES
+            </p>
+        </div>
+        <div class="card-body" style="background: #ededed">
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-center">
+                                Capacitação para servidores
+                                <small>
+                                    {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                                </small>
+                            </h5>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="md-form md-outline">
+                                        <input id="capacitacao_docente" type="text" class="form-control form-control-sm"
+                                               placeholder="Digite para pesquisar"/>
+                                        <label for="capacitacao_docente" class="active">Pesquisar</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-striped table-sm">
+                                    <tbody id="table_capacitacao_docente">
+                                    {% for item in docentes_discursivas %}
+                                        <tr>
+                                            <td>{{ item.sugestao_capacitacao }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-center">
+                                Sugestão de atividades
+                                <small>
+                                    {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                                </small>
+                            </h5>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="md-form md-outline">
+                                        <input id="sugestao_docente" type="text" class="form-control form-control-sm"
+                                               placeholder="Digite para pesquisar"/>
+                                        <label for="sugestao_docente" class="active">Pesquisar</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-striped table-sm">
+                                    <tbody id="table_sugestao_docente">
+                                    {% for item in docentes_discursivas %}
+                                        <tr>
+                                            <td>{{ item.sugestao_suspensao }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#PERGUNTAS DISCURSIVAS TAES#}
+    <div class="card mb-3">
+        <div class="card-header grey lighten-1 font-weight-bold">
+            <p class="float-left m-0">
+                QUESTÕES DISCURSIVAS TAES
+            </p>
+        </div>
+        <div class="card-body" style="background: #ededed">
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-center">
+                                Capacitação para servidores
+                                <small>
+                                    {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                                </small>
+                            </h5>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="md-form md-outline">
+                                        <input id="capacitacao_tae" type="text" class="form-control form-control-sm"
+                                               placeholder="Digite para pesquisar"/>
+                                        <label for="capacitacao_tae" class="active">Pesquisar</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-striped table-sm">
+                                    <tbody id="table_capacitacao_docente">
+                                    {% for item in taes_discursivas %}
+                                        <tr>
+                                            <td>{{ item.sugestao_capacitacao }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100 clearfix d-md-none">
+
+                <div class="col-sm-6">
+                    <!--Card-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-center">
+                                Sugestão de atividades
+                                <small>
+                                    {% if qs_campus %}<br><i>Campus</i> {{ qs_campus }}{% endif %}
+                                </small>
+                            </h5>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="md-form md-outline">
+                                        <input id="sugestao_tae" type="text" class="form-control form-control-sm"
+                                               placeholder="Digite para pesquisar"/>
+                                        <label for="sugestao_tae" class="active">Pesquisar</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-striped table-sm">
+                                    <tbody id="table_sugestao_docente">
+                                    {% for item in taes_discursivas %}
+                                        <tr>
+                                            <td>{{ item.sugestao_suspensao }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block script %}
     <!--GRÁFICO ALUNO CAMPUS-->
@@ -1883,6 +2056,38 @@
                         data: data_tae
                     }
                 ]
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#capacitacao_docente").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table_capacitacao_docente tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $("#sugestao_docente").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table_sugestao_docente tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $("#capacitacao_tae").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table_capacitacao_tae tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $("#capacitacao_tae").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table_capacitacao_tae tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
             });
         });
     </script>
